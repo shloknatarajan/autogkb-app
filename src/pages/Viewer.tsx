@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Quote } from 'lucide-react';
 
 interface ViewerData {
   markdown: string;
@@ -18,6 +18,7 @@ const Viewer = () => {
   const [data, setData] = useState<ViewerData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [highlightedText, setHighlightedText] = useState<string | null>(null);
 
   useEffect(() => {
     const loadData = async () => {
@@ -60,6 +61,97 @@ const Viewer = () => {
 
     loadData();
   }, [pmcid]);
+
+  const handleQuoteClick = (quote: string) => {
+    setHighlightedText(quote);
+    // Find and highlight the quote in the markdown content
+    setTimeout(() => {
+      const markdownContainer = document.querySelector('.prose');
+      if (markdownContainer) {
+        // Remove previous highlights
+        const previousHighlights = markdownContainer.querySelectorAll('.quote-highlight');
+        previousHighlights.forEach(el => {
+          const parent = el.parentNode;
+          if (parent) {
+            parent.replaceChild(document.createTextNode(el.textContent || ''), el);
+            parent.normalize();
+          }
+        });
+
+        // Find and highlight the new quote
+        const walker = document.createTreeWalker(
+          markdownContainer,
+          NodeFilter.SHOW_TEXT,
+          null
+        );
+
+        let node;
+        const textNodes: Text[] = [];
+        while (node = walker.nextNode()) {
+          textNodes.push(node as Text);
+        }
+
+        // Look for the quote text in the content
+        const quoteText = quote.toLowerCase().trim();
+        for (const textNode of textNodes) {
+          const content = textNode.textContent?.toLowerCase() || '';
+          if (content.includes(quoteText)) {
+            const parent = textNode.parentElement;
+            if (parent) {
+              const highlightSpan = document.createElement('span');
+              highlightSpan.className = 'quote-highlight bg-yellow-200 dark:bg-yellow-800 px-1 rounded';
+              highlightSpan.style.backgroundColor = 'hsl(var(--primary) / 0.2)';
+              highlightSpan.style.border = '1px solid hsl(var(--primary) / 0.4)';
+              
+              const startIndex = content.indexOf(quoteText);
+              const beforeText = textNode.textContent?.substring(0, startIndex) || '';
+              const highlightedText = textNode.textContent?.substring(startIndex, startIndex + quoteText.length) || '';
+              const afterText = textNode.textContent?.substring(startIndex + quoteText.length) || '';
+              
+              highlightSpan.textContent = highlightedText;
+              
+              const parentNode = textNode.parentNode;
+              if (parentNode) {
+                if (beforeText) {
+                  parentNode.insertBefore(document.createTextNode(beforeText), textNode);
+                }
+                parentNode.insertBefore(highlightSpan, textNode);
+                if (afterText) {
+                  parentNode.insertBefore(document.createTextNode(afterText), textNode);
+                }
+                parentNode.removeChild(textNode);
+                
+                // Scroll to the highlighted text
+                highlightSpan.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }
+              break;
+            }
+          }
+        }
+      }
+    }, 100);
+  };
+
+  const renderQuoteButtons = (quotes: string[]) => {
+    if (!quotes || quotes.length === 0) return null;
+    
+    return (
+      <div className="flex flex-wrap gap-1 mt-2">
+        {quotes.map((quote, index) => (
+          <Button
+            key={index}
+            variant="ghost"
+            size="sm"
+            onClick={() => handleQuoteClick(quote)}
+            className="h-6 px-2 text-xs hover:bg-primary/10"
+          >
+            <Quote className="w-3 h-3 mr-1" />
+            Quote {index + 1}
+          </Button>
+        ))}
+      </div>
+    );
+  };
 
   if (loading) {
     return (
@@ -185,24 +277,28 @@ const Viewer = () => {
                                 {data.json.study_parameters.study_type.explanation && (
                                   <p className="text-xs text-muted-foreground mt-1 italic">{data.json.study_parameters.study_type.explanation}</p>
                                 )}
+                                {renderQuoteButtons(data.json.study_parameters.study_type.quotes)}
                               </div>
                             )}
                             {data.json.study_parameters.participant_info && (
                               <div className="bg-accent/50 p-3 rounded-lg">
                                 <h4 className="font-medium text-sm text-accent-foreground mb-1">Participant Information</h4>
                                 <p className="text-sm text-muted-foreground">{data.json.study_parameters.participant_info.content}</p>
+                                {renderQuoteButtons(data.json.study_parameters.participant_info.quotes)}
                               </div>
                             )}
                             {data.json.study_parameters.study_design && (
                               <div className="bg-accent/50 p-3 rounded-lg">
                                 <h4 className="font-medium text-sm text-accent-foreground mb-1">Study Design</h4>
                                 <p className="text-sm text-muted-foreground">{data.json.study_parameters.study_design.content}</p>
+                                {renderQuoteButtons(data.json.study_parameters.study_design.quotes)}
                               </div>
                             )}
                             {data.json.study_parameters.study_results && (
                               <div className="bg-accent/50 p-3 rounded-lg">
                                 <h4 className="font-medium text-sm text-accent-foreground mb-1">Study Results</h4>
                                 <p className="text-sm text-muted-foreground">{data.json.study_parameters.study_results.content}</p>
+                                {renderQuoteButtons(data.json.study_parameters.study_results.quotes)}
                               </div>
                             )}
                           </div>
@@ -213,25 +309,32 @@ const Viewer = () => {
                       {data.json.drug_annotations && data.json.drug_annotations.length > 0 && (
                         <div>
                           <h3 className="text-lg font-semibold mb-3 text-primary">Drug Annotations</h3>
-                          {data.json.drug_annotations.map((annotation: any, index: number) => (
-                            <div key={index} className="bg-accent/50 p-3 rounded-lg mb-3">
-                              <h4 className="font-medium text-sm text-accent-foreground mb-2">Annotation {index + 1}</h4>
-                              <div className="space-y-1 text-sm">
-                                {annotation.sentence_summary && (
-                                  <p><span className="font-medium">Summary:</span> {annotation.sentence_summary}</p>
-                                )}
-                                {annotation.associated_drugs?.contents && (
-                                  <p><span className="font-medium">Associated Drugs:</span> {annotation.associated_drugs.contents.join(', ')}</p>
-                                )}
-                                {annotation.association_significance?.content && (
-                                  <p><span className="font-medium">Significance:</span> {annotation.association_significance.content}</p>
-                                )}
-                                {annotation.notes && (
-                                  <p><span className="font-medium">Notes:</span> {annotation.notes}</p>
-                                )}
-                              </div>
-                            </div>
-                          ))}
+                           {data.json.drug_annotations.map((annotation: any, index: number) => (
+                             <div key={index} className="bg-accent/50 p-3 rounded-lg mb-3">
+                               <h4 className="font-medium text-sm text-accent-foreground mb-2">Annotation {index + 1}</h4>
+                               <div className="space-y-1 text-sm">
+                                 {annotation.sentence_summary && (
+                                   <p><span className="font-medium">Summary:</span> {annotation.sentence_summary}</p>
+                                 )}
+                                 {annotation.associated_drugs?.contents && (
+                                   <p><span className="font-medium">Associated Drugs:</span> {annotation.associated_drugs.contents.join(', ')}</p>
+                                 )}
+                                 {annotation.association_significance?.content && (
+                                   <p><span className="font-medium">Significance:</span> {annotation.association_significance.content}</p>
+                                 )}
+                                 {annotation.notes && (
+                                   <p><span className="font-medium">Notes:</span> {annotation.notes}</p>
+                                 )}
+                               </div>
+                               {/* Add quote buttons for drug annotations */}
+                               {(annotation.associated_drugs?.quotes || annotation.association_significance?.quotes) && (
+                                 <div className="mt-2">
+                                   {renderQuoteButtons(annotation.associated_drugs?.quotes || [])}
+                                   {renderQuoteButtons(annotation.association_significance?.quotes || [])}
+                                 </div>
+                               )}
+                             </div>
+                           ))}
                         </div>
                       )}
 
