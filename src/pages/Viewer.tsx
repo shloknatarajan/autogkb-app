@@ -135,20 +135,32 @@ const Viewer = () => {
           if (foundNode) {
             console.log('Found text node, highlighting...');
             
-            // Create highlight span
+            // Create underline span
             const highlightSpan = document.createElement('span');
             highlightSpan.className = 'quote-highlight';
-            highlightSpan.style.backgroundColor = 'hsl(var(--primary) / 0.3)';
-            highlightSpan.style.border = '2px solid hsl(var(--primary))';
-            highlightSpan.style.borderRadius = '4px';
-            highlightSpan.style.padding = '2px 4px';
+            highlightSpan.style.textDecoration = 'underline';
+            highlightSpan.style.textDecorationColor = '#ef4444'; // red-500
+            highlightSpan.style.textDecorationThickness = '2px';
+            highlightSpan.style.textUnderlineOffset = '2px';
             
-            // Split the text node and wrap the relevant part
+            // Find word boundaries for proper highlighting
             const originalText = foundNode.textContent || '';
-            const beforeText = originalText.substring(0, Math.max(0, nodeStartIndex));
-            const highlightLength = Math.min(originalText.length - nodeStartIndex, 100);
-            const highlightText = originalText.substring(nodeStartIndex, nodeStartIndex + highlightLength);
-            const afterText = originalText.substring(nodeStartIndex + highlightLength);
+            let startIndex = Math.max(0, nodeStartIndex);
+            let endIndex = Math.min(originalText.length, nodeStartIndex + cleanQuote.length);
+            
+            // Adjust start to word boundary
+            while (startIndex > 0 && /\w/.test(originalText[startIndex - 1])) {
+              startIndex--;
+            }
+            
+            // Adjust end to word boundary
+            while (endIndex < originalText.length && /\w/.test(originalText[endIndex])) {
+              endIndex++;
+            }
+            
+            const beforeText = originalText.substring(0, startIndex);
+            const highlightText = originalText.substring(startIndex, endIndex);
+            const afterText = originalText.substring(endIndex);
             
             highlightSpan.textContent = highlightText;
             
