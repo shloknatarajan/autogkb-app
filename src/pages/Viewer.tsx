@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -205,10 +206,10 @@ const Viewer = () => {
             </CardHeader>
             <CardContent className="p-0 h-full">
               <ScrollArea className="h-[calc(100vh-8rem)]">
-                <div className="p-6 prose prose-sm max-w-none">
-                  <pre className="whitespace-pre-wrap font-sans text-sm leading-relaxed">
+                <div className="p-6 prose prose-slate max-w-none prose-headings:text-foreground prose-p:text-foreground prose-strong:text-foreground prose-h1:text-2xl prose-h2:text-xl prose-h3:text-lg prose-h2:border-b prose-h2:border-border prose-h2:pb-2 prose-h3:text-primary prose-p:leading-relaxed">
+                  <ReactMarkdown>
                     {data.markdown}
-                  </pre>
+                  </ReactMarkdown>
                 </div>
               </ScrollArea>
             </CardContent>
