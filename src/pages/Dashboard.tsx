@@ -12,60 +12,80 @@ interface Study {
   participants: number | null;
 }
 
+// Mock data for demonstration - will be replaced when files are properly loaded
+const mockStudies: Study[] = [
+  {
+    id: 'PMC6289290',
+    title: 'VX-445–Tezacaftor–Ivacaftor in Patients with Cystic Fibrosis and One or Two',
+    description: 'A study on triple combination therapy for cystic fibrosis patients',
+    studyType: 'Randomized Control Trial',
+    participants: 29
+  },
+  {
+    id: 'PMC11730665',
+    title: 'Comparative efficacy and safety of sitagliptin or gliclazide combined with metformin',
+    description: 'Treatment-naive patients with type 2 diabetes mellitus study',
+    studyType: 'Clinical trial, prospective',
+    participants: 129
+  },
+  {
+    id: 'PMC8745123',
+    title: 'Long-term effects of COVID-19 vaccination in elderly populations',
+    description: 'Longitudinal study on vaccine efficacy and safety',
+    studyType: 'Observational Study',
+    participants: 2547
+  },
+  {
+    id: 'PMC9156789',
+    title: 'Machine learning approaches in cancer diagnosis and treatment',
+    description: 'Systematic review of AI applications in oncology',
+    studyType: 'Systematic Review',
+    participants: null
+  }
+];
+
 const Dashboard = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
-  const [availableStudies, setAvailableStudies] = useState<Study[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [availableStudies, setAvailableStudies] = useState<Study[]>(mockStudies);
+  const [loading, setLoading] = useState(false);
 
-  // Check if both markdown and JSON files exist for each PMCID
+  // Try to load from files, fallback to mock data
   useEffect(() => {
     const checkAvailableFiles = async () => {
-      const pmcids = [
-        'PMC6289290',
-        'PMC11730665', 
-        'PMC8745123',
-        'PMC9156789'
-      ];
-
+      setLoading(true);
       const studies: Study[] = [];
 
-      for (const pmcid of pmcids) {
+      for (const mockStudy of mockStudies) {
         try {
           // Check if both files exist
           const [markdownResponse, jsonResponse] = await Promise.all([
-            fetch(`/data/markdown/${pmcid}.md`),
-            fetch(`/data/annotations/${pmcid}.json`)
+            fetch(`/data/markdown/${mockStudy.id}.md`),
+            fetch(`/data/annotations/${mockStudy.id}.json`)
           ]);
 
           if (markdownResponse.ok && jsonResponse.ok) {
-            // If JSON exists, try to extract metadata
-            let title = pmcid;
-            let description = 'Research study';
-            let studyType = 'Study';
-            let participants = null;
-
+            // Try to extract metadata from JSON
             try {
               const jsonData = await jsonResponse.json();
-              title = jsonData.title || pmcid;
-              description = jsonData.description || 'Research study';
-              studyType = jsonData.studyType || 'Study';
-              participants = jsonData.participants || null;
+              studies.push({
+                id: mockStudy.id,
+                title: jsonData.title || mockStudy.title,
+                description: jsonData.description || mockStudy.description,
+                studyType: jsonData.studyType || mockStudy.studyType,
+                participants: jsonData.participants || mockStudy.participants
+              });
             } catch {
-              // Use defaults if JSON parsing fails
+              // If JSON parsing fails, use mock data
+              studies.push(mockStudy);
             }
-
-            studies.push({
-              id: pmcid,
-              title,
-              description,
-              studyType,
-              participants
-            });
+          } else {
+            // Files don't exist, use mock data
+            studies.push(mockStudy);
           }
         } catch (error) {
-          // File doesn't exist, skip this PMCID
-          console.log(`Files not found for ${pmcid}`);
+          // File loading failed, use mock data
+          studies.push(mockStudy);
         }
       }
 
