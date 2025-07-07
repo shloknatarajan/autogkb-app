@@ -157,43 +157,103 @@ const Viewer = () => {
                 <TabsContent value="formatted" className="mt-0 h-full">
                   <ScrollArea className="h-[calc(100vh-12rem)]">
                     <div className="p-6 space-y-6">
-                      {/* Study Parameters */}
-                      <div>
-                        <h3 className="text-lg font-semibold mb-3 text-primary">Study Parameters</h3>
-                        <div className="space-y-3">
-                          <div className="bg-accent/50 p-3 rounded-lg">
-                            <h4 className="font-medium text-sm text-accent-foreground mb-1">Summary</h4>
-                            <p className="text-sm text-muted-foreground">{data.json.study_parameters?.summary}</p>
-                          </div>
-                          <div className="bg-accent/50 p-3 rounded-lg">
-                            <h4 className="font-medium text-sm text-accent-foreground mb-1">Study Type</h4>
-                            <p className="text-sm text-muted-foreground">{data.json.study_parameters?.study_type?.content}</p>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Participant Info */}
-                      <div>
-                        <h3 className="text-lg font-semibold mb-3 text-primary">Participant Information</h3>
-                        <div className="bg-accent/50 p-3 rounded-lg">
-                          <p className="text-sm text-muted-foreground">{data.json.participant_info?.content}</p>
-                        </div>
-                      </div>
-
-                      {/* Variant Annotations */}
-                      {data.json.variant_annotations && (
+                      {/* Title */}
+                      {data.json.title && (
                         <div>
-                          <h3 className="text-lg font-semibold mb-3 text-primary">Variant Annotations</h3>
-                          {Object.entries(data.json.variant_annotations).map(([key, variant]: [string, any]) => (
-                            <div key={key} className="bg-accent/50 p-3 rounded-lg mb-3">
-                              <h4 className="font-medium text-sm text-accent-foreground mb-2">{key}</h4>
-                              <div className="space-y-1 text-sm">
-                                <p><span className="font-medium">Gene:</span> {variant.gene}</p>
-                                <p><span className="font-medium">Significance:</span> {variant.significance}</p>
-                                {variant.drugs && (
-                                  <p><span className="font-medium">Drugs:</span> {variant.drugs.join(', ')}</p>
+                          <h3 className="text-lg font-semibold mb-3 text-primary">Study Title</h3>
+                          <div className="bg-accent/50 p-3 rounded-lg">
+                            <p className="text-sm text-muted-foreground">{data.json.title}</p>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Study Parameters */}
+                      {data.json.study_parameters && (
+                        <div>
+                          <h3 className="text-lg font-semibold mb-3 text-primary">Study Parameters</h3>
+                          <div className="space-y-3">
+                            {data.json.study_parameters.summary && (
+                              <div className="bg-accent/50 p-3 rounded-lg">
+                                <h4 className="font-medium text-sm text-accent-foreground mb-1">Summary</h4>
+                                <p className="text-sm text-muted-foreground">{data.json.study_parameters.summary}</p>
+                              </div>
+                            )}
+                            {data.json.study_parameters.study_type && (
+                              <div className="bg-accent/50 p-3 rounded-lg">
+                                <h4 className="font-medium text-sm text-accent-foreground mb-1">Study Type</h4>
+                                <p className="text-sm text-muted-foreground">{data.json.study_parameters.study_type.content}</p>
+                                {data.json.study_parameters.study_type.explanation && (
+                                  <p className="text-xs text-muted-foreground mt-1 italic">{data.json.study_parameters.study_type.explanation}</p>
                                 )}
                               </div>
+                            )}
+                            {data.json.study_parameters.participant_info && (
+                              <div className="bg-accent/50 p-3 rounded-lg">
+                                <h4 className="font-medium text-sm text-accent-foreground mb-1">Participant Information</h4>
+                                <p className="text-sm text-muted-foreground">{data.json.study_parameters.participant_info.content}</p>
+                              </div>
+                            )}
+                            {data.json.study_parameters.study_design && (
+                              <div className="bg-accent/50 p-3 rounded-lg">
+                                <h4 className="font-medium text-sm text-accent-foreground mb-1">Study Design</h4>
+                                <p className="text-sm text-muted-foreground">{data.json.study_parameters.study_design.content}</p>
+                              </div>
+                            )}
+                            {data.json.study_parameters.study_results && (
+                              <div className="bg-accent/50 p-3 rounded-lg">
+                                <h4 className="font-medium text-sm text-accent-foreground mb-1">Study Results</h4>
+                                <p className="text-sm text-muted-foreground">{data.json.study_parameters.study_results.content}</p>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Drug Annotations */}
+                      {data.json.drug_annotations && data.json.drug_annotations.length > 0 && (
+                        <div>
+                          <h3 className="text-lg font-semibold mb-3 text-primary">Drug Annotations</h3>
+                          {data.json.drug_annotations.map((annotation: any, index: number) => (
+                            <div key={index} className="bg-accent/50 p-3 rounded-lg mb-3">
+                              <h4 className="font-medium text-sm text-accent-foreground mb-2">Annotation {index + 1}</h4>
+                              <div className="space-y-1 text-sm">
+                                {annotation.sentence_summary && (
+                                  <p><span className="font-medium">Summary:</span> {annotation.sentence_summary}</p>
+                                )}
+                                {annotation.associated_drugs?.contents && (
+                                  <p><span className="font-medium">Associated Drugs:</span> {annotation.associated_drugs.contents.join(', ')}</p>
+                                )}
+                                {annotation.association_significance?.content && (
+                                  <p><span className="font-medium">Significance:</span> {annotation.association_significance.content}</p>
+                                )}
+                                {annotation.notes && (
+                                  <p><span className="font-medium">Notes:</span> {annotation.notes}</p>
+                                )}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+
+                      {/* Phenotype Annotations */}
+                      {data.json.phenotype_annotations && data.json.phenotype_annotations.length > 0 && (
+                        <div>
+                          <h3 className="text-lg font-semibold mb-3 text-primary">Phenotype Annotations</h3>
+                          {data.json.phenotype_annotations.map((annotation: any, index: number) => (
+                            <div key={index} className="bg-accent/50 p-3 rounded-lg mb-3">
+                              <p className="text-sm text-muted-foreground">{JSON.stringify(annotation, null, 2)}</p>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+
+                      {/* Functional Annotations */}
+                      {data.json.functional_annotations && data.json.functional_annotations.length > 0 && (
+                        <div>
+                          <h3 className="text-lg font-semibold mb-3 text-primary">Functional Annotations</h3>
+                          {data.json.functional_annotations.map((annotation: any, index: number) => (
+                            <div key={index} className="bg-accent/50 p-3 rounded-lg mb-3">
+                              <p className="text-sm text-muted-foreground">{JSON.stringify(annotation, null, 2)}</p>
                             </div>
                           ))}
                         </div>
