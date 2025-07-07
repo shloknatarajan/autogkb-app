@@ -63,10 +63,14 @@ const Viewer = () => {
   }, [pmcid]);
 
   const handleQuoteClick = (quote: string) => {
+    console.log('Searching for quote:', quote);
     setHighlightedText(quote);
+    
     // Find and highlight the quote in the markdown content
     setTimeout(() => {
       const markdownContainer = document.querySelector('.prose');
+      console.log('Markdown container found:', !!markdownContainer);
+      
       if (markdownContainer) {
         // Remove previous highlights
         const previousHighlights = markdownContainer.querySelectorAll('.quote-highlight');
@@ -78,58 +82,101 @@ const Viewer = () => {
           }
         });
 
-        // Find and highlight the new quote
-        const walker = document.createTreeWalker(
-          markdownContainer,
-          NodeFilter.SHOW_TEXT,
-          null
-        );
-
-        let node;
-        const textNodes: Text[] = [];
-        while (node = walker.nextNode()) {
-          textNodes.push(node as Text);
+        // Get all text content and search for the quote
+        const allText = markdownContainer.textContent || '';
+        console.log('Total text length:', allText.length);
+        
+        // Clean the quote text and search for it
+        const cleanQuote = quote.replace(/[^\w\s]/gi, '').toLowerCase().trim();
+        const cleanText = allText.replace(/[^\w\s]/gi, '').toLowerCase();
+        
+        console.log('Searching for clean quote:', cleanQuote.substring(0, 100) + '...');
+        
+        // Try to find the quote or a significant portion of it
+        let foundIndex = cleanText.indexOf(cleanQuote);
+        if (foundIndex === -1 && cleanQuote.length > 50) {
+          // Try searching for the first 50 characters if full quote not found
+          const shortQuote = cleanQuote.substring(0, 50);
+          foundIndex = cleanText.indexOf(shortQuote);
+          console.log('Searching for shorter quote:', shortQuote);
         }
+        
+        console.log('Quote found at index:', foundIndex);
+        
+        if (foundIndex !== -1) {
+          // Create a simple highlight by wrapping the text
+          const range = document.createRange();
+          const selection = window.getSelection();
+          
+          // Find text nodes that contain our quote
+          const walker = document.createTreeWalker(
+            markdownContainer,
+            NodeFilter.SHOW_TEXT,
+            null
+          );
 
-        // Look for the quote text in the content
-        const quoteText = quote.toLowerCase().trim();
-        for (const textNode of textNodes) {
-          const content = textNode.textContent?.toLowerCase() || '';
-          if (content.includes(quoteText)) {
-            const parent = textNode.parentElement;
-            if (parent) {
-              const highlightSpan = document.createElement('span');
-              highlightSpan.className = 'quote-highlight bg-yellow-200 dark:bg-yellow-800 px-1 rounded';
-              highlightSpan.style.backgroundColor = 'hsl(var(--primary) / 0.2)';
-              highlightSpan.style.border = '1px solid hsl(var(--primary) / 0.4)';
-              
-              const startIndex = content.indexOf(quoteText);
-              const beforeText = textNode.textContent?.substring(0, startIndex) || '';
-              const highlightedText = textNode.textContent?.substring(startIndex, startIndex + quoteText.length) || '';
-              const afterText = textNode.textContent?.substring(startIndex + quoteText.length) || '';
-              
-              highlightSpan.textContent = highlightedText;
-              
-              const parentNode = textNode.parentNode;
-              if (parentNode) {
-                if (beforeText) {
-                  parentNode.insertBefore(document.createTextNode(beforeText), textNode);
-                }
-                parentNode.insertBefore(highlightSpan, textNode);
-                if (afterText) {
-                  parentNode.insertBefore(document.createTextNode(afterText), textNode);
-                }
-                parentNode.removeChild(textNode);
-                
-                // Scroll to the highlighted text
-                highlightSpan.scrollIntoView({ behavior: 'smooth', block: 'center' });
-              }
+          let currentIndex = 0;
+          let node;
+          let foundNode = null;
+          let nodeStartIndex = 0;
+
+          while (node = walker.nextNode()) {
+            const nodeText = (node.textContent || '').replace(/[^\w\s]/gi, '').toLowerCase();
+            const nodeLength = nodeText.length;
+            
+            if (currentIndex <= foundIndex && currentIndex + nodeLength > foundIndex) {
+              foundNode = node;
+              nodeStartIndex = foundIndex - currentIndex;
               break;
             }
+            currentIndex += nodeLength;
           }
+
+          if (foundNode) {
+            console.log('Found text node, highlighting...');
+            
+            // Create highlight span
+            const highlightSpan = document.createElement('span');
+            highlightSpan.className = 'quote-highlight';
+            highlightSpan.style.backgroundColor = 'hsl(var(--primary) / 0.3)';
+            highlightSpan.style.border = '2px solid hsl(var(--primary))';
+            highlightSpan.style.borderRadius = '4px';
+            highlightSpan.style.padding = '2px 4px';
+            
+            // Split the text node and wrap the relevant part
+            const originalText = foundNode.textContent || '';
+            const beforeText = originalText.substring(0, Math.max(0, nodeStartIndex));
+            const highlightLength = Math.min(originalText.length - nodeStartIndex, 100);
+            const highlightText = originalText.substring(nodeStartIndex, nodeStartIndex + highlightLength);
+            const afterText = originalText.substring(nodeStartIndex + highlightLength);
+            
+            highlightSpan.textContent = highlightText;
+            
+            const parentNode = foundNode.parentNode;
+            if (parentNode) {
+              if (beforeText) {
+                parentNode.insertBefore(document.createTextNode(beforeText), foundNode);
+              }
+              parentNode.insertBefore(highlightSpan, foundNode);
+              if (afterText) {
+                parentNode.insertBefore(document.createTextNode(afterText), foundNode);
+              }
+              parentNode.removeChild(foundNode);
+              
+              // Scroll to the highlighted text
+              highlightSpan.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              console.log('Scrolled to highlighted text');
+            }
+          } else {
+            console.log('Could not find text node containing the quote');
+          }
+        } else {
+          console.log('Quote not found in text content');
+          // Show a toast notification that the quote wasn't found
+          console.warn('Quote not found in the document');
         }
       }
-    }, 100);
+    }, 200);
   };
 
   const renderQuoteButtons = (quotes: string[]) => {
