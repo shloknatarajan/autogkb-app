@@ -385,13 +385,37 @@ const Viewer = () => {
                                    <p><span className="font-medium">Notes:</span> {annotation.notes}</p>
                                  )}
                                </div>
-                               {/* Add quote buttons for drug annotations */}
-                               {(annotation.associated_drugs?.quotes || annotation.association_significance?.quotes) && (
-                                 <div className="mt-2">
-                                   {renderQuoteButtons(annotation.associated_drugs?.quotes || [])}
-                                   {renderQuoteButtons(annotation.association_significance?.quotes || [])}
-                                 </div>
-                               )}
+                                {/* Add quote buttons for drug annotations */}
+                                {(annotation.associated_drugs?.quotes || annotation.association_significance?.quotes) && (
+                                  <div className="mt-2">
+                                    <div className="flex flex-wrap gap-1">
+                                      {annotation.associated_drugs?.quotes?.map((quote: string, quoteIndex: number) => (
+                                        <Button
+                                          key={`drugs-${quoteIndex}`}
+                                          variant="ghost"
+                                          size="sm"
+                                          onClick={() => handleQuoteClick(quote)}
+                                          className="h-6 px-2 text-xs hover:bg-primary/10"
+                                        >
+                                          <Quote className="w-3 h-3 mr-1" />
+                                          Quote {quoteIndex + 1}
+                                        </Button>
+                                      ))}
+                                      {annotation.association_significance?.quotes?.map((quote: string, quoteIndex: number) => (
+                                        <Button
+                                          key={`significance-${quoteIndex}`}
+                                          variant="ghost"
+                                          size="sm"
+                                          onClick={() => handleQuoteClick(quote)}
+                                          className="h-6 px-2 text-xs hover:bg-primary/10"
+                                        >
+                                          <Quote className="w-3 h-3 mr-1" />
+                                          Quote {(annotation.associated_drugs?.quotes?.length || 0) + quoteIndex + 1}
+                                        </Button>
+                                      ))}
+                                    </div>
+                                  </div>
+                                )}
                              </div>
                            ))}
                         </div>
