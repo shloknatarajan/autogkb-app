@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { useAuth } from '@/contexts/AuthContext';
 
 // Mock data for available PMCIDs
 const mockPMCIDs = [
@@ -39,7 +38,6 @@ const mockPMCIDs = [
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const { logout } = useAuth();
   const [searchTerm, setSearchTerm] = useState('');
 
   const filteredStudies = useMemo(() => {
@@ -56,11 +54,6 @@ const Dashboard = () => {
     navigate(`/viewer/${pmcid}`);
   };
 
-  const handleLogout = () => {
-    logout();
-    navigate('/');
-  };
-
   return (
     <div className="min-h-screen bg-gradient-subtle">
       <header className="bg-card shadow-soft border-b">
@@ -72,13 +65,6 @@ const Dashboard = () => {
               </div>
               <h1 className="text-xl font-bold text-foreground">Medical Research Tool</h1>
             </div>
-            <Button 
-              variant="outline" 
-              onClick={handleLogout}
-              className="hover:bg-destructive hover:text-destructive-foreground transition-smooth"
-            >
-              Logout
-            </Button>
           </div>
         </div>
       </header>
