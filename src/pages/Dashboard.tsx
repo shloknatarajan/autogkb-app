@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 import { useAuth } from '@/contexts/AuthContext';
 
 // Mock data for available PMCIDs
@@ -39,6 +40,17 @@ const mockPMCIDs = [
 const Dashboard = () => {
   const navigate = useNavigate();
   const { logout } = useAuth();
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const filteredStudies = useMemo(() => {
+    if (!searchTerm.trim()) return mockPMCIDs;
+    
+    const term = searchTerm.toLowerCase();
+    return mockPMCIDs.filter(study => 
+      study.id.toLowerCase().includes(term) ||
+      study.title.toLowerCase().includes(term)
+    );
+  }, [searchTerm]);
 
   const handlePMCIDClick = (pmcid: string) => {
     navigate(`/viewer/${pmcid}`);
@@ -74,13 +86,22 @@ const Dashboard = () => {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
           <h2 className="text-3xl font-bold text-foreground mb-2">Available Studies</h2>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground mb-4">
             Click on any study to view the detailed analysis with markdown content and JSON data
           </p>
+          <div className="max-w-md">
+            <Input
+              type="text"
+              placeholder="Search by PMCID or title..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full"
+            />
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {mockPMCIDs.map((study) => (
+          {filteredStudies.map((study) => (
             <Card 
               key={study.id}
               className="cursor-pointer hover:shadow-medium transition-bounce bg-card border-border hover:border-primary/20"
@@ -113,6 +134,18 @@ const Dashboard = () => {
             </Card>
           ))}
         </div>
+
+        {filteredStudies.length === 0 && searchTerm && (
+          <div className="text-center py-12">
+            <div className="w-16 h-16 bg-muted rounded-full mx-auto mb-4 flex items-center justify-center">
+              <span className="text-muted-foreground text-xl">🔍</span>
+            </div>
+            <h3 className="text-lg font-medium text-foreground mb-2">No studies found</h3>
+            <p className="text-muted-foreground">
+              Try adjusting your search terms
+            </p>
+          </div>
+        )}
 
         {mockPMCIDs.length === 0 && (
           <div className="text-center py-12">
