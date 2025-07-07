@@ -7,135 +7,58 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { ArrowLeft } from 'lucide-react';
 
-// Mock data for demonstration
-const mockData = {
-  'PMC6289290': {
-    markdown: `# VX-445–Tezacaftor–Ivacaftor in Patients with Cystic Fibrosis and One or Two
-
-## Abstract
-
-### BACKGROUND
-VX-445 is a next-generation cystic fibrosis transmembrane conductance regulator (CFTR) corrector designed to restore Phe508del CFTR protein function in patients with cystic fibrosis when administered with tezacaftor and ivacaftor (VX-445–tezacaftor–ivacaftor).
-
-### METHODS
-We evaluated the effects of VX-445–tezacaftor–ivacaftor on Phe508del CFTR protein processing, trafficking, and chloride transport in human bronchial epithelial cells. On the basis of in vitro activity, a randomized, controlled, double-blind, dose-ranging, phase 2 trial was conducted to evaluate tezacaftor–ivacaftor in patients heterozygous for the Phe508del CFTR mutation and a minimal-function mutation (Phe508del–MF) and in patients homozygous for the Phe508del CFTR mutation (Phe508del–Phe508del) after tezacaftor–ivacaftor run-in. Primary end points were safety and absolute change in percentage of predicted forced expiratory volume in 1 second (FEV1) from baseline.
-
-### RESULTS
-In vitro, VX-445–tezacaftor–ivacaftor significantly improved Phe508del CFTR protein processing, trafficking, and chloride transport to a greater extent than any two of these agents in dual combination. In patients with cystic fibrosis, VX-445–tezacaftor–ivacaftor had an acceptable safety and side-effect profile. Most adverse events were mild or moderate. The treatment also resulted in an increased percentage of predicted FEV1 of up to 13.8 points in the primary analysis group (P<0.001). In patients in the Phe508del–Phe508del group, who were already receiving tezacaftor–ivacaftor, the addition of VX-445 resulted in an 11.0-point increase in the percentage of predicted FEV1 (P<0.001). In both groups, there was a decrease in sweat chloride concentrations and improvement in the respiratory domain score on the Cystic Fibrosis Questionnaire–Revised.
-
-### CONCLUSIONS
-The use of VX-445–tezacaftor–ivacaftor to target Phe508del CFTR protein resulted in increased CFTR function in vitro and translated to improvements in patients with cystic fibrosis with one or two Phe508del alleles. This approach has the potential to treat the underlying cause of cystic fibrosis in approximately 90% of patients.
-
-## Study Details
-
-This study represents a significant advancement in cystic fibrosis treatment, demonstrating the efficacy of triple combination therapy in targeting the underlying protein defect that causes the disease.`,
-    json: {
-      pmcid: "PMC6289290",
-      title: "VX-445–Tezacaftor–Ivacaftor in Patients with Cystic Fibrosis and One or Two",
-      study_parameters: {
-        summary: "The use of VX-445-tezacaftor-ivacaftor to target Phe508del CFTR protein resulted in increased CFTR function in vitro and translated to improvements in patients with cystic fibrosis with one or two Phe508del alleles.",
-        study_type: {
-          content: "Randomized Control Trial",
-          explanation: "The study is described as a 'randomized, controlled, double-blind, dose-ranging, phase 2 trial'.",
-          quotes: [
-            "randomized, controlled, double-blind, dose-ranging, phase 2 trial was conducted to evaluate tezacaftor–ivacaftor"
-          ]
-        }
-      },
-      participant_info: {
-        content: "29 CF patients",
-        explanation: "The study included patients with cystic fibrosis with specific genetic mutations.",
-        quotes: [
-          "patients heterozygous for the Phe508del CFTR mutation and a minimal-function mutation",
-          "patients homozygous for the Phe508del CFTR mutation"
-        ]
-      },
-      study_design: {
-        content: "Phase 2 randomized controlled trial evaluating VX-445–tezacaftor–ivacaftor combination therapy",
-        explanation: "The study design focused on dose-ranging and safety evaluation of the triple combination therapy.",
-        quotes: [
-          "randomized, controlled, double-blind, dose-ranging, phase 2 trial",
-          "Primary end points were safety and absolute change in percentage of predicted FEV1"
-        ]
-      },
-      variant_annotations: {
-        rs113993960: {
-          annotation_type: "Functional Analysis",
-          haplotype: "rs113993960",
-          gene: "CFTR",
-          drugs: ["elexacaftor", "ivacaftor", "tezacaftor"],
-          sentence: "Genotype del/del are associated with increased transport of CFTR when exposed to elexacaftor, ivacaftor and tezacaftor.",
-          significance: "Significant"
-        }
-      }
-    }
-  },
-  'PMC11730665': {
-    markdown: `# Comparative efficacy and safety of sitagliptin or gliclazide combined with metformin in treatment-naïve patients with type 2 diabetes mellitus
-
-## Abstract
-
-### Background
-Type 2 diabetes mellitus (T2DM) is a progressive metabolic disorder requiring effective glycemic control to prevent complications.
-
-### Methods
-This single-center, prospective, randomized, controlled noninferiority trial compared sitagliptin plus metformin versus gliclazide plus metformin in 129 treatment-naïve patients with T2DM.
-
-### Results
-Both treatment combinations showed significant improvements in glycemic control with acceptable safety profiles.
-
-### Conclusions
-Sitagliptin plus metformin demonstrated noninferiority to gliclazide plus metformin in treatment-naïve T2DM patients.`,
-    json: {
-      pmcid: "PMC11730665",
-      title: "Comparative efficacy and safety of sitagliptin or gliclazide combined with metformin in treatment-naïve patients with type 2 diabetes mellitus",
-      study_parameters: {
-        summary: "This study evaluates the efficacy and safety of sitagliptin versus gliclazide, combined with metformin, in treatment-naïve patients with T2DM.",
-        study_type: {
-          content: "Clinical trial, prospective",
-          explanation: "The study is described as a 'single-center, prospective, randomized, controlled noninferiority trial'.",
-          quotes: [
-            "In this single-center, randomized, controlled noninferiority trial, 129 treatment-naïve patients with T2DM with glucotoxicity",
-            "This single-center, prospective, randomized, controlled, noninferiority study..."
-          ]
-        }
-      },
-      participant_info: {
-        content: "129 treatment-naïve patients with type 2 diabetes mellitus (T2DM) and glucotoxicity, aged 18 to 70 years",
-        explanation: "The study included 129 treatment-naïve patients with T2DM and glucotoxicity, aged 18 to 70 years, with specific inclusion criteria.",
-        quotes: [
-          "129 treatment-naïve patients with T2DM with glucotoxicity (fasting plasma glucose [FPG] \\u2265 200 mg/dL and glycated hemoglobin [HbA1c] ≥ 9%)",
-          "The age range is between 18 and 70 years, with a body mass index (BMI) ranging from 18 to 30 kg/m\\u00b2..."
-        ]
-      },
-      study_design: {
-        content: "The study was conducted at Nanfang Hospital of Southern Medical University, involving 129 participants randomized to receive different treatments.",
-        explanation: "The study design is detailed as a randomized controlled trial with two groups, each receiving different treatment combinations.",
-        quotes: [
-          "In this single-center, randomized, controlled noninferiority trial, 129 treatment-naïve patients with T2DM with glucotoxicity",
-          "Participants were recruited from Nanfang Hospital of Southern Medical University between September 1, 2023, and March 31, 2024, and were randomized to receive sitagliptin plus metformin (n = 66) or gliclazide plus metformin (n = 63) for 12 weeks."
-        ]
-      }
-    }
-  }
-};
+interface ViewerData {
+  markdown: string;
+  json: any;
+}
 
 const Viewer = () => {
   const { pmcid } = useParams<{ pmcid: string }>();
   const navigate = useNavigate();
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<ViewerData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Simulate loading delay
-    const timer = setTimeout(() => {
-      if (pmcid && mockData[pmcid as keyof typeof mockData]) {
-        setData(mockData[pmcid as keyof typeof mockData]);
+    const loadData = async () => {
+      if (!pmcid) {
+        setError('No PMCID provided');
+        setLoading(false);
+        return;
       }
-      setLoading(false);
-    }, 1000);
 
-    return () => clearTimeout(timer);
+      try {
+        setLoading(true);
+        setError(null);
+
+        // Load both markdown and JSON files from the correct paths
+        const [markdownResponse, jsonResponse] = await Promise.all([
+          fetch(`/data/markdown/${pmcid}.md`),
+          fetch(`/data/annotations/${pmcid}.json`)
+        ]);
+
+        if (!markdownResponse.ok || !jsonResponse.ok) {
+          throw new Error(`Files not found for PMCID: ${pmcid}`);
+        }
+
+        const [markdownText, jsonData] = await Promise.all([
+          markdownResponse.text(),
+          jsonResponse.json()
+        ]);
+
+        setData({
+          markdown: markdownText,
+          json: jsonData
+        });
+      } catch (error) {
+        console.error('Error loading data:', error);
+        setError(`Failed to load data for PMCID: ${pmcid}. Please ensure both markdown and JSON files exist in the correct directories.`);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
   }, [pmcid]);
 
   if (loading) {
@@ -149,7 +72,7 @@ const Viewer = () => {
     );
   }
 
-  if (!data) {
+  if (error || !data) {
     return (
       <div className="min-h-screen bg-gradient-subtle flex items-center justify-center">
         <Card className="max-w-md mx-auto">
@@ -158,7 +81,7 @@ const Viewer = () => {
           </CardHeader>
           <CardContent>
             <p className="text-muted-foreground mb-4">
-              The requested PMCID "{pmcid}" could not be found.
+              {error || `The requested PMCID "${pmcid}" could not be found.`}
             </p>
             <Button onClick={() => navigate('/dashboard')}>
               Back to Dashboard

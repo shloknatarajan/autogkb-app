@@ -1,54 +1,90 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 
-// Mock data for available PMCIDs
-const mockPMCIDs = [
-  {
-    id: 'PMC6289290',
-    title: 'VX-445–Tezacaftor–Ivacaftor in Patients with Cystic Fibrosis and One or Two',
-    description: 'A study on triple combination therapy for cystic fibrosis patients',
-    studyType: 'Randomized Control Trial',
-    participants: 29
-  },
-  {
-    id: 'PMC11730665',
-    title: 'Comparative efficacy and safety of sitagliptin or gliclazide combined with metformin',
-    description: 'Treatment-naive patients with type 2 diabetes mellitus study',
-    studyType: 'Clinical trial, prospective',
-    participants: 129
-  },
-  {
-    id: 'PMC8745123',
-    title: 'Long-term effects of COVID-19 vaccination in elderly populations',
-    description: 'Longitudinal study on vaccine efficacy and safety',
-    studyType: 'Observational Study',
-    participants: 2547
-  },
-  {
-    id: 'PMC9156789',
-    title: 'Machine learning approaches in cancer diagnosis and treatment',
-    description: 'Systematic review of AI applications in oncology',
-    studyType: 'Systematic Review',
-    participants: null
-  }
-];
+interface Study {
+  id: string;
+  title: string;
+  description: string;
+  studyType: string;
+  participants: number | null;
+}
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
+  const [availableStudies, setAvailableStudies] = useState<Study[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // Check if both markdown and JSON files exist for each PMCID
+  useEffect(() => {
+    const checkAvailableFiles = async () => {
+      const pmcids = [
+        'PMC6289290',
+        'PMC11730665', 
+        'PMC8745123',
+        'PMC9156789'
+      ];
+
+      const studies: Study[] = [];
+
+      for (const pmcid of pmcids) {
+        try {
+          // Check if both files exist
+          const [markdownResponse, jsonResponse] = await Promise.all([
+            fetch(`/data/markdown/${pmcid}.md`),
+            fetch(`/data/annotations/${pmcid}.json`)
+          ]);
+
+          if (markdownResponse.ok && jsonResponse.ok) {
+            // If JSON exists, try to extract metadata
+            let title = pmcid;
+            let description = 'Research study';
+            let studyType = 'Study';
+            let participants = null;
+
+            try {
+              const jsonData = await jsonResponse.json();
+              title = jsonData.title || pmcid;
+              description = jsonData.description || 'Research study';
+              studyType = jsonData.studyType || 'Study';
+              participants = jsonData.participants || null;
+            } catch {
+              // Use defaults if JSON parsing fails
+            }
+
+            studies.push({
+              id: pmcid,
+              title,
+              description,
+              studyType,
+              participants
+            });
+          }
+        } catch (error) {
+          // File doesn't exist, skip this PMCID
+          console.log(`Files not found for ${pmcid}`);
+        }
+      }
+
+      setAvailableStudies(studies);
+      setLoading(false);
+    };
+
+    checkAvailableFiles();
+  }, []);
 
   const filteredStudies = useMemo(() => {
-    if (!searchTerm.trim()) return mockPMCIDs;
+    if (!searchTerm.trim()) return availableStudies;
     
     const term = searchTerm.toLowerCase();
-    return mockPMCIDs.filter(study => 
+    return availableStudies.filter(study => 
       study.id.toLowerCase().includes(term) ||
       study.title.toLowerCase().includes(term)
     );
-  }, [searchTerm]);
+  }, [searchTerm, availableStudies]);
 
   const handlePMCIDClick = (pmcid: string) => {
     navigate(`/viewer/${pmcid}`);
@@ -133,14 +169,26 @@ const Dashboard = () => {
           </div>
         )}
 
-        {mockPMCIDs.length === 0 && (
+        {loading && (
+          <div className="text-center py-12">
+            <div className="w-16 h-16 bg-muted rounded-full mx-auto mb-4 flex items-center justify-center animate-pulse">
+              <span className="text-muted-foreground text-xl">📄</span>
+            </div>
+            <h3 className="text-lg font-medium text-foreground mb-2">Loading studies...</h3>
+            <p className="text-muted-foreground">
+              Checking for available markdown and JSON files
+            </p>
+          </div>
+        )}
+
+        {!loading && availableStudies.length === 0 && (
           <div className="text-center py-12">
             <div className="w-16 h-16 bg-muted rounded-full mx-auto mb-4 flex items-center justify-center">
               <span className="text-muted-foreground text-xl">📄</span>
             </div>
             <h3 className="text-lg font-medium text-foreground mb-2">No studies available</h3>
             <p className="text-muted-foreground">
-              Add JSON files to the local directory to see available PMCIDs
+              Add corresponding .md and .json files to data/markdown/ and data/annotations/ folders
             </p>
           </div>
         )}

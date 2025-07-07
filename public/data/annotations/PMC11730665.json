@@ -1,0 +1,51 @@
+{
+  "pmcid": "PMC11730665",
+  "title": "Comparative efficacy and safety of sitagliptin or gliclazide combined with metformin in treatment-naïve patients with type 2 diabetes mellitus",
+  "description": "Treatment-naive patients with type 2 diabetes mellitus study",
+  "studyType": "Clinical trial, prospective",
+  "participants": 129,
+  "study_parameters": {
+    "summary": "This study evaluates the efficacy and safety of sitagliptin versus gliclazide, combined with metformin, in treatment-naïve patients with T2DM.",
+    "study_type": {
+      "content": "Clinical trial, prospective",
+      "explanation": "The study is described as a 'single-center, prospective, randomized, controlled noninferiority trial'.",
+      "quotes": [
+        "In this single-center, randomized, controlled noninferiority trial, 129 treatment-naïve patients with T2DM with glucotoxicity",
+        "This single-center, prospective, randomized, controlled, noninferiority study..."
+      ]
+    }
+  },
+  "participant_info": {
+    "content": "129 treatment-naïve patients with type 2 diabetes mellitus (T2DM) and glucotoxicity, aged 18 to 70 years",
+    "explanation": "The study included 129 treatment-naïve patients with T2DM and glucotoxicity, aged 18 to 70 years, with specific inclusion criteria.",
+    "quotes": [
+      "129 treatment-naïve patients with T2DM with glucotoxicity (fasting plasma glucose [FPG] ≥ 200 mg/dL and glycated hemoglobin [HbA1c] ≥ 9%)",
+      "The age range is between 18 and 70 years, with a body mass index (BMI) ranging from 18 to 30 kg/m²..."
+    ]
+  },
+  "study_design": {
+    "content": "The study was conducted at Nanfang Hospital of Southern Medical University, involving 129 participants randomized to receive different treatments.",
+    "explanation": "The study design is detailed as a randomized controlled trial with two groups, each receiving different treatment combinations.",
+    "quotes": [
+      "In this single-center, randomized, controlled noninferiority trial, 129 treatment-naïve patients with T2DM with glucotoxicity",
+      "Participants were recruited from Nanfang Hospital of Southern Medical University between September 1, 2023, and March 31, 2024, and were randomized to receive sitagliptin plus metformin (n = 66) or gliclazide plus metformin (n = 63) for 12 weeks."
+    ]
+  },
+  "treatment_groups": {
+    "sitagliptin_metformin": {
+      "participants": 66,
+      "dosage": "Sitagliptin 100mg + Metformin",
+      "duration": "12 weeks"
+    },
+    "gliclazide_metformin": {
+      "participants": 63,
+      "dosage": "Gliclazide + Metformin",
+      "duration": "12 weeks"
+    }
+  },
+  "primary_endpoints": {
+    "hba1c_reduction": "Significant improvement in both groups",
+    "fasting_glucose": "Comparable reduction between groups",
+    "safety_profile": "Well-tolerated with minimal adverse events"
+  }
+}

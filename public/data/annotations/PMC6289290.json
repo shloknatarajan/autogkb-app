@@ -1,0 +1,43 @@
+{
+  "pmcid": "PMC6289290",
+  "title": "VX-445–Tezacaftor–Ivacaftor in Patients with Cystic Fibrosis and One or Two Phe508del Alleles",
+  "description": "A study on triple combination therapy for cystic fibrosis patients",
+  "studyType": "Randomized Control Trial",
+  "participants": 29,
+  "study_parameters": {
+    "summary": "The use of VX-445-tezacaftor-ivacaftor to target Phe508del CFTR protein resulted in increased CFTR function in vitro and translated to improvements in patients with cystic fibrosis with one or two Phe508del alleles.",
+    "study_type": {
+      "content": "Randomized Control Trial",
+      "explanation": "The study is described as a 'randomized, controlled, double-blind, dose-ranging, phase 2 trial'.",
+      "quotes": [
+        "randomized, controlled, double-blind, dose-ranging, phase 2 trial was conducted to evaluate tezacaftor–ivacaftor"
+      ]
+    }
+  },
+  "participant_info": {
+    "content": "29 CF patients",
+    "explanation": "The study included patients with cystic fibrosis with specific genetic mutations.",
+    "quotes": [
+      "patients heterozygous for the Phe508del CFTR mutation and a minimal-function mutation",
+      "patients homozygous for the Phe508del CFTR mutation"
+    ]
+  },
+  "study_design": {
+    "content": "Phase 2 randomized controlled trial evaluating VX-445–tezacaftor–ivacaftor combination therapy",
+    "explanation": "The study design focused on dose-ranging and safety evaluation of the triple combination therapy.",
+    "quotes": [
+      "randomized, controlled, double-blind, dose-ranging, phase 2 trial",
+      "Primary end points were safety and absolute change in percentage of predicted FEV1"
+    ]
+  },
+  "variant_annotations": {
+    "rs113993960": {
+      "annotation_type": "Functional Analysis",
+      "haplotype": "rs113993960",
+      "gene": "CFTR",
+      "drugs": ["elexacaftor", "ivacaftor", "tezacaftor"],
+      "sentence": "Genotype del/del are associated with increased transport of CFTR when exposed to elexacaftor, ivacaftor and tezacaftor.",
+      "significance": "Significant"
+    }
+  }
+}
