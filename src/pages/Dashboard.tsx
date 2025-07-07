@@ -12,89 +12,78 @@ interface Study {
   participants: number | null;
 }
 
-// Mock data for demonstration - will be replaced when files are properly loaded
-const mockStudies: Study[] = [
-  {
-    id: 'PMC6289290',
-    title: 'VX-445–Tezacaftor–Ivacaftor in Patients with Cystic Fibrosis and One or Two',
-    description: 'A study on triple combination therapy for cystic fibrosis patients',
-    studyType: 'Randomized Control Trial',
-    participants: 29
-  },
-  {
-    id: 'PMC11730665',
-    title: 'Comparative efficacy and safety of sitagliptin or gliclazide combined with metformin',
-    description: 'Treatment-naive patients with type 2 diabetes mellitus study',
-    studyType: 'Clinical trial, prospective',
-    participants: 129
-  },
-  {
-    id: 'PMC8745123',
-    title: 'Long-term effects of COVID-19 vaccination in elderly populations',
-    description: 'Longitudinal study on vaccine efficacy and safety',
-    studyType: 'Observational Study',
-    participants: 2547
-  },
-  {
-    id: 'PMC9156789',
-    title: 'Machine learning approaches in cancer diagnosis and treatment',
-    description: 'Systematic review of AI applications in oncology',
-    studyType: 'Systematic Review',
-    participants: null
-  }
-];
-
 const Dashboard = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
-  const [availableStudies, setAvailableStudies] = useState<Study[]>(mockStudies);
-  const [loading, setLoading] = useState(false);
+  const [availableStudies, setAvailableStudies] = useState<Study[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  // Try to load from files, fallback to mock data
   useEffect(() => {
-    const checkAvailableFiles = async () => {
+    const loadRealData = async () => {
       setLoading(true);
       const studies: Study[] = [];
 
-      for (const mockStudy of mockStudies) {
-        try {
-          // Check if both files exist
-          const [markdownResponse, jsonResponse] = await Promise.all([
-            fetch(`/data/markdown/${mockStudy.id}.md`),
-            fetch(`/data/annotations/${mockStudy.id}.json`)
-          ]);
+      try {
+        // Get list of available annotation files
+        const annotationFiles = ['PMC6289290.json', 'PMC11730665.json'];
+        
+        for (const filename of annotationFiles) {
+          const pmcid = filename.replace('.json', '');
+          
+          try {
+            // Check if both files exist
+            const [markdownResponse, jsonResponse] = await Promise.all([
+              fetch(`/data/markdown/${pmcid}.md`),
+              fetch(`/data/annotations/${pmcid}.json`)
+            ]);
 
-          if (markdownResponse.ok && jsonResponse.ok) {
-            // Try to extract metadata from JSON
-            try {
+            if (markdownResponse.ok && jsonResponse.ok) {
+              // Extract metadata from JSON
               const jsonData = await jsonResponse.json();
+              
+              // Extract summary from study_parameters if available
+              const summary = jsonData.study_parameters?.summary || 
+                            jsonData.description || 
+                            'No description available';
+              
+              // Extract study type from study_parameters if available
+              const studyType = jsonData.study_parameters?.study_type?.content || 
+                              jsonData.studyType || 
+                              'Unknown';
+              
+              // Extract participants from study_parameters if available
+              const participants = jsonData.study_parameters?.participant_info?.content ? 
+                                 extractParticipantNumber(jsonData.study_parameters.participant_info.content) :
+                                 jsonData.participants || null;
+
               studies.push({
-                id: mockStudy.id,
-                title: jsonData.title || mockStudy.title,
-                description: jsonData.description || mockStudy.description,
-                studyType: jsonData.studyType || mockStudy.studyType,
-                participants: jsonData.participants || mockStudy.participants
+                id: pmcid,
+                title: jsonData.title || `Study ${pmcid}`,
+                description: summary,
+                studyType: studyType,
+                participants: participants
               });
-            } catch {
-              // If JSON parsing fails, use mock data
-              studies.push(mockStudy);
             }
-          } else {
-            // Files don't exist, use mock data
-            studies.push(mockStudy);
+          } catch (error) {
+            console.error(`Failed to load data for ${pmcid}:`, error);
           }
-        } catch (error) {
-          // File loading failed, use mock data
-          studies.push(mockStudy);
         }
+      } catch (error) {
+        console.error('Failed to load study data:', error);
       }
 
       setAvailableStudies(studies);
       setLoading(false);
     };
 
-    checkAvailableFiles();
+    loadRealData();
   }, []);
+
+  const extractParticipantNumber = (participantInfo: string): number | null => {
+    // Try to extract number from participant info text
+    const match = participantInfo.match(/(\d+)\s+(?:treatment-naive\s+)?patients?/i);
+    return match ? parseInt(match[1]) : null;
+  };
 
   const filteredStudies = useMemo(() => {
     if (!searchTerm.trim()) return availableStudies;
