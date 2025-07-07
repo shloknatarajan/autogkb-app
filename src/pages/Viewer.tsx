@@ -86,28 +86,51 @@ const Viewer = () => {
         const allText = markdownContainer.textContent || '';
         console.log('Total text length:', allText.length);
         
-        // Clean the quote text and search for it
-        const cleanQuote = quote.replace(/[^\w\s]/gi, ' ').replace(/\s+/g, ' ').toLowerCase().trim();
-        const cleanText = allText.replace(/[^\w\s]/gi, ' ').replace(/\s+/g, ' ').toLowerCase();
+        // Try multiple search strategies
+        let foundIndex = -1;
+        let searchQuote = quote;
         
-        console.log('Searching for clean quote:', cleanQuote.substring(0, 100) + '...');
+        // Strategy 1: Try exact match (case insensitive)
+        foundIndex = allText.toLowerCase().indexOf(quote.toLowerCase());
+        console.log('Exact match search result:', foundIndex);
         
-        // Try to find the quote or progressively smaller portions of it
-        let foundIndex = cleanText.indexOf(cleanQuote);
-        let searchQuote = cleanQuote;
-        
-        // If not found, try progressively smaller parts (start from the beginning)
+        // Strategy 2: Try with normalized whitespace
         if (foundIndex === -1) {
-          const words = cleanQuote.split(' ');
-          for (let len = Math.max(5, Math.floor(words.length * 0.7)); len >= 5; len--) {
-            searchQuote = words.slice(0, len).join(' ');
-            foundIndex = cleanText.indexOf(searchQuote);
-            console.log(`Searching for shorter quote (${len} words):`, searchQuote);
-            if (foundIndex !== -1) break;
+          const normalizedQuote = quote.replace(/\s+/g, ' ').trim();
+          const normalizedText = allText.replace(/\s+/g, ' ');
+          foundIndex = normalizedText.toLowerCase().indexOf(normalizedQuote.toLowerCase());
+          console.log('Normalized whitespace search result:', foundIndex);
+          if (foundIndex !== -1) {
+            searchQuote = normalizedQuote;
           }
         }
         
-        console.log('Quote found at index:', foundIndex);
+        // Strategy 3: Try with punctuation normalization
+        if (foundIndex === -1) {
+          const cleanQuote = quote.replace(/[^\w\s]/gi, ' ').replace(/\s+/g, ' ').toLowerCase().trim();
+          const cleanText = allText.replace(/[^\w\s]/gi, ' ').replace(/\s+/g, ' ').toLowerCase();
+          foundIndex = cleanText.indexOf(cleanQuote);
+          console.log('Punctuation normalized search result:', foundIndex);
+          if (foundIndex !== -1) {
+            searchQuote = cleanQuote;
+          }
+        }
+        
+        // Strategy 4: Progressive word reduction (only if still not found)
+        if (foundIndex === -1) {
+          const words = quote.split(/\s+/);
+          for (let len = Math.max(5, Math.floor(words.length * 0.8)); len >= 5; len--) {
+            const partialQuote = words.slice(0, len).join(' ');
+            foundIndex = allText.toLowerCase().indexOf(partialQuote.toLowerCase());
+            console.log(`Searching for partial quote (${len} words):`, partialQuote.substring(0, 50) + '...');
+            if (foundIndex !== -1) {
+              searchQuote = partialQuote;
+              break;
+            }
+          }
+        }
+        
+        console.log('Final search result - Quote found at index:', foundIndex);
         
         if (foundIndex !== -1) {
           // Create a simple highlight by wrapping the text
@@ -127,7 +150,7 @@ const Viewer = () => {
           let nodeStartIndex = 0;
 
           while (node = walker.nextNode()) {
-            const nodeText = (node.textContent || '').replace(/[^\w\s]/gi, ' ').replace(/\s+/g, ' ').toLowerCase();
+            const nodeText = node.textContent || '';
             const nodeLength = nodeText.length;
             
             if (currentIndex <= foundIndex && currentIndex + nodeLength > foundIndex) {
