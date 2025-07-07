@@ -87,18 +87,24 @@ const Viewer = () => {
         console.log('Total text length:', allText.length);
         
         // Clean the quote text and search for it
-        const cleanQuote = quote.replace(/[^\w\s]/gi, '').toLowerCase().trim();
-        const cleanText = allText.replace(/[^\w\s]/gi, '').toLowerCase();
+        const cleanQuote = quote.replace(/[^\w\s]/gi, ' ').replace(/\s+/g, ' ').toLowerCase().trim();
+        const cleanText = allText.replace(/[^\w\s]/gi, ' ').replace(/\s+/g, ' ').toLowerCase();
         
         console.log('Searching for clean quote:', cleanQuote.substring(0, 100) + '...');
         
-        // Try to find the quote or a significant portion of it
+        // Try to find the quote or progressively smaller portions of it
         let foundIndex = cleanText.indexOf(cleanQuote);
-        if (foundIndex === -1 && cleanQuote.length > 50) {
-          // Try searching for the first 50 characters if full quote not found
-          const shortQuote = cleanQuote.substring(0, 50);
-          foundIndex = cleanText.indexOf(shortQuote);
-          console.log('Searching for shorter quote:', shortQuote);
+        let searchQuote = cleanQuote;
+        
+        // If not found, try progressively smaller parts (start from the beginning)
+        if (foundIndex === -1) {
+          const words = cleanQuote.split(' ');
+          for (let len = Math.max(5, Math.floor(words.length * 0.7)); len >= 5; len--) {
+            searchQuote = words.slice(0, len).join(' ');
+            foundIndex = cleanText.indexOf(searchQuote);
+            console.log(`Searching for shorter quote (${len} words):`, searchQuote);
+            if (foundIndex !== -1) break;
+          }
         }
         
         console.log('Quote found at index:', foundIndex);
@@ -121,7 +127,7 @@ const Viewer = () => {
           let nodeStartIndex = 0;
 
           while (node = walker.nextNode()) {
-            const nodeText = (node.textContent || '').replace(/[^\w\s]/gi, '').toLowerCase();
+            const nodeText = (node.textContent || '').replace(/[^\w\s]/gi, ' ').replace(/\s+/g, ' ').toLowerCase();
             const nodeLength = nodeText.length;
             
             if (currentIndex <= foundIndex && currentIndex + nodeLength > foundIndex) {
@@ -146,7 +152,7 @@ const Viewer = () => {
             // Find word boundaries for proper highlighting
             const originalText = foundNode.textContent || '';
             let startIndex = Math.max(0, nodeStartIndex);
-            let endIndex = Math.min(originalText.length, nodeStartIndex + cleanQuote.length);
+            let endIndex = Math.min(originalText.length, nodeStartIndex + searchQuote.length);
             
             // Adjust start to word boundary
             while (startIndex > 0 && /\w/.test(originalText[startIndex - 1])) {
