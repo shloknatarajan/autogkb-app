@@ -24,7 +24,8 @@ export const MarkdownPanel: React.FC<MarkdownPanelProps> = ({ markdown }) => {
                   tbody: ({node, ...props}) => <tbody {...props} />,
                   tr: ({node, ...props}) => <tr className="even:bg-muted/30" {...props} />,
                   th: ({node, ...props}) => <th className="border border-border bg-secondary px-6 py-4 text-left font-bold text-foreground" {...props} />,
-                  td: ({node, ...props}) => <td className="border border-border px-6 py-3 text-sm align-top" {...props} />
+                  td: ({node, ...props}) => <td className="border border-border px-6 py-3 text-sm align-top" {...props} />,
+                  p: ({node, ...props}) => <p className="whitespace-pre-line" {...props} />
                 }}
               >
                 {markdown}
