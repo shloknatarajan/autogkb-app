@@ -5,7 +5,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { StudyParametersSection } from './StudyParametersSection';
 import { DrugAnnotationsSection } from './DrugAnnotationsSection';
 import { FunctionalAnnotationsSection } from './FunctionalAnnotationsSection';
-import { AnnotationsSection } from './AnnotationsSection';
+import { PhenotypeAnnotationsSection } from './PhenotypeAnnotationsSection';
 
 interface AnnotationsPanelProps {
   jsonData: any;
@@ -54,9 +54,9 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
                   />
 
                   {/* Phenotype Annotations */}
-                  <AnnotationsSection 
-                    title="Phenotype Annotations" 
-                    annotations={jsonData.phenotype_annotations} 
+                  <PhenotypeAnnotationsSection 
+                    phenotypeAnnotations={jsonData.phenotype_annotations} 
+                    onQuoteClick={onQuoteClick} 
                   />
 
                   {/* Functional Annotations */}
