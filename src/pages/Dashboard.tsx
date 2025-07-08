@@ -25,7 +25,13 @@ const Dashboard = () => {
 
       try {
         // Get list of available annotation files
-        const annotationFiles = ['PMC6289290.json', 'PMC11730665.json'];
+        const annotationFiles = [
+          'PMC11730665.json', 
+          'PMC5712579.json', 
+          'PMC5728534.json', 
+          'PMC5749368.json', 
+          'PMC4737107.json'
+        ];
         
         for (const filename of annotationFiles) {
           const pmcid = filename.replace('.json', '');
