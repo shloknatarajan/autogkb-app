@@ -19,89 +19,53 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const discoverAvailableStudies = async () => {
+    const loadAvailableStudies = async () => {
       setLoading(true);
       const studies: Study[] = [];
 
-      try {
-        // Try to fetch a manifest file first
-        let pmcIds: string[] = [];
-        
+      // Known available studies based on the files in the project
+      const knownStudies = [
+        'PMC11730665', 'PMC5712579', 'PMC5728534', 'PMC5749368', 'PMC4737107'
+      ];
+      
+      // Load data for each known study
+      for (const pmcid of knownStudies) {
         try {
-          const manifestResponse = await fetch('/data/manifest.json');
-          if (manifestResponse.ok) {
-            const manifest = await manifestResponse.json();
-            pmcIds = manifest.studies || [];
-          }
-        } catch {
-          // If no manifest, try common PMC patterns
-          const commonPMCs = [
-            'PMC11730665', 'PMC5712579', 'PMC5728534', 'PMC5749368', 'PMC4737107',
-            'PMC6289290', 'PMC10000000', 'PMC9000000', 'PMC8000000', 'PMC7000000'
-          ];
-          
-          // Test which PMCs actually exist
-          const existingPMCs = await Promise.all(
-            commonPMCs.map(async (pmcid) => {
-              try {
-                const [markdownResponse, jsonResponse] = await Promise.all([
-                  fetch(`/data/markdown/${pmcid}.md`),
-                  fetch(`/data/annotations/${pmcid}.json`)
-                ]);
-                return markdownResponse.ok && jsonResponse.ok ? pmcid : null;
-              } catch {
-                return null;
-              }
-            })
-          );
-          
-          pmcIds = existingPMCs.filter((pmcid): pmcid is string => pmcid !== null);
-        }
-        
-        // Load data for discovered PMC IDs
-        for (const pmcid of pmcIds) {
-          try {
-            const [markdownResponse, jsonResponse] = await Promise.all([
-              fetch(`/data/markdown/${pmcid}.md`),
-              fetch(`/data/annotations/${pmcid}.json`)
-            ]);
+          const jsonResponse = await fetch(`/data/annotations/${pmcid}.json`);
 
-            if (markdownResponse.ok && jsonResponse.ok) {
-              const jsonData = await jsonResponse.json();
-              
-              const summary = jsonData.study_parameters?.summary || 
-                            jsonData.description || 
-                            'No description available';
-              
-              const studyType = jsonData.study_parameters?.study_type?.content || 
-                              jsonData.studyType || 
-                              'Unknown';
-              
-              const participants = jsonData.study_parameters?.participant_info?.content ? 
-                                 extractParticipantNumber(jsonData.study_parameters.participant_info.content) :
-                                 jsonData.participants || null;
+          if (jsonResponse.ok) {
+            const jsonData = await jsonResponse.json();
+            
+            const summary = jsonData.study_parameters?.summary || 
+                          jsonData.description || 
+                          'No description available';
+            
+            const studyType = jsonData.study_parameters?.study_type?.content || 
+                            jsonData.studyType || 
+                            'Unknown';
+            
+            const participants = jsonData.study_parameters?.participant_info?.content ? 
+                               extractParticipantNumber(jsonData.study_parameters.participant_info.content) :
+                               jsonData.participants || null;
 
-              studies.push({
-                id: pmcid,
-                title: jsonData.title || `Study ${pmcid}`,
-                description: summary,
-                studyType: studyType,
-                participants: participants
-              });
-            }
-          } catch (error) {
-            console.error(`Failed to load data for ${pmcid}:`, error);
+            studies.push({
+              id: pmcid,
+              title: jsonData.title || `Study ${pmcid}`,
+              description: summary,
+              studyType: studyType,
+              participants: participants
+            });
           }
+        } catch (error) {
+          console.error(`Failed to load data for ${pmcid}:`, error);
         }
-      } catch (error) {
-        console.error('Failed to discover studies:', error);
       }
 
       setAvailableStudies(studies);
       setLoading(false);
     };
 
-    discoverAvailableStudies();
+    loadAvailableStudies();
   }, []);
 
   const extractParticipantNumber = (participantInfo: string): number | null => {
