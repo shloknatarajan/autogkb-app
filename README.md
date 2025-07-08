@@ -1,6 +1,6 @@
-# AutoGKB - Medical Research Analysis Tool
+# AutoGKB App
 
-A React-based application for analyzing pharmacogenomic (PGx) research papers using Large Language Models (LLMs). This tool provides an interactive interface for viewing medical research data with markdown content and structured JSON annotations.
+A React-based application for analyzing pharmacogenomic (PGx) research papers using Large Language Models (LLMs). This tool provides an interactive interface for viewing medical research data with markdown content and structured JSON annotations generated from the base [AutoGKB](https://github.com/DaneshjouLab/AutoGKB) repo
 
 ## Features
 
