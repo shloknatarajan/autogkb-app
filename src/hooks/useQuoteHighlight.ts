@@ -24,7 +24,12 @@ export const useQuoteHighlight = () => {
         });
 
         // Get all text content and search for the quote
-        const allText = markdownContainer.textContent || '';
+        let allText = markdownContainer.textContent || '';
+        
+        // Clean up markdown processing artifacts
+        allText = allText.replace(/\*P\*P/g, '*P*'); // Fix duplicate P in p-values
+        allText = allText.replace(/\*([^*]+)\*\1/g, '*$1'); // Fix general duplicates
+        
         console.log('Total text length:', allText.length);
         
         // Try multiple search strategies
@@ -35,7 +40,37 @@ export const useQuoteHighlight = () => {
         foundIndex = allText.toLowerCase().indexOf(quote.toLowerCase());
         console.log('Exact match search result:', foundIndex);
         
-        // Strategy 2: Try with normalized whitespace
+        // Strategy 2: Remove ellipsis and try again
+        if (foundIndex === -1) {
+          const quoteTrimmed = quote.replace(/\.{3,}$/, '').trim();
+          if (quoteTrimmed !== quote) {
+            foundIndex = allText.toLowerCase().indexOf(quoteTrimmed.toLowerCase());
+            console.log('Ellipsis removed search result:', foundIndex);
+            if (foundIndex !== -1) {
+              searchQuote = quoteTrimmed;
+            }
+          }
+        }
+        
+        // Strategy 3: Normalize P-values and statistical notation
+        if (foundIndex === -1) {
+          let normalizedQuote = quote.toLowerCase();
+          let normalizedText = allText.toLowerCase();
+          
+          // Handle p-value variations
+          normalizedQuote = normalizedQuote.replace(/\bp\s*<\s*0\.(\d+)/g, 'p < .$1');
+          normalizedQuote = normalizedQuote.replace(/\bp\s*<\s*\.(\d+)/g, 'p < .$1');
+          normalizedText = normalizedText.replace(/\*?p\*?\s*<\s*0\.(\d+)/g, 'p < .$1');
+          normalizedText = normalizedText.replace(/\*?p\*?\s*<\s*\.(\d+)/g, 'p < .$1');
+          
+          foundIndex = normalizedText.indexOf(normalizedQuote);
+          console.log('P-value normalized search result:', foundIndex);
+          if (foundIndex !== -1) {
+            searchQuote = normalizedQuote;
+          }
+        }
+        
+        // Strategy 4: Try with normalized whitespace
         if (foundIndex === -1) {
           const normalizedQuote = quote.replace(/\s+/g, ' ').trim();
           const normalizedText = allText.replace(/\s+/g, ' ');
@@ -46,23 +81,38 @@ export const useQuoteHighlight = () => {
           }
         }
         
-        // Strategy 3: Try with punctuation normalization
+        // Strategy 5: Try with selective punctuation normalization (preserve important scientific notation)
         if (foundIndex === -1) {
-          const cleanQuote = quote.replace(/[^\w\s]/gi, ' ').replace(/\s+/g, ' ').toLowerCase().trim();
-          const cleanText = allText.replace(/[^\w\s]/gi, ' ').replace(/\s+/g, ' ').toLowerCase();
+          // Only remove common punctuation but preserve scientific notation
+          const cleanQuote = quote.replace(/[,;:""'']/g, '').replace(/\s+/g, ' ').toLowerCase().trim();
+          const cleanText = allText.replace(/[,;:""'']/g, '').replace(/\s+/g, ' ').toLowerCase();
           foundIndex = cleanText.indexOf(cleanQuote);
-          console.log('Punctuation normalized search result:', foundIndex);
+          console.log('Selective punctuation normalized search result:', foundIndex);
           if (foundIndex !== -1) {
             searchQuote = cleanQuote;
           }
         }
         
-        // Strategy 4: Progressive word reduction for long quotes
+        // Strategy 6: Medical term and genetic marker search
+        if (foundIndex === -1) {
+          // Look for genetic markers, drug names, and medical terms
+          const medicalTerms = quote.match(/\b(?:rs\d+|HbA1c|DPP4|T2DM|sitagliptin|gliclazide|genotype|allele|SNP|mg\/dL|mmol\/L)\b/gi) || [];
+          for (const term of medicalTerms) {
+            foundIndex = allText.toLowerCase().indexOf(term.toLowerCase());
+            console.log(`Searching for medical term: "${term}"`);
+            if (foundIndex !== -1) {
+              searchQuote = term;
+              break;
+            }
+          }
+        }
+        
+        // Strategy 7: Progressive word reduction for long quotes (improved)
         if (foundIndex === -1 && quote.length > 50) {
-          const words = quote.split(/\s+/);
-          // Try different starting and ending points
-          for (let start = 0; start < Math.min(3, words.length - 5); start++) {
-            for (let len = Math.max(5, Math.floor(words.length * 0.7)); len >= 5; len--) {
+          const words = quote.replace(/\.{3,}$/, '').split(/\s+/);
+          // Try different starting and ending points, prioritizing middle content
+          for (let start = 0; start < Math.min(2, words.length - 8); start++) {
+            for (let len = Math.max(8, Math.floor(words.length * 0.8)); len >= 8; len--) {
               const partialQuote = words.slice(start, start + len).join(' ');
               foundIndex = allText.toLowerCase().indexOf(partialQuote.toLowerCase());
               console.log(`Searching for partial quote (${len} words from ${start}):`, partialQuote.substring(0, 50) + '...');
@@ -75,14 +125,14 @@ export const useQuoteHighlight = () => {
           }
         }
         
-        // Strategy 5: Key phrase extraction for very long quotes
-        if (foundIndex === -1 && quote.length > 100) {
-          // Look for distinctive phrases or medical terms
-          const distinctivePhrases = quote.match(/\b[A-Z][a-z]*(?:\s+[a-z]+)*(?:\s+[A-Z][a-z]*)*\b/g) || [];
-          for (const phrase of distinctivePhrases) {
-            if (phrase.length > 10) {
+        // Strategy 8: Key phrase extraction with medical context
+        if (foundIndex === -1 && quote.length > 80) {
+          // Look for distinctive medical phrases
+          const medicalPhrases = quote.match(/\b(?:randomized|controlled|trial|patients|treatment|efficacy|significant|association|genotype|phenotype|clinical|study|analysis|results|conclusion)\s+[a-z]+(?:\s+[a-z]+){1,4}/gi) || [];
+          for (const phrase of medicalPhrases) {
+            if (phrase.length > 15) {
               foundIndex = allText.toLowerCase().indexOf(phrase.toLowerCase());
-              console.log(`Searching for distinctive phrase: "${phrase}"`);
+              console.log(`Searching for medical phrase: "${phrase}"`);
               if (foundIndex !== -1) {
                 searchQuote = phrase;
                 break;
@@ -91,12 +141,15 @@ export const useQuoteHighlight = () => {
           }
         }
         
-        // Strategy 6: Single word fallback for drug names
-        if (foundIndex === -1 && quote.length < 30) {
-          const singleWords = quote.split(/\s+/).filter(word => word.length > 3);
-          for (const word of singleWords) {
+        // Strategy 9: Fuzzy matching for drug names and short quotes
+        if (foundIndex === -1 && quote.length < 50) {
+          const importantWords = quote.split(/\s+/).filter(word => 
+            word.length > 4 && 
+            !/^(the|and|for|with|from|this|that|were|was|are|is|of|to|in|on|at|by|an|a)$/i.test(word)
+          );
+          for (const word of importantWords) {
             foundIndex = allText.toLowerCase().indexOf(word.toLowerCase());
-            console.log(`Searching for single word: "${word}"`);
+            console.log(`Searching for important word: "${word}"`);
             if (foundIndex !== -1) {
               searchQuote = word;
               break;
@@ -151,14 +204,24 @@ export const useQuoteHighlight = () => {
             let startIndex = Math.max(0, nodeStartIndex);
             let endIndex = Math.min(originalText.length, nodeStartIndex + searchQuote.length);
             
-            // Adjust start to word boundary
-            while (startIndex > 0 && /\w/.test(originalText[startIndex - 1])) {
-              startIndex--;
-            }
-            
-            // Adjust end to word boundary
-            while (endIndex < originalText.length && /\w/.test(originalText[endIndex])) {
-              endIndex++;
+            // For medical terms and genetic markers, be more precise with boundaries
+            if (searchQuote.match(/\b(?:rs\d+|HbA1c|DPP4|T2DM|sitagliptin|gliclazide|genotype|allele|SNP|mg\/dL|mmol\/L)\b/i)) {
+              // Use exact boundaries for medical terms
+              const termMatch = originalText.toLowerCase().indexOf(searchQuote.toLowerCase());
+              if (termMatch !== -1) {
+                startIndex = termMatch;
+                endIndex = termMatch + searchQuote.length;
+              }
+            } else {
+              // Adjust start to word boundary for regular text
+              while (startIndex > 0 && /\w/.test(originalText[startIndex - 1])) {
+                startIndex--;
+              }
+              
+              // Adjust end to word boundary for regular text
+              while (endIndex < originalText.length && /\w/.test(originalText[endIndex])) {
+                endIndex++;
+              }
             }
             
             const beforeText = originalText.substring(0, startIndex);
