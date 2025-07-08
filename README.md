@@ -1,6 +1,6 @@
-# AutoGKB - Medical Research Analysis Tool
+# AutoGKB App
 
-A React-based application for analyzing pharmacogenomic (PGx) research papers using Large Language Models (LLMs). This tool provides an interactive interface for viewing medical research data with markdown content and structured JSON annotations.
+A React-based application for analyzing pharmacogenomic (PGx) research papers using Large Language Models (LLMs). This tool provides an interactive interface for viewing medical research data with markdown content and structured JSON annotations generated from the base [AutoGKB](https://github.com/DaneshjouLab/AutoGKB) repo
 
 ## Features
 
@@ -69,9 +69,12 @@ The application will be available at `http://localhost:5173`
 
 To add new research studies:
 
-1. Place the markdown file in `public/data/markdown/` (e.g., `PMC1234567.md`)
-2. Place the corresponding JSON annotations in `public/data/annotations/` (e.g., `PMC1234567.json`)
-3. The application will automatically detect and load the new study
+1. Convert an article PMCID to markdown using [PubMedDownloader](https://github.com/shloknatarajan/PubMedDownloader)
+2. Generate new annotations using the base [AutoGKB](https://github.com/DaneshjouLab/AutoGKB) repo
+3. Place the markdown file in `public/data/markdown/` (e.g., `PMC1234567.md`)
+4. Place the corresponding JSON annotations in `public/data/annotations/` (e.g., `PMC1234567.json`)
+5. The application will automatically detect and load the new study
+
 
 ## Technology Stack
 
