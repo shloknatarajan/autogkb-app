@@ -69,9 +69,11 @@ The application will be available at `http://localhost:5173`
 
 To add new research studies:
 
-1. Place the markdown file in `public/data/markdown/` (e.g., `PMC1234567.md`)
-2. Place the corresponding JSON annotations in `public/data/annotations/` (e.g., `PMC1234567.json`)
-3. The application will automatically detect and load the new study
+1. Generate new annotations using the base [AutoGKB](https://github.com/DaneshjouLab/AutoGKB) repo
+2. Place the markdown file in `public/data/markdown/` (e.g., `PMC1234567.md`)
+3. Place the corresponding JSON annotations in `public/data/annotations/` (e.g., `PMC1234567.json`)
+4. The application will automatically detect and load the new study
+
 
 ## Technology Stack
 
