@@ -1,73 +1,95 @@
-# Welcome to your Lovable project
+# AutoGKB - Medical Research Analysis Tool
 
-## Project info
+A React-based application for analyzing pharmacogenomic (PGx) research papers using Large Language Models (LLMs). This tool provides an interactive interface for viewing medical research data with markdown content and structured JSON annotations.
 
-**URL**: https://lovable.dev/projects/4ecaff54-43b3-4461-94e4-f0c9d7fe3e04
+## Features
 
-## How can I edit this code?
+- **Study Dashboard**: Browse available medical research studies with search functionality
+- **Interactive Viewer**: View research papers in markdown format alongside structured JSON annotations
+- **Quote Highlighting**: Click on quotes in annotations to highlight corresponding text in the paper
+- **Responsive Design**: Modern UI built with shadcn/ui components and Tailwind CSS
+- **Data Management**: Automatically detects and loads studies from local data files
 
-There are several ways of editing your application.
+## Project Structure
 
-**Use Lovable**
+```
+src/
+├── components/
+│   ├── ui/                 # shadcn/ui components
+│   └── viewer/             # Custom viewer components
+├── hooks/                  # Custom React hooks
+├── pages/                  # Main application pages
+│   ├── Dashboard.tsx       # Study listing page
+│   ├── Viewer.tsx          # Paper viewer page
+│   └── NotFound.tsx        # 404 page
+├── contexts/               # React contexts
+└── lib/                    # Utility functions
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/4ecaff54-43b3-4461-94e4-f0c9d7fe3e04) and start prompting.
+public/data/
+├── markdown/               # Research papers in markdown format
+└── annotations/            # JSON annotations for papers
+```
 
-Changes made via Lovable will be committed automatically to this repo.
+## Getting Started
 
-**Use your preferred IDE**
+### Prerequisites
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- Node.js (v18 or higher)
+- npm or yarn
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Installation
 
-Follow these steps:
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd autogkb-app
+```
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+2. Install dependencies:
+```bash
+npm install
+```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+3. Start the development server:
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The application will be available at `http://localhost:5173`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Available Scripts
 
-**Use GitHub Codespaces**
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run build:dev` - Build for development
+- `npm run lint` - Run ESLint
+- `npm run preview` - Preview production build
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Adding New Studies
 
-## What technologies are used for this project?
+To add new research studies:
 
-This project is built with:
+1. Place the markdown file in `public/data/markdown/` (e.g., `PMC1234567.md`)
+2. Place the corresponding JSON annotations in `public/data/annotations/` (e.g., `PMC1234567.json`)
+3. The application will automatically detect and load the new study
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Technology Stack
 
-## How can I deploy this project?
+- **Frontend**: React 18, TypeScript
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS
+- **UI Components**: shadcn/ui, Radix UI
+- **Routing**: React Router
+- **State Management**: TanStack Query
+- **Form Handling**: React Hook Form
+- **Validation**: Zod
+- **Icons**: Lucide React
 
-Simply open [Lovable](https://lovable.dev/projects/4ecaff54-43b3-4461-94e4-f0c9d7fe3e04) and click on Share -> Publish.
+## Development
 
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+The project follows modern React patterns with:
+- Custom hooks for data fetching and state management
+- Component composition with shadcn/ui
+- TypeScript for type safety
+- Responsive design principles
+- Accessible UI components
