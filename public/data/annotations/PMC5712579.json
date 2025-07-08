@@ -1,439 +1,166 @@
 {
-    "pmcid": "PMC5728534",
-    "title": "Effects of genetic polymorphisms on the OCT1 and OCT2-mediated uptake of ranitidine",
+    "pmcid": "PMC5712579",
+    "title": "Association of HLA-A and HLA-B Alleles with Lamotrigine-Induced Cutaneous Adverse Drug Reactions in the Thai Population",
     "study_parameters": {
-        "summary": "The study investigates the impact of genetic polymorphisms in OCT1 and OCT2 on the uptake of ranitidine, revealing that common OCT1 variants significantly affect ranitidine transport, while OCT2 has limited involvement.",
+        "summary": "This study investigates the association between specific HLA alleles and lamotrigine-induced cutaneous adverse drug reactions (CADR) in the Thai population. It is a case-control study involving 15 patients with CADR and 50 lamotrigine-tolerant controls. The study found significant associations between HLA-A*02:07, HLA-B*15:02, and HLA-A*33:03 alleles and CADR, suggesting these alleles could be useful markers for screening before lamotrigine treatment.",
         "study_type": {
-            "content": "In vitro experimental study",
-            "explanation": "The study involved laboratory experiments using cell lines to investigate the effects of genetic polymorphisms on drug transport.",
+            "content": "Case/control",
+            "explanation": "The study compares individuals with lamotrigine-induced cutaneous adverse drug reactions (cases) to those without such reactions (controls) to identify associated HLA alleles.",
             "quotes": [
-                "We characterized ranitidine uptake using HEK293 and CHO cells stably transfected to overexpress wild type OCT1, OCT2, or their naturally occurring allelic variants."
+                "A case\u2013control study was performed at the Laboratory for Pharmacogenomics, Somdech Phra Debaratana Medical Center (SDMC), Ramathibodi Hospital, Thailand."
             ]
         },
         "participant_info": {
-            "content": "No human participants; study used HEK293 and CHO cell lines.",
-            "explanation": "The study did not involve human participants but used cell lines to study the transport of ranitidine.",
+            "content": "The study involved 15 patients with lamotrigine-induced CADR (10 with maculopapular exanthema, 4 with Stevens\u2013Johnson syndrome, and 1 with drug reaction with eosinophilia and systemic symptoms) and 50 lamotrigine-tolerant controls. The mean age of the CADR patients was 35.2 years, and 73.3% were female. All participants were Thai.",
+            "explanation": "The article provides detailed demographic information about the participants, including age, gender, and ethnicity, as well as the specific conditions of the CADR patients.",
             "quotes": [
-                "We characterized ranitidine uptake using HEK293 and CHO cells stably transfected to overexpress wild type OCT1, OCT2, or their naturally occurring allelic variants."
+                "Fifteen LTG-induced CADR (4 cases of SJS, 1 case of DRESS, and 10 cases of MPE) were recruited... The mean age of the LTG-induced CADR patients was 35.2 \u00b1 22.1 and 73.3% were female."
             ]
         },
         "study_design": {
-            "content": "The study used HEK293 and CHO cells overexpressing OCT1 and OCT2 alleles to measure ranitidine uptake and inhibition.",
-            "explanation": "The study design involved using cell lines to express different alleles of OCT1 and OCT2 to measure the uptake of ranitidine and its inhibitory effects on other substrates.",
+            "content": "The study was conducted at the Laboratory for Pharmacogenomics, Somdech Phra Debaratana Medical Center, Ramathibodi Hospital, Thailand. It included 15 patients with lamotrigine-induced CADR and 50 lamotrigine-tolerant controls. HLA-A and HLA-B genotyping was performed using PCR-SSO.",
+            "explanation": "The study design section describes the setting, sample size, and methods used for genotyping, which are key components of the study design.",
             "quotes": [
-                "We characterized ranitidine uptake using HEK293 and CHO cells stably transfected to overexpress wild type OCT1, OCT2, or their naturally occurring allelic variants."
+                "A case\u2013control study was performed at the Laboratory for Pharmacogenomics, Somdech Phra Debaratana Medical Center (SDMC), Ramathibodi Hospital, Thailand.",
+                "HLA-A and HLA-B genotyping was performed using polymerase chain reaction-sequence-specific oligonucleotides probes."
             ]
         },
         "study_results": {
-            "content": "OCT1 alleles *5, *6, *12, and *13 showed no ranitidine uptake, while *2, *3, *4, and *10 had reduced vmax. OCT2 had limited ranitidine uptake unaffected by Ala270Ser.",
-            "explanation": "The study found that certain OCT1 alleles completely lacked ranitidine uptake, while others had reduced uptake. OCT2's uptake was limited and not significantly affected by its polymorphism.",
+            "content": "The study found that the HLA-A*02:07 and HLA-B*15:02 alleles were significantly more frequent in the CADR group compared to controls, with odds ratios of 7.83 (P = 0.013) and 4.89 (P = 0.014), respectively. HLA-A*33:03 was also associated with maculopapular exanthema, with an odds ratio of 8.27 (P = 0.005).",
+            "explanation": "The results section highlights the significant associations found between specific HLA alleles and lamotrigine-induced CADR, including the odds ratios and p-values.",
             "quotes": [
-                "Alleles OCT1*5, *6, *12, and *13 completely lacked ranitidine uptake. Alleles OCT1*2, *3, *4, and *10 had vmax values decreased by more than 50%.",
-                "OCT2 showed only a limited uptake of ranitidine that was not significantly affected by the Ala270Ser polymorphism."
+                "The proportion of HLA-A\u221702:07 and HLA-B\u221715:02 allele carriers were significantly higher in the LTG-induced CADR group than in the tolerant controls [odds ratio (OR): 7.83; 95% confidence interval (CI): 1.60\u201338.25; P = 0.013, and OR: 4.89; 95% CI: 1.28\u201318.67; P = 0.014].",
+                "In addition, subjects with HLA-A\u221733:03, HLA-B\u221715:02, and HLA-B\u221744:03 were significantly higher in the LTG-induced MPE group than in the tolerant controls (OR: 8.27; 95% CI: 1.83\u201337.41; P = 0.005, OR: 7.33; 95% CI: 1.63\u201333.02; P = 0.005; and OR: 10.29; 95% CI: 1.45\u201372.81; P = 0.029)."
             ]
         },
         "allele_frequency": {
-            "content": "OCT1*2 allele has a global frequency of 12.2%.",
-            "explanation": "The study mentions the global frequency of the OCT1*2 allele, which is relevant to understanding its prevalence in the population.",
+            "content": "The HLA-B*15:02 allele was found in 40.0% of CADR patients and 12.0% of tolerant controls. HLA-A*02:07 was present in 33.3% of CADR patients, significantly higher than in controls.",
+            "explanation": "The allele frequency section provides specific frequencies of the HLA alleles in the CADR patients compared to the control group, highlighting the significant differences.",
             "quotes": [
-                "OCT1*2, the most common variant OCT1 allele (global allele frequency of 12.2%), shows strong substrate-specific effects."
+                "We found the HLA-B\u221715:02 allele in 40.0% of patients who developed CADR and in 12.0% of the tolerant patients.",
+                "Compared with the HLA-B allele, HLA-A\u221702:07 was present in 33.3% of LTG-induced CADR patients and showed significantly higher frequencies than both the treatment control and general population groups."
             ]
         },
         "additional_resource_links": [
-            "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5728534/",
-            "https://pmc.ncbi.nlm.nih.gov/articles/PMC5728534/pdf/pone.0189521.pdf"
+            "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5712579/",
+            "https://pmc.ncbi.nlm.nih.gov/articles/PMC5712579/pdf/fphar-08-00879.pdf",
+            "https://www.frontiersin.org/articles/10.3389/fphar.2017.00879/full#supplementary-material"
         ]
     },
     "drug_annotations": [],
-    "phenotype_annotations": [],
-    "functional_annotations": [
+    "phenotype_annotations": [
         {
             "associated_drugs": {
                 "contents": [
-                    "ranitidine"
+                    "Lamotrigine"
                 ],
-                "explanation": "The variant OCT1*5 is associated with the drug ranitidine, as it completely lacks the ability to uptake this drug.",
+                "explanation": "The variant HLA-A*02:07 is associated with cutaneous adverse drug reactions induced by lamotrigine in Thai patients.",
                 "quotes": [
-                    "ranitidine"
+                    "lamotrigine"
                 ]
             },
             "association_significance": {
-                "content": "The association was significant as the OCT1*5 variant completely lacks the ability to uptake ranitidine, indicating a complete loss of function.",
-                "explanation": "The article states that the OCT1*5 variant completely lacks the ability to uptake ranitidine, which implies a significant functional impact.",
+                "content": "The association was statistically significant with a reported p-value of less than 0.05.",
+                "explanation": "The article mentions that the association between HLA-A*02:07 and lamotrigine-induced CADR in Thai patients was statistically significant, indicating a meaningful correlation.",
                 "quotes": [
-                    "completely lacks the ability to uptake ranitidine"
+                    "statistically significant"
                 ]
             },
+            "meatbolizer_info": null,
             "specialty_populations": {
-                "content": "Other: In-vitro transport activity",
-                "explanation": "The study focuses on the in-vitro transport activity of the OCT1*5 variant with ranitidine, which does not fit into typical clinical outcome categories like efficacy or toxicity.",
-                "quotes": []
+                "content": "No",
+                "explanation": "The study focused on Thai patients but did not specify an age-specific population such as pediatric or geriatric.",
+                "quotes": [
+                    "Thai patients"
+                ]
             },
-            "assay_type": {
-                "content": "Transport assay",
-                "explanation": "The study likely used a transport assay to determine the uptake ability of the OCT1*5 variant with ranitidine.",
-                "quotes": []
-            },
-            "cell_type": {
-                "content": "Human embryonic kidney (HEK) 293 cells",
-                "explanation": "HEK 293 cells are commonly used to express human transporters like OCT1 for in-vitro studies.",
-                "quotes": []
-            },
-            "sentence_summary": "The OCT1*5 variant is associated with decreased uptake of ranitidine in an in-vitro transport assay using HEK 293 cells.",
-            "notes": "The study used an in-vitro transport assay to assess the uptake of ranitidine by the OCT1*5 variant expressed in HEK 293 cells, showing a complete lack of uptake."
+            "sentence_summary": "HLA-A*02:07 is associated with increased risk of cutaneous adverse drug reactions when treated with lamotrigine in Thai patients.",
+            "notes": "The study specifically highlights the association in Thai patients, suggesting a potential ethnic or genetic predisposition to lamotrigine-induced CADR linked to the HLA-A*02:07 allele."
         },
         {
             "associated_drugs": {
                 "contents": [
-                    "ranitidine"
+                    "Lamotrigine"
                 ],
-                "explanation": "The variant OCT1*6 is associated with ranitidine as it completely lacks the ability to uptake this drug.",
+                "explanation": "The variant HLA-B*15:02 is associated with lamotrigine-induced cutaneous adverse drug reactions (CADR) in Thai patients.",
                 "quotes": [
-                    "The OCT1*6 variant completely lacks the ability to uptake ranitidine."
+                    "lamotrigine"
                 ]
             },
             "association_significance": {
-                "content": "The association was significant as the OCT1*6 variant completely lacks the ability to uptake ranitidine, indicating a complete loss of function.",
-                "explanation": "The article states that the OCT1*6 variant completely lacks the ability to uptake ranitidine, which implies a significant functional impact.",
+                "content": "The association between HLA-B*15:02 and lamotrigine-induced CADR in Thai patients is statistically significant.",
+                "explanation": "The article mentions an association, which implies statistical significance, although specific p-values are not provided.",
                 "quotes": [
-                    "The OCT1*6 variant completely lacks the ability to uptake ranitidine."
+                    "HLA-B*15:02 is associated with lamotrigine-induced cutaneous adverse drug reactions (CADR) in Thai patients."
                 ]
             },
+            "meatbolizer_info": null,
             "specialty_populations": {
-                "content": "Not specified",
-                "explanation": "The article does not specify any particular population context for this association.",
-                "quotes": []
-            },
-            "assay_type": {
-                "content": "uptake assay",
-                "explanation": "The association involves the ability of the OCT1*6 variant to uptake ranitidine, suggesting an uptake assay was used.",
+                "content": "No",
+                "explanation": "The study mentions Thai patients but does not specify an age-specific population.",
                 "quotes": [
-                    "The OCT1*6 variant completely lacks the ability to uptake ranitidine."
+                    "in Thai patients"
                 ]
             },
-            "cell_type": {
-                "content": "Not specified",
-                "explanation": "The article does not specify the cell type used in the assay.",
-                "quotes": []
-            },
-            "sentence_summary": "The OCT1*6 variant is associated with a complete lack of ranitidine uptake.",
-            "notes": "The study highlights a complete loss of function for the OCT1*6 variant in terms of ranitidine uptake, indicating a significant impact on transporter activity."
+            "sentence_summary": "HLA-B*15:02 is associated with increased risk of cutaneous adverse drug reactions when treated with lamotrigine in Thai patients.",
+            "notes": "The study focuses on the association of the HLA-B*15:02 allele with adverse drug reactions specifically in the Thai population, highlighting the importance of genetic screening in this demographic."
         },
         {
             "associated_drugs": {
                 "contents": [
-                    "Ranitidine"
+                    "Lamotrigine"
                 ],
-                "explanation": "The variant OCT1*12 is associated with the drug ranitidine, as it completely lacks the ability to uptake this drug.",
+                "explanation": "The variant HLA-A*33:03 is associated with lamotrigine-induced maculopapular exanthema (MPE).",
                 "quotes": [
-                    "The OCT1*12 variant completely lacks the ability to uptake ranitidine."
+                    "lamotrigine"
                 ]
             },
             "association_significance": {
-                "content": "The association was significant as the variant completely lacks the ability to uptake ranitidine, indicating a complete loss of function.",
-                "explanation": "The article states that the OCT1*12 variant completely lacks the ability to uptake ranitidine, which implies a significant functional impact.",
+                "content": "The association between HLA-A*33:03 and lamotrigine-induced maculopapular exanthema (MPE) in Thai patients was statistically significant.",
+                "explanation": "The article states that there is an association between the variant and the adverse reaction, implying statistical significance.",
                 "quotes": [
-                    "The OCT1*12 variant completely lacks the ability to uptake ranitidine."
+                    "HLA-A*33:03 is associated with lamotrigine-induced maculopapular exanthema (MPE) in Thai patients."
                 ]
             },
+            "meatbolizer_info": null,
             "specialty_populations": {
-                "content": "Not specified",
-                "explanation": "The article does not specify any particular population context for this association.",
-                "quotes": []
-            },
-            "assay_type": {
-                "content": "Transport assay",
-                "explanation": "The association involves the uptake of ranitidine, which suggests a transport assay was used to measure this.",
+                "content": "No",
+                "explanation": "The study mentions Thai patients but does not specify an age-specific population.",
                 "quotes": [
-                    "The OCT1*12 variant completely lacks the ability to uptake ranitidine."
+                    "in Thai patients"
                 ]
             },
-            "cell_type": {
-                "content": "Not specified",
-                "explanation": "The article does not specify the cell type used in the assay.",
-                "quotes": []
-            },
-            "sentence_summary": "The OCT1*12 variant is associated with decreased uptake of ranitidine.",
-            "notes": "The study highlights a complete lack of uptake of ranitidine by the OCT1*12 variant, indicating a loss of function in transport activity."
+            "sentence_summary": "HLA-A*33:03 is associated with increased risk of maculopapular exanthema when treated with lamotrigine in Thai patients.",
+            "notes": "The study focuses on the association of HLA-A*33:03 with lamotrigine-induced maculopapular exanthema in a specific ethnic population (Thai patients)."
         },
         {
             "associated_drugs": {
                 "contents": [
-                    "ranitidine"
+                    "Lamotrigine"
                 ],
-                "explanation": "The variant OCT1*13 is associated with ranitidine, as it completely lacks the ability to uptake this drug.",
+                "explanation": "The variant HLA-B*44:03 is associated with lamotrigine-induced maculopapular exanthema (MPE).",
                 "quotes": [
-                    "The OCT1*13 variant completely lacks the ability to uptake ranitidine."
+                    "lamotrigine"
                 ]
             },
             "association_significance": {
-                "content": "The association was significant as the OCT1*13 variant completely lacks the ability to uptake ranitidine, indicating a complete loss of function.",
-                "explanation": "The article states that the OCT1*13 variant completely lacks the ability to uptake ranitidine, which implies a significant functional impact.",
+                "content": "The association between HLA-B*44:03 and lamotrigine-induced maculopapular exanthema (MPE) in Thai patients was statistically significant.",
+                "explanation": "The article states that there is a significant association between the variant and the adverse reaction.",
                 "quotes": [
-                    "The OCT1*13 variant completely lacks the ability to uptake ranitidine."
+                    "HLA-B*44:03 is associated with lamotrigine-induced maculopapular exanthema (MPE) in Thai patients."
                 ]
             },
+            "meatbolizer_info": null,
             "specialty_populations": {
-                "content": "Not specified",
-                "explanation": "The article does not specify any particular population context for this association.",
-                "quotes": []
-            },
-            "assay_type": {
-                "content": "Transport assay",
-                "explanation": "The article likely used a transport assay to determine the uptake ability of the OCT1*13 variant for ranitidine.",
+                "content": "No",
+                "explanation": "The study focused on Thai patients but did not specify an age-specific population.",
                 "quotes": [
-                    "The OCT1*13 variant completely lacks the ability to uptake ranitidine."
+                    "in Thai patients"
                 ]
             },
-            "cell_type": {
-                "content": "Not specified",
-                "explanation": "The article does not specify the cell type used in the assay.",
-                "quotes": []
-            },
-            "sentence_summary": "The OCT1*13 variant is associated with a complete lack of ranitidine uptake, indicating a loss of transporter function.",
-            "notes": "The study highlights a complete loss of function for the OCT1*13 variant in transporting ranitidine, suggesting significant implications for drug metabolism and efficacy."
-        },
-        {
-            "associated_drugs": {
-                "contents": [
-                    "ranitidine"
-                ],
-                "explanation": "The variant OCT1*2 is associated with ranitidine, showing a significant decrease in vmax for its uptake.",
-                "quotes": [
-                    "ranitidine"
-                ]
-            },
-            "association_significance": {
-                "content": "The association was statistically significant, as indicated by a significant decrease in vmax for ranitidine uptake.",
-                "explanation": "The article mentions a significant decrease in vmax, which implies statistical significance.",
-                "quotes": [
-                    "significant decrease in vmax"
-                ]
-            },
-            "specialty_populations": {
-                "content": "Metabolism/PK",
-                "explanation": "The study focuses on the uptake rate of ranitidine, which falls under pharmacokinetics (PK).",
-                "quotes": [
-                    "vmax for ranitidine uptake"
-                ]
-            },
-            "assay_type": {
-                "content": "uptake assay",
-                "explanation": "The study measures the uptake rate of ranitidine, which suggests an uptake assay was used.",
-                "quotes": [
-                    "vmax for ranitidine uptake"
-                ]
-            },
-            "cell_type": {
-                "content": "Not specified",
-                "explanation": "The article does not specify the cell type used in the assay.",
-                "quotes": []
-            },
-            "sentence_summary": "The OCT1*2 variant is associated with decreased vmax for ranitidine uptake.",
-            "notes": "The study specifically examines the kinetic parameter vmax for ranitidine uptake in relation to the OCT1*2 variant."
-        },
-        {
-            "associated_drugs": {
-                "contents": [
-                    "Ranitidine"
-                ],
-                "explanation": "The variant OCT1*3 is associated with ranitidine, showing a significant decrease in vmax for its uptake.",
-                "quotes": [
-                    "The OCT1*3 variant shows a significant decrease in vmax for ranitidine uptake."
-                ]
-            },
-            "association_significance": {
-                "content": "The association was statistically significant, as indicated by the reported decrease in vmax.",
-                "explanation": "The article mentions a significant decrease in vmax, which implies statistical significance.",
-                "quotes": [
-                    "The OCT1*3 variant shows a significant decrease in vmax for ranitidine uptake."
-                ]
-            },
-            "specialty_populations": {
-                "content": "Metabolism/PK",
-                "explanation": "The study focuses on the uptake rate of ranitidine, which falls under pharmacokinetics (PK).",
-                "quotes": [
-                    "The OCT1*3 variant shows a significant decrease in vmax for ranitidine uptake."
-                ]
-            },
-            "assay_type": {
-                "content": "Uptake assay",
-                "explanation": "The study likely used an uptake assay to measure the vmax of ranitidine uptake.",
-                "quotes": [
-                    "The OCT1*3 variant shows a significant decrease in vmax for ranitidine uptake."
-                ]
-            },
-            "cell_type": {
-                "content": "Not specified",
-                "explanation": "The article does not specify the cell type used in the assay.",
-                "quotes": []
-            },
-            "sentence_summary": "The OCT1*3 variant is associated with decreased vmax for ranitidine uptake.",
-            "notes": "The study specifically examines the kinetic parameter vmax for ranitidine uptake in relation to the OCT1*3 variant."
-        },
-        {
-            "associated_drugs": {
-                "contents": [
-                    "Ranitidine"
-                ],
-                "explanation": "The variant OCT1*4 is associated with ranitidine, as it shows a significant decrease in vmax for ranitidine uptake.",
-                "quotes": [
-                    "ranitidine"
-                ]
-            },
-            "association_significance": {
-                "content": "The association between the OCT1*4 variant and decreased vmax for ranitidine uptake is statistically significant.",
-                "explanation": "The article mentions a significant decrease in vmax, indicating statistical significance.",
-                "quotes": [
-                    "significant decrease in vmax"
-                ]
-            },
-            "specialty_populations": {
-                "content": "Metabolism/PK",
-                "explanation": "The study focuses on the uptake rate of ranitidine, which falls under pharmacokinetics (PK).",
-                "quotes": [
-                    "vmax for ranitidine uptake"
-                ]
-            },
-            "assay_type": {
-                "content": "Uptake assay",
-                "explanation": "The study measures the uptake rate of ranitidine, likely using an uptake assay.",
-                "quotes": [
-                    "vmax for ranitidine uptake"
-                ]
-            },
-            "cell_type": {
-                "content": "Human cells",
-                "explanation": "The study likely uses human cells to measure the uptake of ranitidine, as OCT1 is a human transporter.",
-                "quotes": [
-                    "OCT1"
-                ]
-            },
-            "sentence_summary": "The OCT1*4 variant is associated with decreased vmax for ranitidine uptake.",
-            "notes": "The study specifically measures the vmax, which is the maximum rate of uptake, indicating a functional impact of the OCT1*4 variant on ranitidine transport."
-        },
-        {
-            "associated_drugs": {
-                "contents": [
-                    "Ranitidine"
-                ],
-                "explanation": "The variant OCT1*10 is associated with ranitidine, showing a significant decrease in vmax for its uptake.",
-                "quotes": [
-                    "The OCT1*10 variant shows a significant decrease in vmax for ranitidine uptake."
-                ]
-            },
-            "association_significance": {
-                "content": "The association between the OCT1*10 variant and decreased vmax for ranitidine uptake is statistically significant.",
-                "explanation": "The article mentions a significant decrease in vmax, implying statistical significance.",
-                "quotes": [
-                    "The OCT1*10 variant shows a significant decrease in vmax for ranitidine uptake."
-                ]
-            },
-            "specialty_populations": {
-                "content": "Metabolism/PK",
-                "explanation": "The study focuses on the uptake rate of ranitidine, which is a pharmacokinetic parameter.",
-                "quotes": [
-                    "The OCT1*10 variant shows a significant decrease in vmax for ranitidine uptake."
-                ]
-            },
-            "assay_type": {
-                "content": "Transport assay",
-                "explanation": "The study likely used a transport assay to measure the uptake rate (vmax) of ranitidine.",
-                "quotes": [
-                    "The OCT1*10 variant shows a significant decrease in vmax for ranitidine uptake."
-                ]
-            },
-            "cell_type": {
-                "content": "Human cells",
-                "explanation": "The study likely used human cells to assess the uptake of ranitidine by OCT1.",
-                "quotes": [
-                    "The OCT1*10 variant shows a significant decrease in vmax for ranitidine uptake."
-                ]
-            },
-            "sentence_summary": "The OCT1*10 variant is associated with decreased vmax for ranitidine uptake in human cells.",
-            "notes": "The study specifically measures the vmax, which is the maximum rate of transport, indicating a functional impact of the OCT1*10 variant on ranitidine uptake."
-        },
-        {
-            "associated_drugs": {
-                "contents": [
-                    "Ranitidine"
-                ],
-                "explanation": "The variant OCT1*8 is associated with an increase in Vmax for ranitidine uptake.",
-                "quotes": [
-                    "ranitidine"
-                ]
-            },
-            "association_significance": {
-                "content": "The association was statistically significant with a reported increase in Vmax.",
-                "explanation": "The article mentions an increase in Vmax for ranitidine uptake, indicating a significant change in transporter activity.",
-                "quotes": [
-                    "increase in vmax for ranitidine uptake"
-                ]
-            },
-            "specialty_populations": {
-                "content": "Metabolism/PK",
-                "explanation": "The study focuses on the pharmacokinetics of ranitidine uptake, which falls under metabolism/pharmacokinetics.",
-                "quotes": [
-                    "increase in vmax for ranitidine uptake"
-                ]
-            },
-            "assay_type": {
-                "content": "Transport assay",
-                "explanation": "The study likely used a transport assay to measure the uptake of ranitidine by OCT1.",
-                "quotes": [
-                    "increase in vmax for ranitidine uptake"
-                ]
-            },
-            "cell_type": {
-                "content": "Human cell line expressing OCT1",
-                "explanation": "The study likely used a human cell line expressing the OCT1 transporter to measure ranitidine uptake.",
-                "quotes": [
-                    "increase in vmax for ranitidine uptake"
-                ]
-            },
-            "sentence_summary": "The OCT1*8 variant is associated with increased Vmax for ranitidine uptake in a human cell line expressing OCT1.",
-            "notes": "The study highlights the functional impact of the OCT1*8 variant on the transport activity of ranitidine, suggesting altered pharmacokinetics."
-        },
-        {
-            "associated_drugs": {
-                "contents": [
-                    "Ranitidine"
-                ],
-                "explanation": "The variant OCT2 Ala270Ser was studied in the context of its effect on the uptake of ranitidine.",
-                "quotes": [
-                    "The OCT2 Ala270Ser variant does not significantly affect ranitidine uptake."
-                ]
-            },
-            "association_significance": {
-                "content": "The association was not statistically significant.",
-                "explanation": "The study reported that the OCT2 Ala270Ser variant does not significantly affect ranitidine uptake, implying no significant statistical association.",
-                "quotes": [
-                    "The OCT2 Ala270Ser variant does not significantly affect ranitidine uptake."
-                ]
-            },
-            "specialty_populations": {
-                "content": "Other: in-vitro uptake study",
-                "explanation": "The study focuses on the in-vitro uptake of ranitidine, which does not fall under typical clinical outcomes like efficacy or toxicity.",
-                "quotes": [
-                    "The OCT2 Ala270Ser variant does not significantly affect ranitidine uptake."
-                ]
-            },
-            "assay_type": {
-                "content": "Uptake assay",
-                "explanation": "The study likely used an uptake assay to measure the transport of ranitidine by the OCT2 transporter with the Ala270Ser variant.",
-                "quotes": [
-                    "The OCT2 Ala270Ser variant does not significantly affect ranitidine uptake."
-                ]
-            },
-            "cell_type": {
-                "content": "Human embryonic kidney (HEK) 293 cells",
-                "explanation": "HEK 293 cells are commonly used to express human transporters like OCT2 for in-vitro uptake studies.",
-                "quotes": [
-                    "The OCT2 Ala270Ser variant does not significantly affect ranitidine uptake."
-                ]
-            },
-            "sentence_summary": "The OCT2 Ala270Ser variant is not associated with altered uptake of ranitidine in an in-vitro system.",
-            "notes": "The study focused on the OCT2 transporter and its variant Ala270Ser, assessing its impact on the uptake of ranitidine, a common substrate for OCT2. The results indicated no significant change in uptake, suggesting the variant does not alter the transporter's function in this context."
+            "sentence_summary": "HLA-B*44:03 is associated with increased risk of maculopapular exanthema when treated with lamotrigine in Thai patients.",
+            "notes": "The study specifically identifies the association in Thai patients, suggesting a potential ethnic or regional genetic predisposition."
         }
-    ]
+    ],
+    "functional_annotations": []
 }
