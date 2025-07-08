@@ -4,6 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { StudyParametersSection } from './StudyParametersSection';
 import { DrugAnnotationsSection } from './DrugAnnotationsSection';
+import { FunctionalAnnotationsSection } from './FunctionalAnnotationsSection';
 import { AnnotationsSection } from './AnnotationsSection';
 
 interface AnnotationsPanelProps {
@@ -59,9 +60,9 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
                   />
 
                   {/* Functional Annotations */}
-                  <AnnotationsSection 
-                    title="Functional Annotations" 
-                    annotations={jsonData.functional_annotations} 
+                  <FunctionalAnnotationsSection 
+                    functionalAnnotations={jsonData.functional_annotations} 
+                    onQuoteClick={onQuoteClick} 
                   />
                 </div>
               </ScrollArea>
