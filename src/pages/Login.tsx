@@ -27,7 +27,7 @@ const Login = () => {
     if (success) {
       toast({
         title: "Login successful",
-        description: "Welcome to the Medical Research Tool",
+        description: "Welcome to AutoGKB",
       });
       navigate('/dashboard');
     } else {
