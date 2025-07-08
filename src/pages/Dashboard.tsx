@@ -24,77 +24,86 @@ const Dashboard = () => {
       const studies: Study[] = [];
 
       try {
-        // Try to fetch a manifest file first
+        // Try to fetch a manifest file first (suppress errors)
         let pmcIds: string[] = [];
         
         try {
-          const manifestResponse = await fetch('/data/manifest.json');
-          if (manifestResponse.ok) {
-            const manifest = await manifestResponse.json();
-            pmcIds = manifest.studies || [];
+          const manifestResponse = await fetch('/data/manifest.json').catch(() => null);
+          if (manifestResponse?.ok) {
+            const manifest = await manifestResponse.json().catch(() => null);
+            pmcIds = manifest?.studies || [];
           }
         } catch {
-          // If no manifest, try common PMC patterns
+          // Silently continue to fallback approach
+        }
+        
+        // If no manifest or manifest failed, try common PMC patterns
+        if (pmcIds.length === 0) {
           const commonPMCs = [
             'PMC11730665', 'PMC5712579', 'PMC5728534', 'PMC5749368', 'PMC4737107',
             'PMC6289290', 'PMC10000000', 'PMC9000000', 'PMC8000000', 'PMC7000000'
           ];
           
-          // Test which PMCs actually exist
-          const existingPMCs = await Promise.all(
+          // Test which PMCs actually exist (suppress individual errors)
+          const existingPMCs = await Promise.allSettled(
             commonPMCs.map(async (pmcid) => {
               try {
-                const [markdownResponse, jsonResponse] = await Promise.all([
+                const [markdownResponse, jsonResponse] = await Promise.allSettled([
                   fetch(`/data/markdown/${pmcid}.md`),
                   fetch(`/data/annotations/${pmcid}.json`)
                 ]);
-                return markdownResponse.ok && jsonResponse.ok ? pmcid : null;
+                
+                const markdownOk = markdownResponse.status === 'fulfilled' && markdownResponse.value.ok;
+                const jsonOk = jsonResponse.status === 'fulfilled' && jsonResponse.value.ok;
+                
+                return markdownOk && jsonOk ? pmcid : null;
               } catch {
                 return null;
               }
             })
           );
           
-          pmcIds = existingPMCs.filter((pmcid): pmcid is string => pmcid !== null);
+          pmcIds = existingPMCs
+            .filter(result => result.status === 'fulfilled' && result.value !== null)
+            .map(result => (result as PromiseFulfilledResult<string>).value);
         }
         
-        // Load data for discovered PMC IDs
+        // Load data for discovered PMC IDs (suppress individual errors)
         for (const pmcid of pmcIds) {
           try {
-            const [markdownResponse, jsonResponse] = await Promise.all([
-              fetch(`/data/markdown/${pmcid}.md`),
-              fetch(`/data/annotations/${pmcid}.json`)
-            ]);
+            const jsonResponse = await fetch(`/data/annotations/${pmcid}.json`).catch(() => null);
 
-            if (markdownResponse.ok && jsonResponse.ok) {
-              const jsonData = await jsonResponse.json();
+            if (jsonResponse?.ok) {
+              const jsonData = await jsonResponse.json().catch(() => null);
               
-              const summary = jsonData.study_parameters?.summary || 
-                            jsonData.description || 
-                            'No description available';
-              
-              const studyType = jsonData.study_parameters?.study_type?.content || 
-                              jsonData.studyType || 
-                              'Unknown';
-              
-              const participants = jsonData.study_parameters?.participant_info?.content ? 
-                                 extractParticipantNumber(jsonData.study_parameters.participant_info.content) :
-                                 jsonData.participants || null;
+              if (jsonData) {
+                const summary = jsonData.study_parameters?.summary || 
+                              jsonData.description || 
+                              'No description available';
+                
+                const studyType = jsonData.study_parameters?.study_type?.content || 
+                                jsonData.studyType || 
+                                'Unknown';
+                
+                const participants = jsonData.study_parameters?.participant_info?.content ? 
+                                   extractParticipantNumber(jsonData.study_parameters.participant_info.content) :
+                                   jsonData.participants || null;
 
-              studies.push({
-                id: pmcid,
-                title: jsonData.title || `Study ${pmcid}`,
-                description: summary,
-                studyType: studyType,
-                participants: participants
-              });
+                studies.push({
+                  id: pmcid,
+                  title: jsonData.title || `Study ${pmcid}`,
+                  description: summary,
+                  studyType: studyType,
+                  participants: participants
+                });
+              }
             }
-          } catch (error) {
-            console.error(`Failed to load data for ${pmcid}:`, error);
+          } catch {
+            // Silently skip studies that fail to load
           }
         }
-      } catch (error) {
-        console.error('Failed to discover studies:', error);
+      } catch {
+        // Silently handle any discovery errors
       }
 
       setAvailableStudies(studies);
