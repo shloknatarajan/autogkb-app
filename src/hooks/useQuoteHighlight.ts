@@ -57,15 +57,48 @@ export const useQuoteHighlight = () => {
           }
         }
         
-        // Strategy 4: Progressive word reduction (only if still not found)
-        if (foundIndex === -1) {
+        // Strategy 4: Progressive word reduction for long quotes
+        if (foundIndex === -1 && quote.length > 50) {
           const words = quote.split(/\s+/);
-          for (let len = Math.max(5, Math.floor(words.length * 0.8)); len >= 5; len--) {
-            const partialQuote = words.slice(0, len).join(' ');
-            foundIndex = allText.toLowerCase().indexOf(partialQuote.toLowerCase());
-            console.log(`Searching for partial quote (${len} words):`, partialQuote.substring(0, 50) + '...');
+          // Try different starting and ending points
+          for (let start = 0; start < Math.min(3, words.length - 5); start++) {
+            for (let len = Math.max(5, Math.floor(words.length * 0.7)); len >= 5; len--) {
+              const partialQuote = words.slice(start, start + len).join(' ');
+              foundIndex = allText.toLowerCase().indexOf(partialQuote.toLowerCase());
+              console.log(`Searching for partial quote (${len} words from ${start}):`, partialQuote.substring(0, 50) + '...');
+              if (foundIndex !== -1) {
+                searchQuote = partialQuote;
+                break;
+              }
+            }
+            if (foundIndex !== -1) break;
+          }
+        }
+        
+        // Strategy 5: Key phrase extraction for very long quotes
+        if (foundIndex === -1 && quote.length > 100) {
+          // Look for distinctive phrases or medical terms
+          const distinctivePhrases = quote.match(/\b[A-Z][a-z]*(?:\s+[a-z]+)*(?:\s+[A-Z][a-z]*)*\b/g) || [];
+          for (const phrase of distinctivePhrases) {
+            if (phrase.length > 10) {
+              foundIndex = allText.toLowerCase().indexOf(phrase.toLowerCase());
+              console.log(`Searching for distinctive phrase: "${phrase}"`);
+              if (foundIndex !== -1) {
+                searchQuote = phrase;
+                break;
+              }
+            }
+          }
+        }
+        
+        // Strategy 6: Single word fallback for drug names
+        if (foundIndex === -1 && quote.length < 30) {
+          const singleWords = quote.split(/\s+/).filter(word => word.length > 3);
+          for (const word of singleWords) {
+            foundIndex = allText.toLowerCase().indexOf(word.toLowerCase());
+            console.log(`Searching for single word: "${word}"`);
             if (foundIndex !== -1) {
-              searchQuote = partialQuote;
+              searchQuote = word;
               break;
             }
           }
