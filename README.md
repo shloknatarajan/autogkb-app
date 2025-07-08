@@ -69,10 +69,11 @@ The application will be available at `http://localhost:5173`
 
 To add new research studies:
 
-1. Generate new annotations using the base [AutoGKB](https://github.com/DaneshjouLab/AutoGKB) repo
-2. Place the markdown file in `public/data/markdown/` (e.g., `PMC1234567.md`)
-3. Place the corresponding JSON annotations in `public/data/annotations/` (e.g., `PMC1234567.json`)
-4. The application will automatically detect and load the new study
+1. Convert an article PMCID to markdown using [PubMedDownloader](https://github.com/shloknatarajan/PubMedDownloader)
+2. Generate new annotations using the base [AutoGKB](https://github.com/DaneshjouLab/AutoGKB) repo
+3. Place the markdown file in `public/data/markdown/` (e.g., `PMC1234567.md`)
+4. Place the corresponding JSON annotations in `public/data/annotations/` (e.g., `PMC1234567.json`)
+5. The application will automatically detect and load the new study
 
 
 ## Technology Stack
