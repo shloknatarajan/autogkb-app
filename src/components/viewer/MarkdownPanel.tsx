@@ -16,7 +16,7 @@ export const MarkdownPanel: React.FC<MarkdownPanelProps> = ({ markdown }) => {
         </CardHeader>
         <CardContent className="p-0 h-full">
           <ScrollArea className="h-[calc(100vh-8rem)]">
-            <div className="p-6 prose prose-slate max-w-none prose-headings:text-foreground prose-p:text-foreground prose-strong:text-foreground prose-h1:text-2xl prose-h2:text-xl prose-h3:text-lg prose-h2:border-b prose-h2:border-border prose-h2:pb-2 prose-h3:text-primary prose-p:leading-relaxed prose-table:border-collapse prose-table:border prose-table:border-border prose-th:border prose-th:border-border prose-th:bg-muted prose-th:px-4 prose-th:py-2 prose-th:text-left prose-th:font-semibold prose-td:border prose-td:border-border prose-td:px-4 prose-td:py-2 prose-td:text-sm prose-table:w-full prose-table:my-6">
+            <div className="p-6 prose prose-slate max-w-none prose-headings:text-foreground prose-p:text-foreground prose-strong:text-foreground prose-h1:text-2xl prose-h2:text-xl prose-h3:text-lg prose-h2:border-b prose-h2:border-border prose-h2:pb-2 prose-h3:text-primary prose-p:leading-relaxed prose-table:border-collapse prose-table:border-2 prose-table:border-border prose-table:shadow-soft prose-table:rounded-lg prose-table:overflow-hidden prose-th:border prose-th:border-border prose-th:bg-secondary prose-th:px-6 prose-th:py-4 prose-th:text-left prose-th:font-bold prose-th:text-foreground prose-td:border prose-td:border-border prose-td:px-6 prose-td:py-3 prose-td:text-sm prose-td:align-top prose-table:w-full prose-table:my-8 prose-tr:even:bg-muted/30">
               <ReactMarkdown>
                 {markdown}
               </ReactMarkdown>
