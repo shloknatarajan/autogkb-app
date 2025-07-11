@@ -76,7 +76,7 @@ To add new research studies:
 5. The application will automatically detect and load the new study
 
 
-## Technology Stack
+## Tech Stack
 
 - **Frontend**: React 18, TypeScript
 - **Build Tool**: Vite
@@ -87,12 +87,3 @@ To add new research studies:
 - **Form Handling**: React Hook Form
 - **Validation**: Zod
 - **Icons**: Lucide React
-
-## Development
-
-The project follows modern React patterns with:
-- Custom hooks for data fetching and state management
-- Component composition with shadcn/ui
-- TypeScript for type safety
-- Responsive design principles
-- Accessible UI components

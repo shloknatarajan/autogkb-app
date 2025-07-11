@@ -49,9 +49,9 @@ const Login = () => {
             <div className="w-16 h-16 bg-gradient-primary rounded-full mx-auto mb-4 flex items-center justify-center">
               <span className="text-2xl font-bold text-primary-foreground">PMC</span>
             </div>
-            <CardTitle className="text-2xl font-bold">Medical Research Tool</CardTitle>
+            <CardTitle className="text-2xl font-bold">AutoGKB</CardTitle>
             <CardDescription>
-              Sign in to access PMC paper analysis
+              Sign in to access AutoGKB
             </CardDescription>
           </CardHeader>
           <CardContent>
