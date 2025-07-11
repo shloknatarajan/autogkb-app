@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Quote } from 'lucide-react';
 
@@ -9,18 +9,52 @@ interface QuoteButtonProps {
 }
 
 export const QuoteButton: React.FC<QuoteButtonProps> = ({ quote, index, onClick }) => {
-  const truncatedQuote = quote.length > 60 ? quote.substring(0, 60) + '...' : quote;
+  const [isExpanded, setIsExpanded] = useState(false);
+  
+  const shouldTruncate = quote.length > 120; // Roughly 2 lines worth
+  const displayQuote = !isExpanded && shouldTruncate 
+    ? quote.substring(0, 120) 
+    : quote;
+  
+  const handleQuoteClick = () => {
+    onClick(quote);
+  };
+  
+  const handleExpandClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsExpanded(!isExpanded);
+  };
   
   return (
     <Button
       variant="ghost"
       size="sm"
-      onClick={() => onClick(quote)}
+      onClick={handleQuoteClick}
       className="h-auto px-2 py-1 text-xs hover:bg-primary/10 justify-start text-left whitespace-normal"
     >
-      <div className="flex items-start gap-1">
-        <span className="font-medium text-primary">[{index + 1}]</span>
-        <span className="italic text-muted-foreground">{truncatedQuote}</span>
+      <div className="flex items-start gap-1 w-full">
+        <span className="font-medium text-primary flex-shrink-0">[{index + 1}]</span>
+        <div className="italic text-muted-foreground min-w-0 flex-1">
+          <span className="leading-relaxed block">
+            {displayQuote}
+            {!isExpanded && shouldTruncate && (
+              <button
+                onClick={handleExpandClick}
+                className="text-primary hover:text-primary/80 ml-1 underline"
+              >
+                ...
+              </button>
+            )}
+            {isExpanded && shouldTruncate && (
+              <button
+                onClick={handleExpandClick}
+                className="text-primary hover:text-primary/80 ml-1 underline"
+              >
+                {' '}Show less
+              </button>
+            )}
+          </span>
+        </div>
       </div>
     </Button>
   );
