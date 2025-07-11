@@ -219,13 +219,12 @@ export const useQuoteHighlight = () => {
           if (foundNode) {
             console.log('Found text node, highlighting...');
             
-            // Create underline span
+            // Create highlight span
             const highlightSpan = document.createElement('span');
             highlightSpan.className = 'quote-highlight';
-            highlightSpan.style.textDecoration = 'underline';
-            highlightSpan.style.textDecorationColor = '#ef4444'; // red-500
-            highlightSpan.style.textDecorationThickness = '2px';
-            highlightSpan.style.textUnderlineOffset = '2px';
+            highlightSpan.style.backgroundColor = '#fef3c7'; // soft yellow
+            highlightSpan.style.padding = '2px 4px';
+            highlightSpan.style.borderRadius = '3px';
             
             // Find word boundaries for proper highlighting
             const originalText = foundNode.textContent || '';
