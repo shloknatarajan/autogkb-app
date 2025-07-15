@@ -32,12 +32,14 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
               <ScrollArea className="h-[calc(100vh-12rem)]">
                 <div className="p-6 space-y-6">
                   {/* Title */}
-                   {jsonData.title && (
-                     <div className="mb-6">
-                       <h3 className="text-lg font-semibold mb-3 text-primary">Study Title</h3>
-                       <p className="text-sm text-muted-foreground">{jsonData.title}</p>
-                     </div>
-                   )}
+                  {jsonData.title && (
+                    <div>
+                      <h3 className="text-lg font-semibold mb-3 text-primary">Study Title</h3>
+                      <div className="bg-accent/50 p-3 rounded-lg">
+                        <p className="text-sm text-muted-foreground">{jsonData.title}</p>
+                      </div>
+                    </div>
+                  )}
 
                   {/* Study Parameters */}
                   <StudyParametersSection 
