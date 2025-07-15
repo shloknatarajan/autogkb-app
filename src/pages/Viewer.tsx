@@ -7,6 +7,7 @@ import { useQuoteHighlight } from '@/hooks/useQuoteHighlight';
 import { ViewerHeader } from '@/components/viewer/ViewerHeader';
 import { MarkdownPanel } from '@/components/viewer/MarkdownPanel';
 import { AnnotationsPanel } from '@/components/viewer/AnnotationsPanel';
+import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/components/ui/resizable';
 
 const Viewer = () => {
   const { pmcid } = useParams<{ pmcid: string }>();
@@ -48,10 +49,15 @@ const Viewer = () => {
   return (
     <div className="min-h-screen bg-gradient-subtle">
       <ViewerHeader pmcid={pmcid || ''} />
-      <div className="flex h-[calc(100vh-4rem)]">
-        <MarkdownPanel markdown={data.markdown} />
-        <AnnotationsPanel jsonData={data.json} onQuoteClick={handleQuoteClick} />
-      </div>
+      <ResizablePanelGroup direction="horizontal" className="h-[calc(100vh-4rem)]">
+        <ResizablePanel defaultSize={50} minSize={30}>
+          <MarkdownPanel markdown={data.markdown} />
+        </ResizablePanel>
+        <ResizableHandle withHandle />
+        <ResizablePanel defaultSize={50} minSize={30}>
+          <AnnotationsPanel jsonData={data.json} onQuoteClick={handleQuoteClick} />
+        </ResizablePanel>
+      </ResizablePanelGroup>
     </div>
   );
 };
