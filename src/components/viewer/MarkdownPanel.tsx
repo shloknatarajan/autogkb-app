@@ -10,7 +10,7 @@ interface MarkdownPanelProps {
 
 export const MarkdownPanel: React.FC<MarkdownPanelProps> = ({ markdown }) => {
   return (
-    <div className="flex-1 border-r">
+    <div className="h-full border-r">
       <Card className="h-full rounded-none border-0 shadow-none">
         <CardHeader className="bg-gradient-secondary border-b">
           <CardTitle className="text-lg">Research Paper Content</CardTitle>

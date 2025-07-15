@@ -14,7 +14,7 @@ interface AnnotationsPanelProps {
 
 export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, onQuoteClick }) => {
   return (
-    <div className="w-1/2">
+    <div className="h-full">
       <Card className="h-full rounded-none border-0 shadow-none">
         <CardHeader className="bg-gradient-secondary border-b">
           <CardTitle className="text-lg">Structured Data</CardTitle>
