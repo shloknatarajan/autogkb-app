@@ -13,8 +13,8 @@ export const PhenotypeAnnotationsSection: React.FC<PhenotypeAnnotationsSectionPr
     <div>
       <h3 className="text-lg font-semibold mb-3 text-primary">Phenotype Annotations</h3>
       {phenotypeAnnotations.map((annotation: any, index: number) => (
-        <div key={index} className="bg-accent/50 p-3 rounded-lg mb-3">
-          <h4 className="font-medium text-sm text-accent-foreground mb-2">Annotation {index + 1}</h4>
+        <div key={index} className="mb-6">
+          <h4 className="font-medium text-sm text-foreground mb-2">Annotation {index + 1}</h4>
           <div className="space-y-1 text-sm">
             {annotation.sentence_summary && (
               <p><span className="font-medium">Summary:</span> {annotation.sentence_summary}</p>
