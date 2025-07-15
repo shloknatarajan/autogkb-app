@@ -28,7 +28,7 @@ export const MarkdownPanel: React.FC<MarkdownPanelProps> = ({ markdown }) => {
                   p: ({node, ...props}) => <p className="whitespace-pre-line" {...props} />
                 }}
               >
-                {markdown}
+                {markdown.replace(/\[([^\]]+)\]\(#[^)]+\)\1/g, '[$1](#)')}
               </ReactMarkdown>
             </div>
           </ScrollArea>
