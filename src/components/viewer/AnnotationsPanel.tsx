@@ -47,23 +47,79 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
                     onQuoteClick={onQuoteClick} 
                   />
 
+                  {/* Annotations */}
+                  {jsonData.annotations?.relationships && (
+                    <div>
+                      <h3 className="text-lg font-semibold mb-3 text-primary">Gene-Drug Relationships</h3>
+                      <div className="space-y-4">
+                        {jsonData.annotations.relationships.map((relationship: any, index: number) => (
+                          <div key={index} className="bg-accent/50 p-4 rounded-lg">
+                            <div className="space-y-2">
+                              <div className="flex flex-wrap gap-2">
+                                <span className="bg-primary/10 text-primary px-2 py-1 rounded text-sm font-medium">
+                                  {relationship.gene}
+                                </span>
+                                <span className="bg-secondary/50 text-secondary-foreground px-2 py-1 rounded text-sm">
+                                  {relationship.polymorphism}
+                                </span>
+                              </div>
+                              <p className="text-sm text-muted-foreground">
+                                <strong>Effect:</strong> {relationship.relationship_effect}
+                              </p>
+                              {relationship.p_value && (
+                                <p className="text-sm text-muted-foreground">
+                                  <strong>P-value:</strong> {relationship.p_value}
+                                </p>
+                              )}
+                              {relationship.citations && relationship.citations.length > 0 && (
+                                <div>
+                                  <h5 className="text-sm font-medium mb-1">Citations:</h5>
+                                  <div className="space-y-1">
+                                    {relationship.citations.map((citation: string, citIndex: number) => (
+                                      <button
+                                        key={citIndex}
+                                        onClick={() => onQuoteClick(citation)}
+                                        className="block text-xs text-left bg-background/50 hover:bg-background/80 p-2 rounded border transition-colors w-full"
+                                      >
+                                        <span className="font-medium text-primary">[{citIndex + 1}]</span>
+                                        <span className="ml-2 italic text-muted-foreground">
+                                          {citation.length > 150 ? citation.substring(0, 150) + "..." : citation}
+                                        </span>
+                                      </button>
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                   {/* Drug Annotations */}
-                  <DrugAnnotationsSection 
-                    drugAnnotations={jsonData.drug_annotations} 
-                    onQuoteClick={onQuoteClick} 
-                  />
+                  {jsonData.drug_annotations && (
+                    <DrugAnnotationsSection 
+                      drugAnnotations={jsonData.drug_annotations} 
+                      onQuoteClick={onQuoteClick} 
+                    />
+                  )}
 
                   {/* Phenotype Annotations */}
-                  <PhenotypeAnnotationsSection 
-                    phenotypeAnnotations={jsonData.phenotype_annotations} 
-                    onQuoteClick={onQuoteClick} 
-                  />
+                  {jsonData.phenotype_annotations && (
+                    <PhenotypeAnnotationsSection 
+                      phenotypeAnnotations={jsonData.phenotype_annotations} 
+                      onQuoteClick={onQuoteClick} 
+                    />
+                  )}
 
                   {/* Functional Annotations */}
-                  <FunctionalAnnotationsSection 
-                    functionalAnnotations={jsonData.functional_annotations} 
-                    onQuoteClick={onQuoteClick} 
-                  />
+                  {jsonData.functional_annotations && (
+                    <FunctionalAnnotationsSection 
+                      functionalAnnotations={jsonData.functional_annotations} 
+                      onQuoteClick={onQuoteClick} 
+                    />
+                  )}
                 </div>
               </ScrollArea>
             </TabsContent>
