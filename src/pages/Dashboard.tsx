@@ -77,11 +77,13 @@ const Dashboard = () => {
               const jsonData = await jsonResponse.json().catch(() => null);
               
               if (jsonData) {
-                const summary = jsonData.study_parameters?.summary || 
+                const summary = jsonData.study_parameters?.summary?.content || 
+                              jsonData.study_parameters?.summary || 
                               jsonData.description || 
                               'No description available';
                 
                 const studyType = jsonData.study_parameters?.study_type?.content || 
+                                jsonData.study_parameters?.study_type || 
                                 jsonData.studyType || 
                                 'Unknown';
                 
