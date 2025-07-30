@@ -16,15 +16,42 @@ export const useQuoteHighlight = () => {
         // Remove previous highlights
         const previousHighlights = markdownContainer.querySelectorAll('.quote-highlight');
         previousHighlights.forEach(el => {
-          const parent = el.parentNode;
-          if (parent) {
-            parent.replaceChild(document.createTextNode(el.textContent || ''), el);
-            parent.normalize();
+          if (el.tagName.toLowerCase() === 'span') {
+            // Text highlight - replace with text content
+            const parent = el.parentNode;
+            if (parent) {
+              parent.replaceChild(document.createTextNode(el.textContent || ''), el);
+              parent.normalize();
+            }
+          } else {
+            // Image or other element highlight - remove styles
+            const htmlEl = el as HTMLElement;
+            htmlEl.style.outline = '';
+            htmlEl.style.borderRadius = '';
+            htmlEl.style.padding = '';
+            htmlEl.style.backgroundColor = '';
+            htmlEl.classList.remove('quote-highlight');
           }
         });
 
-        // Get all text content and search for the quote
-        let allText = markdownContainer.textContent || '';
+        // Get all text content including image alt text and figure captions
+        let allText = '';
+        
+        // Strategy: Collect text from multiple sources
+        const textSources = [
+          markdownContainer.textContent || '', // Regular text content
+          // Image alt texts
+          ...Array.from(markdownContainer.querySelectorAll('img')).map(img => img.alt || ''),
+          // Figure captions
+          ...Array.from(markdownContainer.querySelectorAll('figcaption')).map(cap => cap.textContent || ''),
+          // Link texts (for figure references)
+          ...Array.from(markdownContainer.querySelectorAll('a')).map(link => link.textContent || ''),
+          // Any elements with data-figure or similar attributes
+          ...Array.from(markdownContainer.querySelectorAll('[data-figure], [title]')).map(el => 
+            (el.getAttribute('data-figure') || el.getAttribute('title') || ''))
+        ];
+        
+        allText = textSources.join(' ');
         
         // Clean up markdown processing artifacts
         allText = allText.replace(/\*P\*P/g, '*P*'); // Fix duplicate P in p-values
@@ -185,10 +212,107 @@ export const useQuoteHighlight = () => {
           }
         }
         
+        // Strategy 11: Figure and Image reference search
+        if (foundIndex === -1) {
+          // Look for figure/image references like "Fig 1", "Figure 1", "Manhattan plot", etc.
+          const figurePatterns = [
+            /fig(?:ure)?\s*\d+/gi,
+            /manhattan\s+plot/gi,
+            /scatter\s+plot/gi,
+            /bar\s+chart/gi,
+            /graph/gi,
+            /image\s*\d*/gi,
+            /table\s*\d+/gi
+          ];
+          
+          for (const pattern of figurePatterns) {
+            const matches = quote.match(pattern);
+            if (matches) {
+              for (const match of matches) {
+                foundIndex = allText.toLowerCase().indexOf(match.toLowerCase());
+                console.log(`Searching for figure reference: "${match}"`);
+                if (foundIndex !== -1) {
+                  searchQuote = match;
+                  break;
+                }
+              }
+              if (foundIndex !== -1) break;
+            }
+          }
+        }
+        
         console.log('Final search result - Quote found at index:', foundIndex);
         
         if (foundIndex !== -1) {
-          // Create a simple highlight by wrapping the text
+          // Check if we're looking for a figure/image reference first
+          const isFigureReference = /fig(?:ure)?\s*\d+|manhattan\s+plot|scatter\s+plot|bar\s+chart|graph|image|table\s*\d+/gi.test(searchQuote);
+          
+          if (isFigureReference) {
+            // Special handling for figures and images
+            console.log('Detected figure/image reference, searching for visual elements...');
+            
+            // Look for images with matching alt text or nearby text
+            const images = markdownContainer.querySelectorAll('img');
+            let highlightedElement = null;
+            
+            for (const img of images) {
+              const imgAlt = (img.alt || '').toLowerCase();
+              const imgTitle = (img.title || '').toLowerCase();
+              const searchLower = searchQuote.toLowerCase();
+              
+              // Check if image alt/title matches our search
+              if (imgAlt.includes(searchLower) || imgTitle.includes(searchLower) || 
+                  searchLower.includes(imgAlt) || searchLower.includes(imgTitle)) {
+                
+                // Create a highlight wrapper around the image
+                const imageWrapper = img.parentElement;
+                if (imageWrapper) {
+                  imageWrapper.style.outline = '3px solid #fbbf24'; // yellow outline
+                  imageWrapper.style.borderRadius = '8px';
+                  imageWrapper.style.padding = '4px';
+                  imageWrapper.style.backgroundColor = '#fef3c7'; // soft yellow background
+                  imageWrapper.classList.add('quote-highlight');
+                  
+                  // Scroll to the image
+                  imageWrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                  highlightedElement = imageWrapper;
+                  console.log('Highlighted image element');
+                  break;
+                }
+              }
+            }
+            
+            // If no image found, look for figure references in text
+            if (!highlightedElement) {
+              // Look for figure references like "Fig. 6" in the text
+              const figureLinks = markdownContainer.querySelectorAll('a');
+              for (const link of figureLinks) {
+                const linkText = (link.textContent || '').toLowerCase();
+                if (linkText.includes(searchQuote.toLowerCase()) || 
+                    searchQuote.toLowerCase().includes(linkText)) {
+                  
+                  // Highlight the link
+                  link.style.backgroundColor = '#fef3c7';
+                  link.style.padding = '2px 4px';
+                  link.style.borderRadius = '3px';
+                  link.classList.add('quote-highlight');
+                  
+                  // Scroll to the link
+                  link.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                  highlightedElement = link;
+                  console.log('Highlighted figure reference link');
+                  break;
+                }
+              }
+            }
+            
+            if (highlightedElement) {
+              console.log('Successfully highlighted figure/image reference');
+              return; // Exit early since we found and highlighted the element
+            }
+          }
+          
+          // Fallback to text-based highlighting
           const range = document.createRange();
           const selection = window.getSelection();
           
