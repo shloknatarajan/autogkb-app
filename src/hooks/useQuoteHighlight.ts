@@ -229,12 +229,23 @@ export const useQuoteHighlight = () => {
             const matches = quote.match(pattern);
             if (matches) {
               for (const match of matches) {
-                foundIndex = allText.toLowerCase().indexOf(match.toLowerCase());
-                console.log(`Searching for figure reference: "${match}"`);
-                if (foundIndex !== -1) {
-                  searchQuote = match;
-                  break;
+                // Try multiple search approaches for figures
+                const searchTerms = [
+                  match.toLowerCase(),
+                  `### ${match.toLowerCase()}.`,
+                  `### figure ${match.match(/\d+/)?.[0] || ''}.`,
+                  `${match.toLowerCase()}.`
+                ];
+                
+                for (const term of searchTerms) {
+                  foundIndex = allText.toLowerCase().indexOf(term);
+                  console.log(`Searching for figure reference: "${term}"`);
+                  if (foundIndex !== -1) {
+                    searchQuote = term;
+                    break;
+                  }
                 }
+                if (foundIndex !== -1) break;
               }
               if (foundIndex !== -1) break;
             }
