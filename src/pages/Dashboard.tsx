@@ -175,11 +175,11 @@ const Dashboard = () => {
               onClick={() => handlePMCIDClick(study.id)}
             >
               <CardHeader>
-                <div className="flex items-center justify-between mb-2">
-                  <div className="px-2 py-1 bg-primary/10 text-primary text-xs font-medium rounded">
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <div className="px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full whitespace-nowrap">
                     {study.id}
                   </div>
-                  <div className="px-2 py-1 bg-accent text-accent-foreground text-xs rounded">
+                  <div className="px-3 py-1 bg-accent text-accent-foreground text-xs font-medium rounded-full text-right line-clamp-1 min-w-0 flex-1">
                     {study.studyType}
                   </div>
                 </div>
