@@ -130,4 +130,3 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
     </div>
   );
 };
-```
