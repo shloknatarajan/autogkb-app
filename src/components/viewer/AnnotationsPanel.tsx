@@ -7,6 +7,7 @@ import { StudyParametersSection } from './StudyParametersSection';
 import { DrugAnnotationsSection } from './DrugAnnotationsSection';
 import { FunctionalAnnotationsSection } from './FunctionalAnnotationsSection';
 import { PhenotypeAnnotationsSection } from './PhenotypeAnnotationsSection';
+import { QuoteButtons } from './QuoteButton';
 
 interface AnnotationsPanelProps {
   jsonData: any;
@@ -65,20 +66,7 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
                               {relationship.citations && relationship.citations.length > 0 && (
                                 <div>
                                   <h5 className="text-sm font-medium mb-1">Citations:</h5>
-                                  <div className="space-y-1">
-                                    {relationship.citations.map((citation: string, citIndex: number) => (
-                                      <button
-                                        key={citIndex}
-                                        onClick={() => onQuoteClick(citation)}
-                                        className="block text-xs text-left bg-background/50 hover:bg-background/80 p-2 rounded border transition-colors w-full"
-                                      >
-                                        <span className="font-medium text-primary">[{citIndex + 1}]</span>
-                                        <span className="ml-2 italic text-muted-foreground">
-                                          {citation.length > 150 ? citation.substring(0, 150) + "..." : citation}
-                                        </span>
-                                      </button>
-                                    ))}
-                                  </div>
+                                  <QuoteButtons quotes={relationship.citations} onQuoteClick={onQuoteClick} />
                                 </div>
                               )}
                             </div>
