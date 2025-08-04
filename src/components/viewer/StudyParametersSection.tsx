@@ -94,14 +94,14 @@ export const StudyParametersSection: React.FC<StudyParametersProps> = ({ studyPa
                 {studyParameters.study_design.content.map((item: string, index: number) => (
                   <li key={index}>
                     <div className="inline prose prose-sm max-w-none prose-p:text-muted-foreground prose-strong:text-foreground prose-p:inline">
-                      <ReactMarkdown>{item}</ReactMarkdown>
+                      <ReactMarkdown>{item.replace(/(\w+)\*\*:/g, '**$1**:')}</ReactMarkdown>
                     </div>
                   </li>
                 ))}
               </ul>
             ) : (
               <div className="text-sm text-muted-foreground prose prose-sm max-w-none prose-p:text-muted-foreground prose-strong:text-foreground">
-                <ReactMarkdown>{studyParameters.study_design.content}</ReactMarkdown>
+                <ReactMarkdown>{studyParameters.study_design.content.replace(/(\w+)\*\*:/g, '**$1**:')}</ReactMarkdown>
               </div>
             )}
             <QuoteButtons quotes={studyParameters.study_design.citations} onQuoteClick={onQuoteClick} />
