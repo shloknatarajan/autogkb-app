@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactMarkdown from 'react-markdown';
 import { QuoteButtons } from './QuoteButton';
 
 interface StudyParametersProps {
@@ -17,15 +18,23 @@ export const StudyParametersSection: React.FC<StudyParametersProps> = ({ studyPa
           <div className="bg-accent/50 p-3 rounded-lg">
             <h4 className="font-medium text-sm text-accent-foreground mb-1">Summary</h4>
             {typeof studyParameters.summary === 'string' ? (
-              <p className="text-sm text-muted-foreground">{studyParameters.summary}</p>
+              <div className="text-sm text-muted-foreground prose prose-sm max-w-none prose-p:text-muted-foreground prose-strong:text-foreground">
+                <ReactMarkdown>{studyParameters.summary}</ReactMarkdown>
+              </div>
             ) : Array.isArray(studyParameters.summary.content) ? (
               <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1">
                 {studyParameters.summary.content.map((item: string, index: number) => (
-                  <li key={index}>{item}</li>
+                  <li key={index}>
+                    <div className="inline prose prose-sm max-w-none prose-p:text-muted-foreground prose-strong:text-foreground prose-p:inline">
+                      <ReactMarkdown>{item}</ReactMarkdown>
+                    </div>
+                  </li>
                 ))}
               </ul>
             ) : (
-              <p className="text-sm text-muted-foreground">{studyParameters.summary.content}</p>
+              <div className="text-sm text-muted-foreground prose prose-sm max-w-none prose-p:text-muted-foreground prose-strong:text-foreground">
+                <ReactMarkdown>{studyParameters.summary.content}</ReactMarkdown>
+              </div>
             )}
             {studyParameters.summary.citations && (
               <QuoteButtons quotes={studyParameters.summary.citations} onQuoteClick={onQuoteClick} />
@@ -38,11 +47,17 @@ export const StudyParametersSection: React.FC<StudyParametersProps> = ({ studyPa
             {Array.isArray(studyParameters.study_type.content) ? (
               <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1">
                 {studyParameters.study_type.content.map((item: string, index: number) => (
-                  <li key={index}>{item}</li>
+                  <li key={index}>
+                    <div className="inline prose prose-sm max-w-none prose-p:text-muted-foreground prose-strong:text-foreground prose-p:inline">
+                      <ReactMarkdown>{item}</ReactMarkdown>
+                    </div>
+                  </li>
                 ))}
               </ul>
             ) : (
-              <p className="text-sm text-muted-foreground">{studyParameters.study_type.content}</p>
+              <div className="text-sm text-muted-foreground prose prose-sm max-w-none prose-p:text-muted-foreground prose-strong:text-foreground">
+                <ReactMarkdown>{studyParameters.study_type.content}</ReactMarkdown>
+              </div>
             )}
             {studyParameters.study_type.explanation && (
               <p className="text-xs text-muted-foreground mt-1 italic">{studyParameters.study_type.explanation}</p>
@@ -56,11 +71,17 @@ export const StudyParametersSection: React.FC<StudyParametersProps> = ({ studyPa
             {Array.isArray(studyParameters.participant_info.content) ? (
               <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1">
                 {studyParameters.participant_info.content.map((item: string, index: number) => (
-                  <li key={index}>{item}</li>
+                  <li key={index}>
+                    <div className="inline prose prose-sm max-w-none prose-p:text-muted-foreground prose-strong:text-foreground prose-p:inline">
+                      <ReactMarkdown>{item}</ReactMarkdown>
+                    </div>
+                  </li>
                 ))}
               </ul>
             ) : (
-              <p className="text-sm text-muted-foreground">{studyParameters.participant_info.content}</p>
+              <div className="text-sm text-muted-foreground prose prose-sm max-w-none prose-p:text-muted-foreground prose-strong:text-foreground">
+                <ReactMarkdown>{studyParameters.participant_info.content}</ReactMarkdown>
+              </div>
             )}
             <QuoteButtons quotes={studyParameters.participant_info.citations} onQuoteClick={onQuoteClick} />
           </div>
@@ -71,11 +92,17 @@ export const StudyParametersSection: React.FC<StudyParametersProps> = ({ studyPa
             {Array.isArray(studyParameters.study_design.content) ? (
               <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1">
                 {studyParameters.study_design.content.map((item: string, index: number) => (
-                  <li key={index}>{item}</li>
+                  <li key={index}>
+                    <div className="inline prose prose-sm max-w-none prose-p:text-muted-foreground prose-strong:text-foreground prose-p:inline">
+                      <ReactMarkdown>{item}</ReactMarkdown>
+                    </div>
+                  </li>
                 ))}
               </ul>
             ) : (
-              <p className="text-sm text-muted-foreground">{studyParameters.study_design.content}</p>
+              <div className="text-sm text-muted-foreground prose prose-sm max-w-none prose-p:text-muted-foreground prose-strong:text-foreground">
+                <ReactMarkdown>{studyParameters.study_design.content}</ReactMarkdown>
+              </div>
             )}
             <QuoteButtons quotes={studyParameters.study_design.citations} onQuoteClick={onQuoteClick} />
           </div>
@@ -86,11 +113,17 @@ export const StudyParametersSection: React.FC<StudyParametersProps> = ({ studyPa
             {Array.isArray(studyParameters.study_results.content) ? (
               <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1">
                 {studyParameters.study_results.content.map((item: string, index: number) => (
-                  <li key={index}>{item}</li>
+                  <li key={index}>
+                    <div className="inline prose prose-sm max-w-none prose-p:text-muted-foreground prose-strong:text-foreground prose-p:inline">
+                      <ReactMarkdown>{item}</ReactMarkdown>
+                    </div>
+                  </li>
                 ))}
               </ul>
             ) : (
-              <p className="text-sm text-muted-foreground">{studyParameters.study_results.content}</p>
+              <div className="text-sm text-muted-foreground prose prose-sm max-w-none prose-p:text-muted-foreground prose-strong:text-foreground">
+                <ReactMarkdown>{studyParameters.study_results.content}</ReactMarkdown>
+              </div>
             )}
             <QuoteButtons quotes={studyParameters.study_results.citations} onQuoteClick={onQuoteClick} />
           </div>
@@ -101,11 +134,17 @@ export const StudyParametersSection: React.FC<StudyParametersProps> = ({ studyPa
             {Array.isArray(studyParameters.allele_frequency.content) ? (
               <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1">
                 {studyParameters.allele_frequency.content.map((item: string, index: number) => (
-                  <li key={index}>{item}</li>
+                  <li key={index}>
+                    <div className="inline prose prose-sm max-w-none prose-p:text-muted-foreground prose-strong:text-foreground prose-p:inline">
+                      <ReactMarkdown>{item}</ReactMarkdown>
+                    </div>
+                  </li>
                 ))}
               </ul>
             ) : (
-              <p className="text-sm text-muted-foreground">{studyParameters.allele_frequency.content}</p>
+              <div className="text-sm text-muted-foreground prose prose-sm max-w-none prose-p:text-muted-foreground prose-strong:text-foreground">
+                <ReactMarkdown>{studyParameters.allele_frequency.content}</ReactMarkdown>
+              </div>
             )}
             <QuoteButtons quotes={studyParameters.allele_frequency.citations} onQuoteClick={onQuoteClick} />
           </div>
