@@ -77,18 +77,26 @@ const Dashboard = () => {
               const jsonData = await jsonResponse.json().catch(() => null);
               
               if (jsonData) {
-                const summary = jsonData.study_parameters?.summary?.content || 
-                              jsonData.study_parameters?.summary || 
-                              jsonData.description || 
-                              'No description available';
+                const summaryContent = jsonData.study_parameters?.summary?.content || 
+                                     jsonData.study_parameters?.summary || 
+                                     jsonData.description;
+                const summary = Array.isArray(summaryContent) 
+                              ? summaryContent.join(' ') 
+                              : summaryContent || 'No description available';
                 
-                const studyType = jsonData.study_parameters?.study_type?.content || 
-                                jsonData.study_parameters?.study_type || 
-                                jsonData.studyType || 
-                                'Unknown';
+                const studyTypeContent = jsonData.study_parameters?.study_type?.content || 
+                                        jsonData.study_parameters?.study_type || 
+                                        jsonData.studyType;
+                const studyType = Array.isArray(studyTypeContent) 
+                                ? studyTypeContent.join(', ') 
+                                : studyTypeContent || 'Unknown';
                 
-                const participants = jsonData.study_parameters?.participant_info?.content ? 
-                                   extractParticipantNumber(jsonData.study_parameters.participant_info.content) :
+                const participantContent = jsonData.study_parameters?.participant_info?.content;
+                const participantText = Array.isArray(participantContent) 
+                                       ? participantContent.join(' ') 
+                                       : participantContent;
+                const participants = participantText ? 
+                                   extractParticipantNumber(participantText) :
                                    jsonData.participants || null;
 
                 studies.push({
