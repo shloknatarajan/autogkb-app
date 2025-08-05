@@ -43,6 +43,38 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
                   {jsonData.annotations?.relationships && (
                     <div>
                       <h3 className="text-lg font-semibold mb-3 text-primary">Found Associations</h3>
+                      
+                      {/* Summary Table */}
+                      <div className="mb-6 overflow-x-auto">
+                        <table className="w-full border-collapse border border-border rounded-lg">
+                          <thead>
+                            <tr className="bg-muted/50">
+                              <th className="border border-border px-3 py-2 text-left text-sm font-medium">Gene</th>
+                              <th className="border border-border px-3 py-2 text-left text-sm font-medium">Polymorphism</th>
+                              <th className="border border-border px-3 py-2 text-left text-sm font-medium">Effect</th>
+                              <th className="border border-border px-3 py-2 text-left text-sm font-medium">P-value</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {jsonData.annotations.relationships.map((relationship: any, index: number) => (
+                              <tr key={index} className="hover:bg-muted/25">
+                                <td className="border border-border px-3 py-2 text-sm font-medium text-primary">
+                                  {relationship.gene}
+                                </td>
+                                <td className="border border-border px-3 py-2 text-sm">
+                                  {relationship.polymorphism}
+                                </td>
+                                <td className="border border-border px-3 py-2 text-sm">
+                                  {relationship.relationship_effect}
+                                </td>
+                                <td className="border border-border px-3 py-2 text-sm">
+                                  {relationship.p_value || 'N/A'}
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
                       <div className="space-y-4">
                         {jsonData.annotations.relationships.map((relationship: any, index: number) => (
                           <div key={index} className="bg-accent/50 p-4 rounded-lg">
