@@ -40,63 +40,67 @@ const calculateSimilarity = (str1: string, str2: string): number => {
 };
 
 // Helper function to extract sentences from HTML elements
-const extractSentences = (container: Element): Array<{text: string, element: Element, offset: number}> => {
-  const sentences: Array<{text: string, element: Element, offset: number}> = [];
+const extractSentences = (container: Element): Array<{text: string, element: Element, textNode: Text | null, startOffset: number, endOffset: number}> => {
+  const sentences: Array<{text: string, element: Element, textNode: Text | null, startOffset: number, endOffset: number}> = [];
   
-  // Get all text-containing elements
+  // Get all text nodes
   const walker = document.createTreeWalker(
     container,
-    NodeFilter.SHOW_ELEMENT,
+    NodeFilter.SHOW_TEXT,
     {
       acceptNode: (node: Node) => {
-        const element = node as Element;
-        const tagName = element.tagName.toLowerCase();
-        
-        // Skip script, style, and empty elements
-        if (['script', 'style'].includes(tagName)) {
+        const text = node.textContent?.trim() || '';
+        // Skip empty or very short text nodes
+        if (text.length < 5) {
           return NodeFilter.FILTER_REJECT;
         }
-        
-        // Accept elements that contain meaningful text
-        const text = element.textContent?.trim() || '';
-        if (text.length > 10) {
-          return NodeFilter.FILTER_ACCEPT;
-        }
-        
-        return NodeFilter.FILTER_SKIP;
+        return NodeFilter.FILTER_ACCEPT;
       }
     }
   );
   
-  let element: Element | null;
-  while ((element = walker.nextNode() as Element)) {
-    const text = element.textContent?.trim() || '';
+  let textNode: Text | null;
+  while ((textNode = walker.nextNode() as Text)) {
+    const text = textNode.textContent || '';
+    const parentElement = textNode.parentElement;
     
-    // Split text into sentences for paragraphs and similar elements
-    if (['p', 'div', 'li', 'td', 'th', 'blockquote'].includes(element.tagName.toLowerCase())) {
-      const sentenceParts = text.split(/[.!?]+\s+/);
-      let offset = 0;
+    if (!parentElement) continue;
+    
+    // Skip script, style elements
+    const tagName = parentElement.tagName.toLowerCase();
+    if (['script', 'style'].includes(tagName)) continue;
+    
+    // Split text into sentences
+    const sentenceRegex = /[.!?]+\s+/g;
+    let lastIndex = 0;
+    let match;
+    
+    while ((match = sentenceRegex.exec(text)) !== null) {
+      const sentenceText = text.substring(lastIndex, match.index + match[0].length - match[0].match(/\s+$/)?.[0].length || 0).trim();
       
-      sentenceParts.forEach((sentence: string, index: number) => {
-        const trimmed = sentence.trim();
-        if (trimmed.length > 20) { // Only consider substantial sentences
-          sentences.push({
-            text: index === sentenceParts.length - 1 ? trimmed : trimmed + '.',
-            element,
-            offset
-          });
-        }
-        offset += sentence.length + (index < sentenceParts.length - 1 ? 1 : 0);
-      });
-    } else {
-      // For headers, captions, etc., treat the whole text as one unit
-      if (text.length > 10) {
+      if (sentenceText.length > 20) {
         sentences.push({
-          text,
-          element,
-          offset: 0
+          text: sentenceText,
+          element: parentElement,
+          textNode,
+          startOffset: lastIndex,
+          endOffset: match.index + match[0].length - (match[0].match(/\s+$/)?.[0].length || 0)
         });
       }
+      
+      lastIndex = match.index + match[0].length;
+    }
+    
+    // Handle the last sentence (no punctuation at end)
+    const lastSentence = text.substring(lastIndex).trim();
+    if (lastSentence.length > 20) {
+      sentences.push({
+        text: lastSentence,
+        element: parentElement,
+        textNode,
+        startOffset: lastIndex,
+        endOffset: text.length
+      });
     }
   }
   
@@ -183,12 +187,14 @@ export const useQuoteHighlight = () => {
           const figureElements = findFigureTableElements(markdownContainer, quote);
           
           if (figureElements.length > 0) {
-            // Highlight the best matching figure/table
+            // Highlight the best matching figure/table with improved styling
             const bestElement = figureElements[0] as HTMLElement;
-            bestElement.style.outline = '3px solid #fbbf24';
-            bestElement.style.borderRadius = '8px';
-            bestElement.style.padding = '4px';
+            bestElement.style.outline = '2px solid #f59e0b';
+            bestElement.style.borderRadius = '6px';
+            bestElement.style.padding = '8px';
             bestElement.style.backgroundColor = '#fef3c7';
+            bestElement.style.boxShadow = '0 2px 8px rgba(245, 158, 11, 0.2)';
+            bestElement.style.transition = 'all 0.3s ease-in-out';
             bestElement.classList.add('quote-highlight');
             bestElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
             console.log('Highlighted figure/table element');
@@ -201,7 +207,7 @@ export const useQuoteHighlight = () => {
         console.log(`Found ${sentences.length} sentences to compare`);
         
         // Find the best matching sentence
-        let bestMatch: { similarity: number; sentence: {text: string, element: Element, offset: number} | null } = { similarity: 0, sentence: null };
+        let bestMatch: { similarity: number; sentence: {text: string, element: Element, textNode: Text | null, startOffset: number, endOffset: number} | null } = { similarity: 0, sentence: null };
         
         sentences.forEach(sentenceObj => {
           const similarity = calculateSimilarity(quote, sentenceObj.text);
@@ -213,19 +219,44 @@ export const useQuoteHighlight = () => {
         console.log('Best match similarity:', bestMatch.similarity);
         
         if (bestMatch.similarity > 0.2 && bestMatch.sentence) { // Minimum threshold
-          const { element } = bestMatch.sentence;
+          const { textNode, startOffset, endOffset } = bestMatch.sentence;
           
-          // Highlight the entire element containing the best matching sentence
-          const highlightElement = element as HTMLElement;
-          highlightElement.style.backgroundColor = '#fef3c7';
-          highlightElement.style.padding = '8px';
-          highlightElement.style.borderRadius = '6px';
-          highlightElement.style.border = '2px solid #fbbf24';
-          highlightElement.classList.add('quote-highlight');
-          
-          // Scroll to the highlighted element
-          highlightElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          console.log('Highlighted best matching sentence with similarity:', bestMatch.similarity);
+          if (textNode) {
+            // Create a highlight span for just the matching sentence
+            const range = document.createRange();
+            range.setStart(textNode, startOffset);
+            range.setEnd(textNode, endOffset);
+            
+            // Create highlight span with better visual styling
+            const highlightSpan = document.createElement('span');
+            highlightSpan.className = 'quote-highlight';
+            highlightSpan.style.backgroundColor = '#fef3c7'; // soft yellow
+            highlightSpan.style.padding = '2px 4px';
+            highlightSpan.style.borderRadius = '3px';
+            highlightSpan.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)';
+            highlightSpan.style.border = '1px solid #f59e0b';
+            
+            try {
+              // Surround the range with the highlight span
+              range.surroundContents(highlightSpan);
+              
+              // Scroll to the highlighted sentence
+              highlightSpan.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              console.log('Highlighted best matching sentence with similarity:', bestMatch.similarity);
+            } catch (error) {
+              console.error('Error highlighting sentence:', error);
+              // Fallback: highlight the entire element with better styling
+              const highlightElement = bestMatch.sentence.element as HTMLElement;
+              highlightElement.style.backgroundColor = '#fef3c7';
+              highlightElement.style.padding = '4px 8px';
+              highlightElement.style.borderRadius = '4px';
+              highlightElement.style.border = '1px solid #f59e0b';
+              highlightElement.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)';
+              highlightElement.style.transition = 'all 0.2s ease-in-out';
+              highlightElement.classList.add('quote-highlight');
+              highlightElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+          }
         } else {
           console.log('No sufficiently similar sentence found (threshold: 0.2)');
         }
