@@ -131,7 +131,7 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
                               )}
                               {relationship.citations && relationship.citations.length > 0 && (
                                 <div>
-                                  <h5 className="text-sm font-medium mb-1">Citations:</h5>
+                                  <h5 className="text-sm font-bold mb-1">Citations:</h5>
                                   <QuoteButtons quotes={relationship.citations} onQuoteClick={onQuoteClick} />
                                 </div>
                               )}
