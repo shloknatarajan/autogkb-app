@@ -13,9 +13,9 @@ export const FunctionalAnnotationsSection: React.FC<FunctionalAnnotationsSection
     <div>
       <h3 className="text-lg font-semibold mb-3 text-primary">Functional Annotations</h3>
       {functionalAnnotations.map((annotation: any, index: number) => (
-        <div key={index} className="bg-accent/50 p-3 rounded-lg mb-3">
-          <h4 className="font-medium text-sm text-accent-foreground mb-2">Annotation {index + 1}</h4>
-          <div className="space-y-1 text-sm">
+        <div key={index} className="mb-6">
+          <h4 className="font-medium text-base mb-3 text-primary border-b pb-1">Annotation {index + 1}</h4>
+          <div className="space-y-2 text-sm">
             {annotation.sentence_summary && (
               <p><span className="font-medium">Summary:</span> {annotation.sentence_summary}</p>
             )}

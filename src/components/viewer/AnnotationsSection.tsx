@@ -12,8 +12,8 @@ export const AnnotationsSection: React.FC<AnnotationsSectionProps> = ({ title, a
     <div>
       <h3 className="text-lg font-semibold mb-3 text-primary">{title}</h3>
       {annotations.map((annotation: any, index: number) => (
-        <div key={index} className="bg-accent/50 p-3 rounded-lg mb-3">
-          <p className="text-sm text-muted-foreground">{JSON.stringify(annotation, null, 2)}</p>
+        <div key={index} className="mb-4">
+          <p className="text-sm">{JSON.stringify(annotation, null, 2)}</p>
         </div>
       ))}
     </div>
