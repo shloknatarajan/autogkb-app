@@ -59,9 +59,16 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
                                 <strong>Effect:</strong> {relationship.relationship_effect}
                               </p>
                               {relationship.p_value && (
-                                <p className="text-sm text-muted-foreground">
-                                  <strong>P-value:</strong> {relationship.p_value}
-                                </p>
+                                <div>
+                                  <p className="text-sm text-muted-foreground">
+                                    <strong>P-value:</strong> {relationship.p_value}
+                                  </p>
+                                  {relationship.p_value_citations && relationship.p_value_citations.length > 0 && (
+                                    <div className="mt-1">
+                                      <QuoteButtons quotes={relationship.p_value_citations} onQuoteClick={onQuoteClick} />
+                                    </div>
+                                  )}
+                                </div>
                               )}
                               {relationship.citations && relationship.citations.length > 0 && (
                                 <div>
