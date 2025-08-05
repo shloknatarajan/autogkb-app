@@ -3,11 +3,11 @@
     "title": "Effects of genetic polymorphisms on the OCT1 and OCT2-mediated uptake of ranitidine",
     "study_parameters": {
         "summary": {
-            "content": "The study aimed to investigate the effects of genetic polymorphisms in the organic cation transporters OCT1 and OCT2 on the uptake of ranitidine, a common H2-receptor antagonist. Using HEK293 and CHO cells overexpressing various OCT1 and OCT2 alleles, the researchers found that ranitidine is a substrate of OCT1, with significant variability in uptake depending on the genetic variant. While some OCT1 alleles showed complete loss of ranitidine uptake, others exhibited reduced or increased transport activity, highlighting the potential for genetic polymorphisms to influence ranitidine pharmacokinetics and drug-drug interactions.",
+            "content": "The study aimed to investigate the effects of genetic polymorphisms in the organic cation transporters OCT1 and OCT2 on the uptake of ranitidine, a commonly used H2-receptor antagonist. Using HEK293 and CHO cells overexpressing various OCT1 and OCT2 alleles, the researchers found that ranitidine is a substrate for OCT1, with significant variability in uptake depending on the OCT1 genetic variants. Specifically, certain OCT1 alleles showed complete or partial loss of ranitidine transport activity, while OCT2 had limited impact on ranitidine uptake, unaffected by the Ala270Ser polymorphism.",
             "citations": [
-                "We confirmed ranitidine as an OCT1 substrate and demonstrated that common genetic polymorphisms in OCT1 strongly affect ranitidine uptake and modulate ranitidine\u2019s potential to cause drug-drug interactions.",
-                "The alleles OCT1*5, *6, *12, and *13 completely lacked ranitidine uptake.",
-                "Alleles OCT1*2, *3, *4, and *10 had vmax values decreased by more than 50%. In contrast, OCT1*8 showed an increase of vmax by 25%."
+                "Ranitidine was transported by wild-type OCT1 with a Km of 62.9 \u03bcM and a vmax of 1125 pmol/min/mg protein.",
+                "Alleles OCT1*5, *6, *12, and *13 completely lacked ranitidine uptake.",
+                "OCT2 showed only a limited uptake of ranitidine that was not significantly affected by the Ala270Ser polymorphism."
             ]
         },
         "study_type": {
@@ -15,70 +15,76 @@
             "citations": [
                 "We characterized ranitidine uptake using HEK293 and CHO cells stably transfected to overexpress wild type OCT1, OCT2, or their naturally occurring allelic variants.",
                 "The effects of alleles OCT1*1 to *6 on ranitidine uptake were confirmed using an alternative cell model\u2014stably transfected CHO cells ([Fig 2D](#pone.0189521.g002)Fig 2D).",
-                "The major limitation of our study is that it contains only *in vitro* analyses."
+                "The major limitation of our study is that it contains only *in vitro*in vitro analyses."
             ]
         },
         "participant_info": {
             "content": [
-                "The study \"Effects of genetic polymorphisms on the OCT1 and OCT2-mediated uptake of ranitidine\" does not involve human participants in the traditional sense, as it is an *in vitro* study using cell lines. Therefore, there are no details about human participants such as age, gender, ethnicity, or pre-existing conditions. Instead, the study uses the following methods and materials:",
-                "Cell Lines Used**: HEK293 and CHO cells were used, which are human embryonic kidney and Chinese hamster ovary cells, respectively.",
-                "Genetic Variants Studied**: The study focused on various allelic variants of the human organic cation transporters OCT1 and OCT2.",
-                "Experimental Setup**: Cells were stably transfected to overexpress wild-type OCT1, OCT2, or their naturally occurring allelic variants to study the uptake of ranitidine.",
-                "Since this is a laboratory-based study, there are no human participants or demographic details to report."
+                "**Participants:** The study did not involve human participants; it was conducted using HEK293 and CHO cell lines.",
+                "**Age:** Not applicable, as the study used cell lines.",
+                "**Gender:** Not applicable, as the study used cell lines.",
+                "**Ethnicity:** Not applicable, as the study used cell lines.",
+                "**Pre-existing conditions:** Not applicable, as the study used cell lines.",
+                "**Study groups:** The study groups consisted of HEK293 and CHO cells overexpressing various OCT1 and OCT2 alleles."
             ],
             "citations": [
                 "We characterized ranitidine uptake using HEK293 and CHO cells stably transfected to overexpress wild type OCT1, OCT2, or their naturally occurring allelic variants.",
-                "HEK293 or CHO cells overexpressing the human *OCT1*OCT1 alleles **1A**1A (characterized by the amino acid substitution Met408Val), **1B**1B, **1C**1C (Phe160Leu), **1D**1D (Pro341Leu/Met408Val), **2**2 (Met420del), **3**3 (Arg61Cys), **4**4 (Gly401Ser), **5**5 (Gly465Arg/Met420del), **6**6 (Cys88Arg/Met420del), **7**7 (Ser14Phe), **8A**8A (Arg488Met), **8B**8B (Arg488Met/Met408Val), **9**9 (Pro117Leu), **10**10 (Ser189Leu), **11**11 (Ile449Thr), **12**12 (Ser29Leu), or **13**13 (Thr245Met), the human *OCT2*OCT2 reference and variant alleles (Ala270Ser), human *OCT3*OCT3, and the control cells (transfected with the empty pcDNA5 vector) were generated by targeted chromosomal integration using the Flp-In\u2122 System (Life Technologies, Darmstadt, Germany).",
-                "The major limitation of our study is that it contains only *in vitro*in vitro analyses."
+                "The effects of alleles OCT1*1* to *6* on ranitidine uptake were confirmed using an alternative cell model\u2014stably transfected CHO cells ([Fig 2D](#pone.0189521.g002)Fig 2D).",
+                "The major limitation of our study is that it contains only *in vitro* analyses."
             ]
         },
         "study_design": {
             "content": [
-                "Study Design**: The study was an *in vitro* experimental analysis focused on the effects of genetic polymorphisms in OCT1 and OCT2 on the uptake of ranitidine and its potential to inhibit the uptake of other drugs.",
-                "Study Population**: The study utilized HEK293 and CHO cell lines that were stably transfected to overexpress wild-type OCT1, OCT2, or their naturally occurring allelic variants.",
-                "Sample Size**: The study did not involve human or animal subjects, so there was no traditional sample size. Instead, multiple independent experiments were conducted using the transfected cell lines.",
-                "Experimental Conditions**: Ranitidine uptake was characterized in these cell lines, and the effects of various OCT1 and OCT2 alleles on ranitidine transport were assessed. The study also evaluated ranitidine's inhibitory effects on the uptake of metformin and morphine.",
-                "Data Analysis**: Nonlinear regression to the Michaelis-Menten equation was used to determine kinetic parameters, and statistical analyses were performed using ANOVA followed by Tukey\u2019s HSD post hoc tests."
+                "**Study Design**: The study was conducted using in vitro experiments to analyze the effects of genetic polymorphisms in OCT1 and OCT2 on the uptake of ranitidine.",
+                "**Cell Lines**: HEK293 and CHO cells were used, stably transfected to overexpress wild-type OCT1, OCT2, or their naturally occurring allelic variants.",
+                "**Sample Size**: The experiments were performed with at least three independent replicates for each condition.",
+                "**Experimental Conditions**: Ranitidine uptake was characterized by measuring intracellular concentrations in the presence of varying concentrations of ranitidine and other substrates.",
+                "**Genetic Variants Analyzed**: The study analyzed major alleles of OCT1 (*OCT1*2 to *OCT1*13) and the common polymorphism Ala270Ser in OCT2."
             ],
             "citations": [
                 "We characterized ranitidine uptake using HEK293 and CHO cells stably transfected to overexpress wild type OCT1, OCT2, or their naturally occurring allelic variants.",
-                "Nonlinear regression to the Michaelis-Menten equation was performed to determine K_m and v_max using GraphPad Prism version 6 (GraphPad Software Inc., La Jolla, CA, USA).",
-                "The effects of genetic variants on the cellular uptake of ranitidine (K_m and v_max) and on ranitidine-mediated inhibition (IC_50) were compared using analyses of variance (ANOVA) followed by Tukey\u2019s Honestly Significant Difference (HSD) post hoc analyses."
+                "The data is shown as means and standard error of the means of at least three independent experiments.",
+                "We analyzed the major alleles OCT1*2 to *13 ([Fig 2B](#pone.0189521.g002)Fig 2B), which have been previously described to affect OCT1 activity with other substrates [[12](#pone.0189521.ref012)12, [13](#pone.0189521.ref013)13, [15](#pone.0189521.ref015)15\u2013[19](#pone.0189521.ref019)19, [33](#pone.0189521.ref033)33, [34](#pone.0189521.ref034)34, [48](#pone.0189521.ref048)48] and the sub-allelic variants OCT1*1B, *1C, and *1D ([Fig 2C](#pone.0189521.g002)Fig 2C)."
             ]
         },
         "study_results": {
             "content": [
-                "Ranitidine Uptake by OCT1:** Ranitidine is confirmed as a substrate of OCT1, with a Km of 62.9 \u03bcM and a vmax of 1125 pmol/min/mg protein. Alleles OCT1*5, *6, *12, and *13 completely lack ranitidine uptake, while OCT1*2, *3, *4, and *10 show more than a 50% decrease in vmax.",
-                "OCT1 Polymorphisms and Ranitidine Uptake:** The effects of OCT1 alleles on ranitidine uptake correlate strongly with effects on morphine uptake, suggesting shared interaction mechanisms. OCT1*8 shows a 25% increase in vmax, though not statistically significant (P = 0.5).",
-                "Inhibition of Drug Uptake by Ranitidine:** Ranitidine inhibits OCT1-mediated uptake of metformin and morphine at clinically relevant concentrations, with the OCT1*2 allele showing increased inhibitory potency for morphine (IC50 of 19.5 \u03bcM for OCT1*2 vs. 45.5 \u03bcM for the reference allele).",
-                "OCT2 and Ranitidine Uptake:** OCT2 shows limited uptake of ranitidine, which is not significantly affected by the Ala270Ser polymorphism.",
-                "Clinical Implications:** Poor OCT1 transporters, representing 7% of Europeans and White Americans, may have reduced hepatic uptake of ranitidine, potentially leading to increased plasma concentrations by 50% or more, though this is not expected to have clinical consequences due to ranitidine's broad therapeutic range."
+                "**OCT1-mediated ranitidine uptake:** Ranitidine is confirmed as a substrate of OCT1 with a Km of 62.9 \u03bcM and a vmax of 1125 pmol/min/mg protein.",
+                "**OCT1 alleles lacking ranitidine uptake:** Alleles OCT1*5, *6, *12, and *13 completely lack ranitidine uptake.",
+                "**Reduced vmax in OCT1 alleles:** Alleles OCT1*2, *3, *4, and *10 show a vmax decrease of more than 50%.",
+                "**Increased vmax in OCT1*8:** The OCT1*8 allele shows a 25% increase in vmax.",
+                "**Correlation with morphine uptake:** Effects of OCT1 alleles on ranitidine uptake strongly correlate with effects on morphine uptake (r\u00b2 = 0.961).",
+                "**OCT2-mediated ranitidine uptake:** OCT2 shows limited uptake of ranitidine, not significantly affected by the Ala270Ser polymorphism.",
+                "**Ranitidine inhibition of OCT1 substrates:** Ranitidine inhibits OCT1-mediated uptake of metformin and morphine, with genotype-dependent differences in inhibitory potency.",
+                "**Genotype-dependent inhibition:** Ranitidine is more potent in inhibiting the OCT1*2 variant than the reference allele, especially for morphine (IC50 of 19.5 \u03bcM for OCT1*2 vs. 45.5 \u03bcM for reference).",
+                "**Statistical significance:** The decrease in vmax for certain alleles is statistically significant (e.g., OCT1*2, *3, *4, and *10), with p-values indicating significance (e.g., **OCT1*2 vmax decrease:** p < 0.001)."
             ],
             "citations": [
                 "Ranitidine was transported by wild-type OCT1 with a Km of 62.9 \u03bcM and a vmax of 1125 pmol/min/mg protein.",
                 "Alleles OCT1*5, *6, *12, and *13 completely lacked ranitidine uptake.",
-                "The alleles OCT1*2, *3, *4, and *10 showed a significant decrease of vmax...The decrease ranged from 50% (OCT1*10) to 91% (OCT1*4)."
+                "The effects of OCT1 alleles on ranitidine uptake strongly correlated with the effects on morphine uptake suggesting common interaction mechanisms of both drugs with OCT1."
             ]
         },
         "allele_frequency": {
             "content": [
-                "The study mentions that the *OCT1*2 allele has a global allele frequency of 12.2%.",
-                "It is reported that 9% of Europeans and White Americans are homozygous or compound heterozygous carriers of the loss-of-function alleles *OCT1*2, *3, *4, *5, and *6.",
-                "An additional 40% of Europeans and White Americans are heterozygous carriers of these alleles, having only one active copy of *OCT1* in their genomes.",
-                "The number of poor OCT1 transporters varies significantly among different ethnicities, being rare in East Asia but representing more than 80% of certain populations in South America, such as the Surui Indians."
+                "**OCT1*2 allele frequency**: The global allele frequency is 12.2%.",
+                "**Poor OCT1 transporters in Europeans and White Americans**: 9% are homozygous or compound heterozygous carriers of loss-of-function alleles.",
+                "**Heterozygous carriers of loss-of-function alleles in Europeans and White Americans**: 40% have only one active copy of OCT1.",
+                "**Poor OCT1 transporters in East Asia**: Rare.",
+                "**Poor OCT1 transporters in South America (e.g., Surui Indians)**: More than 80% of certain populations."
             ],
             "citations": [
-                "Nine percent of Europeans and White Americans are homozygous or compound heterozygous carriers of these loss-of-function alleles (so called poor OCT1 transporters) [[14](#pone.0189521.ref014)14, [16](#pone.0189521.ref016)16, [30](#pone.0189521.ref030)30].",
-                "An additional 40% of Europeans and White Americans are heterozygous carriers of these alleles and have only one active copy of *OCT1*OCT1 in their genomes.",
-                "The number of poor OCT1 transporters varies strongly among different ethnicities and different world regions [[14](#pone.0189521.ref014)14, [19](#pone.0189521.ref019)19]. While rare in East Asia, poor OCT1 transporters represent more than 80% of certain populations in South America (e.g. the Surui Indians) [[19](#pone.0189521.ref019)19]."
+                "OCT1*2, the most common variant OCT1 allele (global allele frequency of 12.2%), shows strong substrate-specific effects.",
+                "Nine percent of Europeans and White Americans are homozygous or compound heterozygous carriers of these loss-of-function alleles (so called poor OCT1 transporters) [14, 16, 30].",
+                "The number of poor OCT1 transporters varies strongly among different ethnicities and different world regions [14, 19]. While rare in East Asia, poor OCT1 transporters represent more than 80% of certain populations in South America (e.g. the Surui Indians) [19]."
             ]
         },
         "additional_resource_links": [
             "The study provides the following additional resources or links related to the design and execution of the study:",
-            "1. **DOI Link to the Article:** [10.1371/journal.pone.0189521](https://doi.org/10.1371/journal.pone.0189521)",
-            "2. **PubMed Central (PMC) Article Link:** [https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5728534/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5728534/)",
-            "3. **PDF of the Article:** [https://pmc.ncbi.nlm.nih.gov/articles/PMC5728534/pdf/pone.0189521.pdf](https://pmc.ncbi.nlm.nih.gov/articles/PMC5728534/pdf/pone.0189521.pdf)",
-            "These links provide access to the full text of the study, including detailed information on the study protocols and data."
+            "- [DOI link to the article](https://doi.org/10.1371/journal.pone.0189521)",
+            "- [PubMed Central (PMC) link to the article](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5728534/)",
+            "- [PDF version of the article](https://pmc.ncbi.nlm.nih.gov/articles/PMC5728534/pdf/pone.0189521.pdf)",
+            "These links provide access to the full text of the article, including supplementary materials and data availability statements."
         ]
     },
     "annotations": {
@@ -86,71 +92,83 @@
             {
                 "gene": "OCT1 (SLC22A1)",
                 "polymorphism": "OCT1*5, OCT1*6, OCT1*12, OCT1*13",
-                "relationship_effect": "These alleles completely lacked ranitidine uptake (i.e., complete loss of function for ranitidine transport).",
-                "p_value": "Not explicitly stated, but described as complete lack of uptake (see Table 2 and Fig 2B).",
+                "relationship_effect": "These alleles completely lacked ranitidine uptake.",
+                "p_value": "Not explicitly stated for this comparison, but described as complete loss of function.",
                 "citations": [
-                    "The alleles OCT1*5, *6, *12, and *13 completely lacked ranitidine uptake.",
-                    "The alleles OCT1*5, 6, 12, and 13 showed a complete lack of ranitidine transport activity after incubation with both 1 \u03bcM (Fig 2B) and 10 \u03bcM concentration of ranitidine (S1 Fig).",
-                    "## Table 2. Effects of common amino acid substitutions on the kinetics of the OCT1-mediated uptake of ranitidine."
+                    "Alleles OCT1*5, *6, *12, and *13 completely lacked ranitidine uptake.",
+                    "The alleles OCT1*5, *6, *12, and *13 showed a complete lack of ranitidine transport activity after incubation with both 1 \u03bcM (Fig 2B) and 10 \u03bcM concentration of ranitidine (S1 Fig).",
+                    "In conclusion, we demonstrated that ranitidine is a substrate of OCT1 and that common genetic polymorphisms in OCT1 lead to a substantial reduction or even complete abolishment of OCT1-mediated ranitidine uptake."
                 ],
-                "p_value_citations": [
-                    "The alleles OCT1*5, *6, *12, and *13 showed a complete lack of ranitidine transport activity after incubation with both 1 \u03bcM (Fig 2B) and 10 \u03bcM concentration of ranitidine (S1 Fig)."
-                ]
+                "p_value_citations": []
             },
             {
                 "gene": "OCT1 (SLC22A1)",
                 "polymorphism": "OCT1*2, OCT1*3, OCT1*4, OCT1*10",
-                "relationship_effect": "These alleles had vmax values decreased by more than 50% for ranitidine uptake, indicating reduced transport capacity.",
-                "p_value": "*OCT1*2: vmax P<0.001; *OCT1*3: vmax P<0.001; *OCT1*4: vmax P<0.001; *OCT1*10: vmax P<0.05 (see Table 2)",
+                "relationship_effect": "These alleles had vmax values decreased by more than 50% for ranitidine uptake.",
+                "p_value": "OCT1*2: *** (p<0.001); OCT1*3: *** (p<0.001); OCT1*4: *** (p<0.001); OCT1*10: * (p<0.05)",
                 "citations": [
-                    "Alleles OCT1*2, *3, *4, and *10 had vmax values decreased by more than 50%.",
                     "The alleles OCT1*2, *3, *4, and *10 showed a significant decrease of vmax (Fig 2E and Table 2).",
+                    "The decrease ranged from 50% (OCT1*10) to 91% (OCT1*4).",
                     "## Table 2. Effects of common amino acid substitutions on the kinetics of the OCT1-mediated uptake of ranitidine."
                 ],
                 "p_value_citations": [
-                    "Table 2. Effects of common amino acid substitutions on the kinetics of the OCT1-mediated uptake of ranitidine."
+                    "Table 2. Effects of common amino acid substitutions on the kinetics of the OCT1-mediated uptake of ranitidine. OCT1*2: vmax 402.04 (\u00b151.24)***, CLint 8.18 (\u00b11.39)**; OCT1*3: vmax 255.08 (\u00b112.75)***, CLint 7.76 (\u00b11.80)**; OCT1*4: vmax 106.65 (\u00b126.70)***, CLint 3.14 (\u00b10.82)***; OCT1*10: vmax 567.50 (\u00b159.10)*, CLint 8.957 (\u00b10.75)*"
                 ]
             },
             {
                 "gene": "OCT1 (SLC22A1)",
                 "polymorphism": "OCT1*8",
-                "relationship_effect": "This allele showed an increase of vmax by 25% for ranitidine uptake, though the difference was not statistically significant.",
-                "p_value": "P = 0.5 (not significant)",
+                "relationship_effect": "OCT1*8 showed an increase of vmax by 25% for ranitidine uptake, though the difference was not statistically significant.",
+                "p_value": "P = 0.5",
                 "citations": [
                     "The OCT1*8 allele showed a 25% increase in vmax, though the difference was not statistically significant (P = 0.5, [Table 2](#pone.0189521.t002)Table 2, [Fig 2E](#pone.0189521.g002)Fig 2E).",
-                    "In contrast, OCT1*8 showed an increase of vmax by 25%.",
-                    "## Table 2. Effects of common amino acid substitutions on the kinetics of the OCT1-mediated uptake of ranitidine."
+                    "## Table 2. Effects of common amino acid substitutions on the kinetics of the OCT1-mediated uptake of ranitidine.",
+                    "In contrast, OCT1*8 showed an increase of vmax by 25%."
                 ],
                 "p_value_citations": [
-                    "The OCT1*8 allele showed a 25% increase in vmax, though the difference was not statistically significant (P = 0.5, Table 2, Fig 2E)."
+                    "Table 2. OCT1*8: vmax 1412.43 (\u00b1108.88), P = 0.5"
                 ]
             },
             {
                 "gene": "OCT1 (SLC22A1)",
                 "polymorphism": "OCT1*1A, OCT1*1C, OCT1*1D, OCT1*7, OCT1*9, OCT1*11",
                 "relationship_effect": "These alleles showed no significant difference in the uptake of ranitidine compared to the reference allele.",
-                "p_value": "Not significant (see Table 2)",
+                "p_value": "Not significant",
                 "citations": [
                     "Alleles OCT1*1A, 1C, 1D, 7, 9, and 11 showed no significant difference in the uptake of ranitidine compared to the reference allele (Fig 2B and 2C, S1 Fig).",
-                    "The OCT1*8 allele showed a 25% increase in vmax, though the difference was not statistically significant (P = 0.5, Table 2, Fig 2E).",
-                    "## Table 2. Effects of common amino acid substitutions on the kinetics of the OCT1-mediated uptake of ranitidine."
+                    "### Table 2. Effects of common amino acid substitutions on the kinetics of the OCT1-mediated uptake of ranitidine.",
+                    "In contrast, none of the analyzed polymorphisms significantly affected the affinity (Km) of ranitidine uptake (P = 0.17, Table 2)."
                 ],
                 "p_value_citations": [
-                    "Table 2. Effects of common amino acid substitutions on the kinetics of the OCT1-mediated uptake of ranitidine."
+                    "Table 2. All p-values for these alleles are not significant."
                 ]
             },
             {
                 "gene": "OCT1 (SLC22A1)",
                 "polymorphism": "OCT1*2 (Met420del)",
-                "relationship_effect": "The inhibitory potency of ranitidine for morphine uptake was affected by the OCT1*2 allele; ranitidine was on average two-fold more potent in inhibiting the common OCT1*2 variant than the reference OCT1 allele (IC50 for morphine: 19.5 \u03bcM for OCT1*2 vs 45.5 \u03bcM for reference).",
-                "p_value": "Not explicitly stated, but IC50 values are given (see Table 3 and Fig 3).",
+                "relationship_effect": "Ranitidine was on average two-fold more potent in inhibiting the common OCT1*2 variant than the reference OCT1 allele for morphine uptake (IC50 of 19.5 and 45.5 \u03bcM for OCT1*2 and *1, respectively).",
+                "p_value": "Not explicitly stated, but described as significant difference.",
                 "citations": [
                     "Depending on the genotype, ranitidine was on average two-fold more potent in inhibiting the common *OCT1*2*OCT1*2 variant than the reference *OCT1*OCT1 allele.",
                     "The genotype-dependent differences were most prominent when inhibiting morphine (IC_50_50 of 19.5 and 45.5 \u03bcM for *OCT1*2*OCT1*2 and **1**1, respectively) and least prominent when inhibiting metformin (IC_50_50 of 14.8 and 20.9 \u03bcM for *OCT1*2*OCT1*2 and **1**1, respectively).",
+                    "The inhibitory potency for morphine uptake was affected by the OCT1*2 allele."
+                ],
+                "p_value_citations": [
+                    "Table 3. Morphine: OCT1*1 IC50 45.5 \u00b1 5.49 \u03bcM, OCT1*2 IC50 19.5 \u00b1 0.0 \u03bcM."
+                ]
+            },
+            {
+                "gene": "OCT1 (SLC22A1)",
+                "polymorphism": "OCT1*2 (Met420del)",
+                "relationship_effect": "For metformin uptake, ranitidine was slightly more potent in inhibiting the OCT1*2 allele (IC50 of 14.8 \u03bcM) than the reference allele (IC50 of 20.9 \u03bcM).",
+                "p_value": "Not explicitly stated",
+                "citations": [
+                    "The genotype-dependent differences were most prominent when inhibiting morphine (IC_50_ of 19.5 and 45.5 \u03bcM for *OCT1*2* and *1*, respectively) and least prominent when inhibiting metformin (IC_50_ of 14.8 and 20.9 \u03bcM for *OCT1*2* and *1*, respectively).",
+                    "Depending on the genotype, ranitidine was on average two-fold more potent in inhibiting the common *OCT1*2* variant than the reference *OCT1* allele.",
                     "## Table 3. Genotype and substrate-dependent variations in the potency of ranitidine to inhibit OCT1-mediated uptake related to the expected ranitidine concentration in the gastrointestinal tract [I]2 and in plasma [I]1."
                 ],
                 "p_value_citations": [
-                    "Table 3. Genotype and substrate-dependent variations in the potency of ranitidine to inhibit OCT1-mediated uptake related to the expected ranitidine concentration in the gastrointestinal tract [I]2 and in plasma [I]1."
+                    "Table 3. Metformin: OCT1*1 IC50 20.93 \u00b1 3.2 \u03bcM, OCT1*2 IC50 14.87 \u00b1 3.52 \u03bcM."
                 ]
             },
             {
@@ -164,7 +182,7 @@
                     "Furthermore, the OCT2-mediated uptake of ranitidine was not substantially affected by the Ala270Ser substitution, the only common genetic polymorphism suggested to affect OCT2 function [[47](#pone.0189521.ref047)47]."
                 ],
                 "p_value_citations": [
-                    "In comparison to the Ala270 allele, the Ser270 allele showed a limited reduction of ranitidine uptake by 9% which was not significant (Fig 4B)."
+                    "Fig 4B. The difference between Ala270 and Ser270 alleles was not significant."
                 ]
             }
         ]
