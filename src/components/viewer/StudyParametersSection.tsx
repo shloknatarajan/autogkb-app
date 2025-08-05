@@ -15,8 +15,8 @@ export const StudyParametersSection: React.FC<StudyParametersProps> = ({ studyPa
       <h3 className="text-lg font-semibold mb-3 text-primary">Study Parameters</h3>
       <div className="space-y-3">
         {studyParameters.summary && (
-          <div className="bg-accent/50 p-3 rounded-lg">
-            <h4 className="font-medium text-sm text-accent-foreground mb-1">Summary</h4>
+          <div className="mb-6">
+            <h4 className="font-medium text-base mb-3 text-primary border-b pb-1">Summary</h4>
             {typeof studyParameters.summary === 'string' ? (
               <div className="text-sm text-muted-foreground prose prose-sm max-w-none prose-p:text-muted-foreground prose-strong:text-foreground">
                 <ReactMarkdown>{studyParameters.summary}</ReactMarkdown>
@@ -42,8 +42,8 @@ export const StudyParametersSection: React.FC<StudyParametersProps> = ({ studyPa
           </div>
         )}
         {studyParameters.study_type && (
-          <div className="bg-accent/50 p-3 rounded-lg">
-            <h4 className="font-medium text-sm text-accent-foreground mb-1">Study Type</h4>
+          <div className="mb-6">
+            <h4 className="font-medium text-base mb-3 text-primary border-b pb-1">Study Type</h4>
             {Array.isArray(studyParameters.study_type.content) ? (
               <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1">
                 {studyParameters.study_type.content.map((item: string, index: number) => (
@@ -66,8 +66,8 @@ export const StudyParametersSection: React.FC<StudyParametersProps> = ({ studyPa
           </div>
         )}
         {studyParameters.participant_info && (
-          <div className="bg-accent/50 p-3 rounded-lg">
-            <h4 className="font-medium text-sm text-accent-foreground mb-1">Participant Information</h4>
+          <div className="mb-6">
+            <h4 className="font-medium text-base mb-3 text-primary border-b pb-1">Participant Information</h4>
             {Array.isArray(studyParameters.participant_info.content) ? (
               <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1">
                 {studyParameters.participant_info.content.map((item: string, index: number) => (
@@ -87,8 +87,8 @@ export const StudyParametersSection: React.FC<StudyParametersProps> = ({ studyPa
           </div>
         )}
         {studyParameters.study_design && (
-          <div className="bg-accent/50 p-3 rounded-lg">
-            <h4 className="font-medium text-sm text-accent-foreground mb-1">Study Design</h4>
+          <div className="mb-6">
+            <h4 className="font-medium text-base mb-3 text-primary border-b pb-1">Study Design</h4>
             {Array.isArray(studyParameters.study_design.content) ? (
               <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1">
                 {studyParameters.study_design.content.map((item: string, index: number) => (
@@ -108,8 +108,8 @@ export const StudyParametersSection: React.FC<StudyParametersProps> = ({ studyPa
           </div>
         )}
         {studyParameters.study_results && (
-          <div className="bg-accent/50 p-3 rounded-lg">
-            <h4 className="font-medium text-sm text-accent-foreground mb-1">Study Results</h4>
+          <div className="mb-6">
+            <h4 className="font-medium text-base mb-3 text-primary border-b pb-1">Study Results</h4>
             {Array.isArray(studyParameters.study_results.content) ? (
               <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1">
                 {studyParameters.study_results.content.map((item: string, index: number) => (
@@ -129,8 +129,8 @@ export const StudyParametersSection: React.FC<StudyParametersProps> = ({ studyPa
           </div>
         )}
         {studyParameters.allele_frequency && (
-          <div className="bg-accent/50 p-3 rounded-lg">
-            <h4 className="font-medium text-sm text-accent-foreground mb-1">Allele Frequency</h4>
+          <div className="mb-6">
+            <h4 className="font-medium text-base mb-3 text-primary border-b pb-1">Allele Frequency</h4>
             {Array.isArray(studyParameters.allele_frequency.content) ? (
               <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1">
                 {studyParameters.allele_frequency.content.map((item: string, index: number) => (
