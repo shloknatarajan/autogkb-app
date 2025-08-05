@@ -16,22 +16,22 @@ interface AnnotationsPanelProps {
 
 export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, onQuoteClick }) => {
   return (
-    <div className="h-full">
-      <Card className="h-full rounded-none border-0 shadow-none">
-        <CardHeader className="bg-gradient-secondary border-b">
+    <div className="h-full flex flex-col">
+      <Card className="h-full rounded-none border-0 shadow-none flex flex-col">
+        <CardHeader className="bg-gradient-secondary border-b flex-shrink-0">
           <CardTitle className="text-lg">Structured Data</CardTitle>
         </CardHeader>
-        <CardContent className="p-0 h-full">
-          <Tabs defaultValue="formatted" className="h-full">
-            <div className="border-b px-6 pt-4">
+        <CardContent className="p-0 flex-1 flex flex-col overflow-hidden">
+          <Tabs defaultValue="formatted" className="h-full flex flex-col">
+            <div className="border-b px-6 pt-4 flex-shrink-0">
               <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger value="formatted">Formatted View</TabsTrigger>
                 <TabsTrigger value="raw">Raw JSON</TabsTrigger>
               </TabsList>
             </div>
             
-            <TabsContent value="formatted" className="mt-0 h-full">
-              <ScrollArea className="h-[calc(100vh-12rem)]">
+            <TabsContent value="formatted" className="mt-0 flex-1 overflow-hidden">
+              <ScrollArea className="h-full">
                 <div className="p-6 space-y-6">
                   {/* Header with Study Parameters and Found Associations button */}
                   <div className="flex justify-between items-center mb-3">
@@ -189,8 +189,8 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
               </ScrollArea>
             </TabsContent>
             
-            <TabsContent value="raw" className="mt-0 h-full">
-              <ScrollArea className="h-[calc(100vh-12rem)]">
+            <TabsContent value="raw" className="mt-0 flex-1 overflow-hidden">
+              <ScrollArea className="h-full">
                 <div className="p-6">
                   <pre className="text-xs bg-muted p-4 rounded-lg overflow-auto">
                     {JSON.stringify(jsonData, null, 2)}
