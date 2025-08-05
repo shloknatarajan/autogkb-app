@@ -174,6 +174,8 @@ export const useQuoteHighlight = () => {
             // Image or other element highlight - remove styles
             const htmlEl = el as HTMLElement;
             htmlEl.style.backgroundColor = '';
+            htmlEl.style.padding = '';
+            htmlEl.style.borderRadius = '';
             htmlEl.classList.remove('quote-highlight');
           }
         });
@@ -186,8 +188,9 @@ export const useQuoteHighlight = () => {
           if (figureElements.length > 0) {
             // Highlight the best matching figure/table
             const bestElement = figureElements[0] as HTMLElement;
-            bestElement.style.backgroundColor = '#fff3cd';
-            bestElement.style.transition = 'background-color 0.3s ease-in-out';
+            bestElement.style.backgroundColor = '#fef3c7';
+            bestElement.style.padding = '2px 4px';
+            bestElement.style.borderRadius = '3px';
             bestElement.classList.add('quote-highlight');
             bestElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
             console.log('Highlighted figure/table element');
@@ -223,8 +226,9 @@ export const useQuoteHighlight = () => {
             // Create highlight span
             const highlightSpan = document.createElement('span');
             highlightSpan.className = 'quote-highlight';
-            highlightSpan.style.backgroundColor = '#fff3cd';
-            highlightSpan.style.transition = 'background-color 0.3s ease-in-out';
+            highlightSpan.style.backgroundColor = '#fef3c7';
+            highlightSpan.style.padding = '2px 4px';
+            highlightSpan.style.borderRadius = '3px';
             
             try {
               // Surround the range with the highlight span
@@ -237,8 +241,9 @@ export const useQuoteHighlight = () => {
               console.error('Error highlighting sentence:', error);
               // Fallback: highlight the entire element
               const highlightElement = bestMatch.sentence.element as HTMLElement;
-              highlightElement.style.backgroundColor = '#fff3cd';
-              highlightElement.style.transition = 'background-color 0.3s ease-in-out';
+              highlightElement.style.backgroundColor = '#fef3c7';
+              highlightElement.style.padding = '2px 4px';
+              highlightElement.style.borderRadius = '3px';
               highlightElement.classList.add('quote-highlight');
               highlightElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
