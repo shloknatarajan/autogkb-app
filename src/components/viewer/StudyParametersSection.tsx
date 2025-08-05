@@ -90,28 +90,15 @@ export const StudyParametersSection: React.FC<StudyParametersProps> = ({ studyPa
           <div className="bg-accent/50 p-3 rounded-lg">
             <h4 className="font-medium text-sm text-accent-foreground mb-1">Study Design</h4>
             {Array.isArray(studyParameters.study_design.content) ? (
-              <div className="space-y-1 text-sm">
-                {studyParameters.study_design.content.map((item: string, index: number) => {
-                  // Extract label and content from items like "**Study Design:** content"
-                  const match = item.match(/\*\*([^*]+)\*\*:\s*(.*)/);
-                  if (match) {
-                    const [, label, content] = match;
-                    return (
-                      <p key={index}>
-                        <span className="font-medium">{label}:</span> {content}
-                      </p>
-                    );
-                  }
-                  // Fallback for items without the expected format
-                  return (
-                    <p key={index}>
-                      <div className="prose prose-sm max-w-none prose-p:text-muted-foreground prose-strong:text-foreground prose-p:inline">
-                        <ReactMarkdown>{item}</ReactMarkdown>
-                      </div>
-                    </p>
-                  );
-                })}
-              </div>
+              <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1">
+                {studyParameters.study_design.content.map((item: string, index: number) => (
+                  <li key={index}>
+                    <div className="inline prose prose-sm max-w-none prose-p:text-muted-foreground prose-strong:text-foreground prose-p:inline">
+                      <ReactMarkdown>{item.replace(/\*\*([^*]+):/g, '**$1**:')}</ReactMarkdown>
+                    </div>
+                  </li>
+                ))}
+              </ul>
             ) : (
               <div className="text-sm text-muted-foreground prose prose-sm max-w-none prose-p:text-muted-foreground prose-strong:text-foreground">
                 <ReactMarkdown>{studyParameters.study_design.content.replace(/\*\*([^*]+):/g, '**$1**:')}</ReactMarkdown>
