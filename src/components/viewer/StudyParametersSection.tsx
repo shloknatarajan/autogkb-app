@@ -12,7 +12,6 @@ export const StudyParametersSection: React.FC<StudyParametersProps> = ({ studyPa
 
   return (
     <div>
-      <h3 className="text-lg font-semibold mb-3 text-primary">Study Parameters</h3>
       <div className="space-y-3">
         {studyParameters.summary && (
           <div className="mb-6">

@@ -33,15 +33,35 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
             <TabsContent value="formatted" className="mt-0 h-full">
               <ScrollArea className="h-[calc(100vh-12rem)]">
                 <div className="p-6 space-y-6">
-                  {/* Study Parameters */}
-                  <StudyParametersSection 
-                    studyParameters={jsonData.study_parameters} 
-                    onQuoteClick={onQuoteClick} 
-                  />
+                  {/* Header with Study Parameters and Found Associations button */}
+                  <div className="flex justify-between items-center mb-3">
+                    <h3 className="text-lg font-semibold text-primary">Study Parameters</h3>
+                    {jsonData.annotations?.relationships && (
+                      <button
+                        onClick={() => {
+                          const foundAssociationsElement = document.getElementById('found-associations-section');
+                          if (foundAssociationsElement) {
+                            foundAssociationsElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                          }
+                        }}
+                        className="px-3 py-1 text-sm bg-primary text-primary-foreground rounded hover:bg-primary/90 transition-colors"
+                      >
+                        Found Associations
+                      </button>
+                    )}
+                  </div>
+                  
+                  {/* Study Parameters Content */}
+                  <div>
+                    <StudyParametersSection 
+                      studyParameters={jsonData.study_parameters} 
+                      onQuoteClick={onQuoteClick} 
+                    />
+                  </div>
 
                   {/* Annotations */}
                   {jsonData.annotations?.relationships && (
-                    <div>
+                    <div id="found-associations-section">
                       <h3 className="text-lg font-semibold mb-3 text-primary">Found Associations</h3>
                       
                       {/* Summary Table */}
