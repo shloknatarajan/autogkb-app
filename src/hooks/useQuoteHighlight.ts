@@ -186,7 +186,8 @@ export const useQuoteHighlight = () => {
           if (figureElements.length > 0) {
             // Highlight the best matching figure/table
             const bestElement = figureElements[0] as HTMLElement;
-            bestElement.style.backgroundColor = '#ffeb3b';
+            bestElement.style.backgroundColor = '#fff3cd';
+            bestElement.style.transition = 'background-color 0.3s ease-in-out';
             bestElement.classList.add('quote-highlight');
             bestElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
             console.log('Highlighted figure/table element');
@@ -222,7 +223,8 @@ export const useQuoteHighlight = () => {
             // Create highlight span
             const highlightSpan = document.createElement('span');
             highlightSpan.className = 'quote-highlight';
-            highlightSpan.style.backgroundColor = '#ffeb3b';
+            highlightSpan.style.backgroundColor = '#fff3cd';
+            highlightSpan.style.transition = 'background-color 0.3s ease-in-out';
             
             try {
               // Surround the range with the highlight span
@@ -235,7 +237,8 @@ export const useQuoteHighlight = () => {
               console.error('Error highlighting sentence:', error);
               // Fallback: highlight the entire element
               const highlightElement = bestMatch.sentence.element as HTMLElement;
-              highlightElement.style.backgroundColor = '#ffeb3b';
+              highlightElement.style.backgroundColor = '#fff3cd';
+              highlightElement.style.transition = 'background-color 0.3s ease-in-out';
               highlightElement.classList.add('quote-highlight');
               highlightElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
