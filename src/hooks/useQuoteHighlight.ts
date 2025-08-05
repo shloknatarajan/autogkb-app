@@ -173,9 +173,6 @@ export const useQuoteHighlight = () => {
           } else {
             // Image or other element highlight - remove styles
             const htmlEl = el as HTMLElement;
-            htmlEl.style.outline = '';
-            htmlEl.style.borderRadius = '';
-            htmlEl.style.padding = '';
             htmlEl.style.backgroundColor = '';
             htmlEl.classList.remove('quote-highlight');
           }
@@ -187,14 +184,9 @@ export const useQuoteHighlight = () => {
           const figureElements = findFigureTableElements(markdownContainer, quote);
           
           if (figureElements.length > 0) {
-            // Highlight the best matching figure/table with improved styling
+            // Highlight the best matching figure/table
             const bestElement = figureElements[0] as HTMLElement;
-            bestElement.style.outline = '2px solid #f59e0b';
-            bestElement.style.borderRadius = '6px';
-            bestElement.style.padding = '8px';
-            bestElement.style.backgroundColor = '#fef3c7';
-            bestElement.style.boxShadow = '0 2px 8px rgba(245, 158, 11, 0.2)';
-            bestElement.style.transition = 'all 0.3s ease-in-out';
+            bestElement.style.backgroundColor = '#ffeb3b';
             bestElement.classList.add('quote-highlight');
             bestElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
             console.log('Highlighted figure/table element');
@@ -227,14 +219,10 @@ export const useQuoteHighlight = () => {
             range.setStart(textNode, startOffset);
             range.setEnd(textNode, endOffset);
             
-            // Create highlight span with better visual styling
+            // Create highlight span
             const highlightSpan = document.createElement('span');
             highlightSpan.className = 'quote-highlight';
-            highlightSpan.style.backgroundColor = '#fef3c7'; // soft yellow
-            highlightSpan.style.padding = '2px 4px';
-            highlightSpan.style.borderRadius = '3px';
-            highlightSpan.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)';
-            highlightSpan.style.border = '1px solid #f59e0b';
+            highlightSpan.style.backgroundColor = '#ffeb3b';
             
             try {
               // Surround the range with the highlight span
@@ -245,14 +233,9 @@ export const useQuoteHighlight = () => {
               console.log('Highlighted best matching sentence with similarity:', bestMatch.similarity);
             } catch (error) {
               console.error('Error highlighting sentence:', error);
-              // Fallback: highlight the entire element with better styling
+              // Fallback: highlight the entire element
               const highlightElement = bestMatch.sentence.element as HTMLElement;
-              highlightElement.style.backgroundColor = '#fef3c7';
-              highlightElement.style.padding = '4px 8px';
-              highlightElement.style.borderRadius = '4px';
-              highlightElement.style.border = '1px solid #f59e0b';
-              highlightElement.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)';
-              highlightElement.style.transition = 'all 0.2s ease-in-out';
+              highlightElement.style.backgroundColor = '#ffeb3b';
               highlightElement.classList.add('quote-highlight');
               highlightElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
