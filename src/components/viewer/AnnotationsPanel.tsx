@@ -82,6 +82,19 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
                                 </td>
                                 <td className="border border-border px-3 py-2 text-sm">
                                   {relationship.p_value || 'N/A'}
+                                  {relationship.p_value_citations && relationship.p_value_citations.length > 0 && (
+                                    <span className="ml-1">
+                                      {relationship.p_value_citations.map((citation: string, citIndex: number) => (
+                                        <button
+                                          key={citIndex}
+                                          onClick={() => onQuoteClick(citation)}
+                                          className="text-primary hover:text-primary/80 text-xs font-medium ml-0.5"
+                                        >
+                                          [{citIndex + 1}]
+                                        </button>
+                                      ))}
+                                    </span>
+                                  )}
                                 </td>
                               </tr>
                             ))}
