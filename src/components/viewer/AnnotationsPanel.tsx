@@ -42,7 +42,7 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
                   {/* Annotations */}
                   {jsonData.annotations?.relationships && (
                     <div>
-                      <h3 className="text-lg font-semibold mb-3 text-primary">Gene-Drug Relationships</h3>
+                      <h3 className="text-lg font-semibold mb-3 text-primary">Found Associations</h3>
                       <div className="space-y-4">
                         {jsonData.annotations.relationships.map((relationship: any, index: number) => (
                           <div key={index} className="bg-accent/50 p-4 rounded-lg">
