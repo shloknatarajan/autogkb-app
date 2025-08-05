@@ -101,10 +101,11 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
                           </tbody>
                         </table>
                       </div>
-                      <div className="space-y-4">
+                      <div className="space-y-6">
                         {jsonData.annotations.relationships.map((relationship: any, index: number) => (
-                          <div key={index} className="bg-accent/50 p-4 rounded-lg">
-                            <div className="space-y-2">
+                          <div key={index} className="mb-6">
+                            <h4 className="font-medium text-base mb-3 text-primary border-b pb-1">Association {index + 1}</h4>
+                            <div className="space-y-3">
                               <div className="flex flex-wrap gap-2">
                                 <span className="bg-primary/10 text-primary px-2 py-1 rounded text-sm font-medium">
                                   {relationship.gene}
@@ -113,12 +114,12 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
                                   {relationship.polymorphism}
                                 </span>
                               </div>
-                              <p className="text-sm text-muted-foreground">
+                              <p className="text-sm text-foreground">
                                 <strong>Effect:</strong> {relationship.relationship_effect}
                               </p>
                               {relationship.p_value && (
                                 <div>
-                                  <p className="text-sm text-muted-foreground">
+                                  <p className="text-sm text-foreground">
                                     <strong>P-value:</strong> {relationship.p_value}
                                   </p>
                                   {relationship.p_value_citations && relationship.p_value_citations.length > 0 && (
