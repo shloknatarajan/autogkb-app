@@ -30,7 +30,7 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
           </div>
           
           <TabsContent value="formatted" className="mt-0 flex-1 min-h-0">
-            <ScrollArea className="h-full">
+            <ScrollArea className="h-[calc(100vh-8rem)]">
               <div className="p-6 space-y-6">
                 {/* Header with Study Parameters and Found Associations button */}
                 <div className="flex justify-between items-center mb-3">
@@ -189,7 +189,7 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
           </TabsContent>
           
           <TabsContent value="raw" className="mt-0 flex-1 min-h-0">
-            <ScrollArea className="h-full">
+            <ScrollArea className="h-[calc(100vh-8rem)]">
               <div className="p-6">
                 <pre className="text-xs bg-muted p-4 rounded-lg overflow-auto">
                   {JSON.stringify(jsonData, null, 2)}
