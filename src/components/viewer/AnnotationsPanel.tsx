@@ -33,7 +33,25 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
             <TabsContent value="formatted" className="mt-0 flex-1 overflow-hidden">
               <ScrollArea className="h-full">
                 <div className="p-6 space-y-6">
-                  {/* Study Parameters */}
+                  {/* Header with Study Parameters and Found Associations button */}
+                  <div className="flex justify-between items-center mb-3">
+                    <h3 className="text-lg font-semibold text-primary">Study Parameters</h3>
+                    {jsonData.annotations?.relationships && (
+                      <button
+                        onClick={() => {
+                          const foundAssociationsElement = document.getElementById('found-associations-section');
+                          if (foundAssociationsElement) {
+                            foundAssociationsElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                          }
+                        }}
+                        className="px-3 py-1 text-sm bg-primary text-primary-foreground rounded hover:bg-primary/90 transition-colors"
+                      >
+                        Found Associations
+                      </button>
+                    )}
+                  </div>
+                  
+                  {/* Study Parameters Content */}
                   <div>
                     <StudyParametersSection 
                       studyParameters={jsonData.study_parameters} 
@@ -109,7 +127,7 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
                             <h4 className="font-medium text-base mb-3 text-primary border-b pb-1">{relationship.gene} {relationship.polymorphism}</h4>
                             <div className="space-y-3">
                               <div className="flex flex-wrap gap-2">
-                                <span className="bg-primary/10 text-foreground px-2 py-1 rounded text-sm font-medium">
+                                <span className="bg-primary/10 text-primary px-2 py-1 rounded text-sm font-medium">
                                   {relationship.gene}
                                 </span>
                                 <span className="bg-secondary/50 text-secondary-foreground px-2 py-1 rounded text-sm">
