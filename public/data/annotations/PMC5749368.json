@@ -3,19 +3,19 @@
     "title": "Genetics and clinical response to warfarin and edoxaban in patients with venous thromboembolism",
     "study_parameters": {
         "summary": {
-            "content": "The study aimed to determine if genetic variants could identify patients with venous thromboembolism (VTE) at increased risk of bleeding when treated with warfarin. Utilizing a subanalysis of the Hokusai VTE trial, patients were genotyped for CYP2C9 and VKORC1 variants and categorized into warfarin sensitivity types. The results showed that sensitive and highly sensitive responders, as defined by these genotypes, had an increased risk of bleeding, spent more time overanticoagulated, and required lower warfarin doses compared to normal responders.",
+            "content": "The study aimed to determine if genetic variants could identify patients with venous thromboembolism (VTE) at increased risk of bleeding when treated with warfarin. Conducted as a subanalysis of the Hokusai VTE trial, it involved genotyping patients for CYP2C9 and VKORC1 variants to classify them into warfarin sensitivity types. The results showed that sensitive and highly sensitive responders, as defined by these genotypes, had a higher risk of bleeding, spent more time overanticoagulated, and required lower warfarin doses compared to normal responders, highlighting the potential of genetic testing to guide warfarin therapy.",
             "citations": [
                 "Compared with normal responders, sensitive and highly sensitive responders had heparin therapy discontinued earlier (p<0.001), had a decreased final weekly warfarin dose (p<0.001), spent more time overanticoagulated (p<0.001) and had an increased bleeding risk with warfarin (sensitive responders HR 1.38 [95% CI 1.11 to 1.71], p=0.0035; highly sensitive responders 1.79 [1.09 to 2.99]; p=0.0252).",
                 "The results of this analysis extend the results of the previous ENGAGE AF-TIMI 48 pharmacogenetic analysis to demonstrate that patients with VTE who have a sensitive or highly sensitive warfarin genotype spend more time overanticoagulated, require a lower warfarin dose and have higher bleeding rates with warfarin therapy.",
-                "The present pharmacogenetic subanalysis of the Hokusai-venous thromboembolism (Hokusai VTE) trial, a trial evaluating edoxaban versus warfarin in patients with VTE initially treated with heparin, demonstrates that patients with VTE who have a sensitive or highly sensitive warfarin genotype spend more time overanticoagulated (p<0.001), require a lower warfarin dose (p<0.001) and have higher bleeding rates with warfarin therapy (sensitive responders HR 1.38 [95% CI 1.11 to 1.71], p=0.0035; highly sensitive responders 1.79 [1.09 to 2.99]; p=0.0252)."
+                "In this study, CYP2C9 and VKORC1 genotypes identified patients with VTE at increased bleeding risk with warfarin."
             ]
         },
         "study_type": {
-            "content": "Clinical trial, prospective, replication",
+            "content": "Clinical trial, prospective",
             "citations": [
                 "Hokusai-venous thromboembolism (Hokusai VTE), a randomised, multinational, double-blind, non-inferiority trial, evaluated the safety and efficacy of edoxaban versus warfarin in patients with VTE initially treated with heparin.",
-                "The present analysis was designed to replicate the ENGAGE AF-TIMI 48 findings and examine whether the previous results could be extended to patients with VTE.",
-                "The present pharmacogenetic subanalysis of the Hokusai VTE trial was designed to confirm and extend the results of the previously reported ENGAGE AF-TIMI 48 pharmacogenetic analysis in a distinct population of patients with VTE requiring a similar treatment."
+                "Briefly, Hokusai VTE was a randomised, double-blind trial comparing edoxaban with warfarin in patients with acute, symptomatic VTE (DVT, PE or both).",
+                "The Hokusai VTE trial enrolled 8292 patients from 439 centres worldwide."
             ]
         },
         "participant_info": {
@@ -23,11 +23,11 @@
                 "**Age (mean \u00b1 SD):** 55.3 \u00b1 15.92 years for normal responders, 56.5 \u00b1 15.58 years for sensitive responders, 56.3 \u00b1 17.47 years for highly sensitive responders.",
                 "**Gender (male, %):** 60.4% for normal responders, 58.7% for sensitive responders, 53.4% for highly sensitive responders.",
                 "**Ethnicity (%):**",
-                "Caucasian: 82.6% normal responders, 82.1% sensitive responders, 82.4% highly sensitive responders.",
-                "Black: 6.0% normal responders, 0.4% sensitive responders, 0% highly sensitive responders.",
-                "Asian: 4.6% normal responders, 11.5% sensitive responders, 11.5% highly sensitive responders.",
-                "Native Hawaiian/Pacific Islander: 0% normal responders, <0.1% sensitive responders, 0% highly sensitive responders.",
-                "Other: 6.7% normal responders, 5.6% sensitive responders, 5.3% highly sensitive responders.",
+                "**Caucasian:** 82.6% for normal responders, 82.1% for sensitive responders, 82.4% for highly sensitive responders.",
+                "**Black:** 6.0% for normal responders, 0.4% for sensitive responders, 0% for highly sensitive responders.",
+                "**Asian:** 4.6% for normal responders, 11.5% for sensitive responders, 11.5% for highly sensitive responders.",
+                "**Native Hawaiian/Pacific Islander:** 0% for normal responders, <0.1% for sensitive responders, 0% for highly sensitive responders.",
+                "**Other:** 6.7% for normal responders, 5.6% for sensitive responders, 5.3% for highly sensitive responders.",
                 "**Weight (mean \u00b1 SD):** 85.5 \u00b1 19.42 kg for normal responders, 83.7 \u00b1 19.25 kg for sensitive responders, 83.2 \u00b1 19.91 kg for highly sensitive responders.",
                 "**BMI (mean \u00b1 SD):** 28.8 \u00b1 5.95 kg/m\u00b2 for normal responders, 28.3 \u00b1 5.45 kg/m\u00b2 for sensitive responders, 28.5 \u00b1 6.40 kg/m\u00b2 for highly sensitive responders.",
                 "**Creatinine clearance (mean \u00b1 SD):** 108.5 \u00b1 40.14 mL/min for normal responders, 106.2 \u00b1 39.69 mL/min for sensitive responders, 103.8 \u00b1 40.62 mL/min for highly sensitive responders.",
@@ -40,35 +40,35 @@
         },
         "study_design": {
             "content": [
-                "**Study Design:** Randomised, multinational, double-blind, non-inferiority trial.",
-                "**Trial Name:** Hokusai-venous thromboembolism (Hokusai VTE).",
+                "**Study design:** Randomised, multinational, double-blind, non-inferiority trial.",
+                "**Trial name:** Hokusai-venous thromboembolism (Hokusai VTE).",
                 "**Objective:** Evaluate the safety and efficacy of edoxaban versus warfarin in patients with VTE initially treated with heparin.",
-                "**Study Population:** Patients with acute, symptomatic VTE (DVT, PE, or both).",
-                "**Sample Size:** 8292 patients enrolled; 3956 patients included in the pharmacogenetic subanalysis.",
-                "**Genotyping:** Patients were genotyped for variants in CYP2C9 and VKORC1 genes.",
-                "**Warfarin Sensitivity Types:** Patients were divided into normal, sensitive, and highly sensitive responders based on genotypes.",
-                "**Randomisation:** 1:1 to receive either edoxaban 60 mg once daily or warfarin.",
-                "**Heparin Treatment:** All patients received open-label heparin for at least 5 days before randomisation.",
-                "**Warfarin Dosing:** Adjusted to maintain an INR between 2.0 and 3.0.",
-                "**Blinding:** Sham INR measures provided to patients randomised to edoxaban.",
-                "**Inclusion Criteria:** Patients \u226518 years with diagnosed acute, symptomatic DVT or PE.",
-                "**Exclusion Criteria:** Contraindications to heparin or warfarin, prior VKA use, certain comorbidities, and specific medication use.",
-                "**Bleeding Definitions:** Major bleeding, clinically relevant non-major bleeding, and total bleeding were defined and adjudicated by an independent committee."
+                "**Genetic analysis:** Subanalysis focused on genotyping for variants in CYP2C9 and VKORC1 genes.",
+                "**Warfarin sensitivity types:** Patients were divided into normal, sensitive, and highly sensitive responders based on genotypes.",
+                "**Sample size:** 3956 patients (47.7% of the total 8292 in Hokusai VTE) were included in the genetic analysis.",
+                "**Warfarin group:** 1978 patients, with 63.0% normal responders, 34.1% sensitive responders, and 2.8% highly sensitive responders.",
+                "**Initial treatment:** All patients received open-label heparin for at least 5 days before randomisation.",
+                "**Randomisation:** Patients were randomised 1:1 to receive either edoxaban or warfarin.",
+                "**Warfarin dosing:** Adjusted to maintain an INR between 2.0 and 3.0.",
+                "**Edoxaban dosing:** 60 mg once daily, halved to 30 mg for specific conditions (e.g., low creatinine clearance, low body weight, concurrent P-glycoprotein inhibitors).",
+                "**Inclusion criteria:** Patients \u226518 years with diagnosed acute, symptomatic DVT or PE.",
+                "**Exclusion criteria:** Contraindications to heparin or warfarin, prior extensive heparin or VKA use, certain medical conditions, and specific medication use.",
+                "**Bleeding definitions:** Major bleeding, clinically relevant non-major bleeding, and total bleeding were adjudicated by an independent committee."
             ],
             "citations": [
                 "Hokusai-venous thromboembolism (Hokusai VTE), a randomised, multinational, double-blind, non-inferiority trial, evaluated the safety and efficacy of edoxaban versus warfarin in patients with VTE initially treated with heparin.",
-                "A detailed description of the study design and patient population of Hokusai VTE (ClinicalTrials.gov: NCT00986154) has been previously published.[14] Briefly, Hokusai VTE was a randomised, double-blind trial comparing edoxaban with warfarin in patients with acute, symptomatic VTE (DVT, PE or both).",
-                "The Hokusai VTE trial enrolled 8292 patients from 439 centres worldwide. Eligible patients were \u226518 years of age with diagnosed acute, symptomatic DVT that involved the popliteal, femoral or iliac veins or with acute, symptomatic PE with or without DVT."
+                "In this subanalysis of Hokusai VTE, patients genotyped for variants in CYP2C9 and VKORC1 genes were divided into three warfarin sensitivity types (normal, sensitive and highly sensitive) based on their genotypes.",
+                "The analysis included 47.7% (3956/8292) of the patients in Hokusai VTE. Among 1978 patients randomised to warfarin, 63.0% (1247) were normal responders, 34.1% (675) were sensitive responders and 2.8% (56) were highly sensitive responders."
             ]
         },
         "study_results": {
             "content": [
-                "**Study Population:** 47.7% (3956/8292) of patients in Hokusai VTE were included; 1978 were randomized to warfarin.",
-                "**Warfarin Sensitivity Distribution:** 63.0% normal responders, 34.1% sensitive responders, 2.8% highly sensitive responders.",
-                "**Heparin Discontinuation:** Sensitive and highly sensitive responders had heparin therapy discontinued earlier (p<0.001).",
-                "**Warfarin Dose:** Sensitive and highly sensitive responders had a decreased final weekly warfarin dose (p<0.001).",
+                "**Study Population:** The analysis included 47.7% (3956/8292) of the patients in Hokusai VTE, with 1978 patients randomised to warfarin.",
+                "**Warfarin Sensitivity Distribution:** Among warfarin patients, 63.0% were normal responders, 34.1% were sensitive responders, and 2.8% were highly sensitive responders.",
+                "**Heparin Therapy Discontinuation:** Sensitive and highly sensitive responders had heparin therapy discontinued earlier than normal responders (p<0.001).",
+                "**Warfarin Dose:** Sensitive and highly sensitive responders had a decreased final weekly warfarin dose compared to normal responders (p<0.001).",
                 "**Overanticoagulation:** Sensitive and highly sensitive responders spent more time overanticoagulated (p<0.001).",
-                "**Bleeding Risk:** Sensitive responders had an increased bleeding risk with warfarin (HR 1.38 [95% CI 1.11 to 1.71], p=0.0035); highly sensitive responders (HR 1.79 [1.09 to 2.99], p=0.0252)."
+                "**Bleeding Risk:** Sensitive responders had an increased bleeding risk with warfarin (HR 1.38, 95% CI 1.11 to 1.71, p=0.0035); highly sensitive responders had an even higher risk (HR 1.79, 95% CI 1.09 to 2.99, p=0.0252)."
             ],
             "citations": [
                 "The analysis included 47.7% (3956/8292) of the patients in Hokusai VTE.",
@@ -77,11 +77,14 @@
             ]
         },
         "allele_frequency": {
-            "content": "The article provides information about the allele frequencies of the *CYP2C9* and *VKORC1* variants in the study population. Here is the relevant information:\n\n- The *CYP2C9* and *VKORC1* polymorphisms were in Hardy-Weinberg equilibrium for all three racial groups examined (Caucasians, African Americans, and East Asians).\n- The observed allele frequencies within each racial group were consistent with previously published findings.\n\nUnfortunately, the article does not provide specific numerical values for the allele frequencies in the studied cohorts. However, it mentions that the allele frequencies align with known data, which suggests that the frequencies are typical for these populations based on existing literature. \n\nFor more detailed allele frequency data, one would need to refer to supplementary materials or previous studies cited in the article.",
+            "content": [
+                "**CYP2C9 and VKORC1 polymorphisms:** The polymorphisms were in Hardy-Weinberg equilibrium for all three race groups examined (Caucasians, African Americans, and East Asians).",
+                "**Observed allele frequencies:** The observed allele frequencies within each race group were consistent with previously published findings."
+            ],
             "citations": [
                 "The *CYP2C9* and *VKORC1* polymorphisms were in Hardy-Weinberg equilibrium for all three race groups examined (ie, Caucasians, African Americans and East Asians), and the observed allele frequencies within each race group were consistent with previously published findings (online [supplementary table 1](#SP1)supplementary table 1).[11](#R11)^11^11",
                 "This variation in warfarin sensitivity by race is expected based on the known differences in allele frequencies[11](#R11)^11^11 and is consistent with the ENGAGE AF-TIMI 48 pharmacogenetic subanalysis.[13](#R13)^13^13",
-                "However, a larger proportion of sensitive and highly sensitive responders were of Asian ancestry relative to normal responders ([table 1](#T1)table 1)."
+                "All of the 4013 samples collected were genotyped; all genotypes were concordant across samples."
             ]
         },
         "additional_resource_links": [
@@ -98,12 +101,12 @@
             {
                 "gene": "CYP2C9",
                 "polymorphism": "*2 (rs1799853)",
-                "relationship_effect": "Carriers of CYP2C9*2 have increased warfarin sensitivity, require lower warfarin doses, spend more time overanticoagulated, and have increased bleeding risk with warfarin compared to normal responders.",
-                "p_value": "p<0.001 (dose and overanticoagulation); p=0.0035 (bleeding risk for sensitive responders); p=0.0252 (bleeding risk for highly sensitive responders)",
+                "relationship_effect": "Carriers of CYP2C9*2 have increased warfarin sensitivity, require a lower final weekly warfarin dose, spend more time overanticoagulated, and have an increased risk of bleeding with warfarin compared to normal responders.",
+                "p_value": "Final weekly warfarin dose: p<0.001; Time overanticoagulated: p<0.001; Bleeding risk (sensitive responders HR 1.38 [95% CI 1.11 to 1.71], p=0.0035; highly sensitive responders HR 1.79 [1.09 to 2.99], p=0.0252)",
                 "citations": [
                     "Compared with normal responders, sensitive and highly sensitive responders had heparin therapy discontinued earlier (p<0.001), had a decreased final weekly warfarin dose (p<0.001), spent more time overanticoagulated (p<0.001) and had an increased bleeding risk with warfarin (sensitive responders HR 1.38 [95% CI 1.11 to 1.71], p=0.0035; highly sensitive responders 1.79 [1.09 to 2.99]; p=0.0252).",
                     "The present pharmacogenetic subanalysis of the Hokusai-venous thromboembolism (Hokusai VTE) trial, a trial evaluating edoxaban versus warfarin in patients with VTE initially treated with heparin, demonstrates that patients with VTE who have a sensitive or highly sensitive warfarin genotype spend more time overanticoagulated (p<0.001), require a lower warfarin dose (p<0.001) and have higher bleeding rates with warfarin therapy (sensitive responders HR 1.38 [95% CI 1.11 to 1.71], p=0.0035; highly sensitive responders 1.79 [1.09 to 2.99]; p=0.0252).",
-                    "The results of this analysis extend the results of the previous ENGAGE AF-TIMI 48 pharmacogenetic analysis to demonstrate that patients with VTE who have a sensitive or highly sensitive warfarin genotype spend more time overanticoagulated, require a lower warfarin dose and have higher bleeding rates with warfarin therapy."
+                    "In warfarin-treated patients, but not edoxaban-treated patients, as genetically defined warfarin sensitivity increased, heparin therapy was discontinued sooner (global p<0.001; p<0.0001 vs normal responders for both sensitive and highly sensitive responders) and the final mean weekly warfarin doses decreased (global p<0.001; p<0.0001 vs normal responders for both sensitive and highly sensitive responders) ([figure 2A and B](#F2)figure 2A and B)."
                 ],
                 "p_value_citations": [
                     "Compared with normal responders, sensitive and highly sensitive responders had heparin therapy discontinued earlier (p<0.001), had a decreased final weekly warfarin dose (p<0.001), spent more time overanticoagulated (p<0.001) and had an increased bleeding risk with warfarin (sensitive responders HR 1.38 [95% CI 1.11 to 1.71], p=0.0035; highly sensitive responders 1.79 [1.09 to 2.99]; p=0.0252)."
@@ -112,12 +115,12 @@
             {
                 "gene": "CYP2C9",
                 "polymorphism": "*3 (rs1057910)",
-                "relationship_effect": "Carriers of CYP2C9*3 have increased warfarin sensitivity, require lower warfarin doses, spend more time overanticoagulated, and have increased bleeding risk with warfarin compared to normal responders.",
-                "p_value": "p<0.001 (dose and overanticoagulation); p=0.0035 (bleeding risk for sensitive responders); p=0.0252 (bleeding risk for highly sensitive responders)",
+                "relationship_effect": "Carriers of CYP2C9*3 have increased warfarin sensitivity, require a lower final weekly warfarin dose, spend more time overanticoagulated, and have an increased risk of bleeding with warfarin compared to normal responders.",
+                "p_value": "Final weekly warfarin dose: p<0.001; Time overanticoagulated: p<0.001; Bleeding risk (sensitive responders HR 1.38 [95% CI 1.11 to 1.71], p=0.0035; highly sensitive responders HR 1.79 [1.09 to 2.99], p=0.0252)",
                 "citations": [
                     "Compared with normal responders, sensitive and highly sensitive responders had heparin therapy discontinued earlier (p<0.001), had a decreased final weekly warfarin dose (p<0.001), spent more time overanticoagulated (p<0.001) and had an increased bleeding risk with warfarin (sensitive responders HR 1.38 [95% CI 1.11 to 1.71], p=0.0035; highly sensitive responders 1.79 [1.09 to 2.99]; p=0.0252).",
-                    "The present pharmacogenetic subanalysis of the Hokusai-venous thromboembolism (Hokusai VTE) trial, a trial evaluating edoxaban versus warfarin in patients with VTE initially treated with heparin, demonstrates that patients with VTE who have a sensitive or highly sensitive warfarin genotype spend more time overanticoagulated (p<0.001), require a lower warfarin dose (p<0.001) and have higher bleeding rates with warfarin therapy (sensitive responders HR 1.38 [95% CI 1.11 to 1.71], p=0.0035; highly sensitive responders 1.79 [1.09 to 2.99]; p=0.0252).",
-                    "The results of this analysis extend the results of the previous ENGAGE AF-TIMI 48 pharmacogenetic analysis to demonstrate that patients with VTE who have a sensitive or highly sensitive warfarin genotype spend more time overanticoagulated, require a lower warfarin dose and have higher bleeding rates with warfarin therapy."
+                    "In warfarin-treated patients, but not edoxaban-treated patients, as genetically defined warfarin sensitivity increased, heparin therapy was discontinued sooner (global p<0.001; p<0.0001 vs normal responders for both sensitive and highly sensitive responders) and the final mean weekly warfarin doses decreased (global p<0.001; p<0.0001 vs normal responders for both sensitive and highly sensitive responders).",
+                    "The present pharmacogenetic subanalysis of the Hokusai-venous thromboembolism (Hokusai VTE) trial, a trial evaluating edoxaban versus warfarin in patients with VTE initially treated with heparin, demonstrates that patients with VTE who have a sensitive or highly sensitive warfarin genotype spend more time overanticoagulated (p<0.001), require a lower warfarin dose (p<0.001) and have higher bleeding rates with warfarin therapy (sensitive responders HR 1.38 [95% CI 1.11 to 1.71], p=0.0035; highly sensitive responders 1.79 [1.09 to 2.99]; p=0.0252)."
                 ],
                 "p_value_citations": [
                     "Compared with normal responders, sensitive and highly sensitive responders had heparin therapy discontinued earlier (p<0.001), had a decreased final weekly warfarin dose (p<0.001), spent more time overanticoagulated (p<0.001) and had an increased bleeding risk with warfarin (sensitive responders HR 1.38 [95% CI 1.11 to 1.71], p=0.0035; highly sensitive responders 1.79 [1.09 to 2.99]; p=0.0252)."
@@ -126,8 +129,8 @@
             {
                 "gene": "VKORC1",
                 "polymorphism": "-1639 G>A (rs9923231)",
-                "relationship_effect": "Carriers of VKORC1 -1639 A allele have increased warfarin sensitivity, require lower warfarin doses, spend more time overanticoagulated, and have increased bleeding risk with warfarin compared to normal responders.",
-                "p_value": "p<0.001 (dose and overanticoagulation); p=0.0035 (bleeding risk for sensitive responders); p=0.0252 (bleeding risk for highly sensitive responders)",
+                "relationship_effect": "Carriers of VKORC1 -1639 A allele have increased warfarin sensitivity, require a lower final weekly warfarin dose, spend more time overanticoagulated, and have an increased risk of bleeding with warfarin compared to normal responders.",
+                "p_value": "Final weekly warfarin dose: p<0.001; Time overanticoagulated: p<0.001; Bleeding risk (sensitive responders HR 1.38 [95% CI 1.11 to 1.71], p=0.0035; highly sensitive responders HR 1.79 [1.09 to 2.99], p=0.0252)",
                 "citations": [
                     "Compared with normal responders, sensitive and highly sensitive responders had heparin therapy discontinued earlier (p<0.001), had a decreased final weekly warfarin dose (p<0.001), spent more time overanticoagulated (p<0.001) and had an increased bleeding risk with warfarin (sensitive responders HR 1.38 [95% CI 1.11 to 1.71], p=0.0035; highly sensitive responders 1.79 [1.09 to 2.99]; p=0.0252).",
                     "The present pharmacogenetic subanalysis of the Hokusai-venous thromboembolism (Hokusai VTE) trial, a trial evaluating edoxaban versus warfarin in patients with VTE initially treated with heparin, demonstrates that patients with VTE who have a sensitive or highly sensitive warfarin genotype spend more time overanticoagulated (p<0.001), require a lower warfarin dose (p<0.001) and have higher bleeding rates with warfarin therapy (sensitive responders HR 1.38 [95% CI 1.11 to 1.71], p=0.0035; highly sensitive responders 1.79 [1.09 to 2.99]; p=0.0252).",

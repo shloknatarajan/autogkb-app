@@ -3,11 +3,11 @@
     "title": "Association of HLA-A and HLA-B Alleles with Lamotrigine-Induced Cutaneous Adverse Drug Reactions in the Thai Population",
     "study_parameters": {
         "summary": {
-            "content": "The study aimed to investigate the association between specific HLA alleles and lamotrigine-induced cutaneous adverse drug reactions (CADR) in the Thai population, motivated by the need to identify genetic markers that could predict such adverse reactions. A case-control design was employed, involving 15 patients with lamotrigine-induced CADR and 50 lamotrigine-tolerant controls, with HLA-A and HLA-B genotyping performed using PCR-SSO techniques. The results revealed significant associations of HLA-A*02:07 and HLA-B*15:02 with lamotrigine-induced CADR, and HLA-A*33:03, HLA-B*15:02, and HLA-B*44:03 with lamotrigine-induced maculopapular exanthema (MPE), suggesting these alleles could serve as potential screening markers in the Thai population.",
+            "content": "The study aimed to investigate the association between specific HLA alleles and lamotrigine-induced cutaneous adverse drug reactions (CADR) in the Thai population, given the known genetic predispositions to such reactions with other antiepileptic drugs. A case-control design was employed, involving 15 patients with lamotrigine-induced CADR and 50 lamotrigine-tolerant controls, with HLA-A and HLA-B genotyping performed. The results revealed significant associations of HLA-A*02:07 and HLA-B*15:02 alleles with lamotrigine-induced CADR, suggesting these alleles could serve as potential screening markers to prevent adverse reactions in Thai patients.",
             "citations": [
                 "The proportion of HLA-A\u221702:07 and HLA-B\u221715:02 allele carriers were significantly higher in the LTG-induced CADR group than in the tolerant controls [odds ratio (OR): 7.83; 95% confidence interval (CI): 1.60\u201338.25; P = 0.013, and OR: 4.89; 95% CI: 1.28\u201318.67; P = 0.014].",
-                "In addition, subjects with HLA-A\u221733:03, HLA-B\u221715:02, and HLA-B\u221744:03 were significantly higher in the LTG-induced MPE group than in the tolerant controls (OR: 8.27; 95% CI: 1.83\u201337.41; P = 0.005, OR: 7.33; 95% CI: 1.63\u201333.02; P = 0.005; and OR: 10.29; 95% CI: 1.45\u201372.81; P = 0.029).",
-                "These results suggest that these alleles could be useful screening markers for preventing CADR before LTG treatment in Thai patients, but further replication studies with larger sample sizes are needed."
+                "Conclusion: HLA-A\u221702:07 and HLA-B\u221715:02 were associated with LTG-induced CADR in Thai patients.",
+                "We found a statistically significant association of the HLA-A\u221702:07 and HLA-B\u221715:02 alleles with LTG-induced CADR in the Thai population."
             ]
         },
         "study_type": {
@@ -15,68 +15,92 @@
             "citations": [
                 "A case\u2013control study was performed at the Laboratory for Pharmacogenomics, Somdech Phra Debaratana Medical Center (SDMC), Ramathibodi Hospital, Thailand.",
                 "Fifteen LTG-induced CADR (4 cases of SJS, 1 case of DRESS, and 10 cases of MPE) were recruited from the Faculty of Medicine, Ramathibodi Hospital, Mahidol University, Manarom Hospital, and Srinagarind Hospital between 2011 and 2015.",
-                "Patients who had been taking LTG for more than 6 months without evidence of cutaneous adverse effects were recruited as LTG-tolerant controls."
+                "The dermatological diagnosis was made by a dermatologist or allergist who reviewed photographs, pathological slides, clinical morphology, and medical records."
             ]
         },
         "participant_info": {
             "content": [
-                "**Age**: The mean age of LTG-induced CADR patients was 35.2 \u00b1 22.1 years, while the LTG-tolerant group had a mean age of 38.2 \u00b1 19.0 years.",
-                "**Gender**: In the LTG-induced CADR group, 73.3% were female and 26.7% were male. In the LTG-tolerant group, 76.0% were female and 24.0% were male.",
+                "**Age**: The mean age of LTG-induced CADR patients was 35.2 \u00b1 22.1 years.",
+                "**Gender**: 73.3% of LTG-induced CADR patients were female.",
                 "**Ethnicity**: All participants were from the Thai population.",
-                "**Pre-existing Conditions**: In the LTG-induced CADR group, 40.0% had epilepsy, 33.3% had bipolar disorder, 20.0% had depressive disorder, and 6.7% had major depressive disorder. In the LTG-tolerant group, 40.0% had epilepsy, 16.0% had bipolar disorder, 12.0% had depressive disorder, 6.0% had major depressive disorder, 8.0% used LTG as a mood stabilizer, and 18.0% had other conditions.",
-                "**Concomitant Use of Valproic Acid**: 6.7% of the LTG-induced CADR group and 8.0% of the LTG-tolerant group used valproic acid."
+                "**Study Groups**:",
+                "**LTG-induced CADR group**: 15 patients (10 with MPE, 4 with SJS, 1 with DRESS).",
+                "**LTG-tolerant group**: 50 patients who had been taking LTG for more than 6 months without adverse effects.",
+                "**Pre-existing Conditions**:",
+                "**Epilepsy**: 40% in both LTG-induced CADR and LTG-tolerant groups.",
+                "**Bipolar Disorder**: 33.3% in LTG-induced CADR group, 16% in LTG-tolerant group.",
+                "**Depressive Disorder**: 20% in LTG-induced CADR group, 12% in LTG-tolerant group.",
+                "**Major Depressive Disorder**: 6.7% in LTG-induced CADR group, 6% in LTG-tolerant group.",
+                "**Mood Stabilizer**: 0% in LTG-induced CADR group, 8% in LTG-tolerant group.",
+                "**Others**: 0% in LTG-induced CADR group, 18% in LTG-tolerant group.",
+                "**Concomitant Use of Valproic Acid**: 6.7% in LTG-induced CADR group, 8% in LTG-tolerant group."
             ],
             "citations": [
+                "DNA samples from 15 LTG-induced CADR patients (10 cases with MPE, 4 cases with SJS, and 1 case with DRESS) and 50 LTG-tolerant controls and the general population group were genotyped.",
                 "The mean age of the LTG-induced CADR patients was 35.2 \u00b1 22.1 and 73.3% were female.",
-                "There were no significant differences in gender, age, dosage of LTG, and concomitant use of valproic acid between the LTG-induced CADR patients and the LTG-tolerant patients (Table 1).",
-                "Table 1. Clinical characteristics of patients in the lamotrigine (LTG)-induced cutaneous adverse drug reactions group and the LTG-tolerant group."
+                "Clinical characteristics of patients in the lamotrigine (LTG)-induced cutaneous adverse drug reactions group and the LTG-tolerant group."
             ]
         },
         "study_design": {
             "content": [
                 "**Study Design:** Case-control study.",
-                "**Study Population:** Thai patients.",
-                "**Sample Size:** 15 patients with lamotrigine-induced cutaneous adverse drug reactions (CADR) and 50 lamotrigine-tolerant controls.",
-                "**Recruitment Period:** Between 2011 and 2015.",
-                "**Recruitment Locations:** Faculty of Medicine, Ramathibodi Hospital, Mahidol University, Manarom Hospital, and Srinagarind Hospital.",
-                "**Inclusion Criteria for Cases:** Patients who developed CADR (SJS, MPE, or DRESS) within 2 months after initiating lamotrigine treatment.",
-                "**Inclusion Criteria for Controls:** Patients who had been taking lamotrigine for more than 6 months without evidence of cutaneous adverse effects.",
-                "**HLA Genotyping Method:** Polymerase chain reaction-sequence-specific oligonucleotides (PCR-SSOs).",
-                "**Ethical Approval:** Approved by the Ramathibodi Hospital Ethical Review Board."
+                "**Study Population:** Thai patients with lamotrigine-induced cutaneous adverse drug reactions (CADR) and lamotrigine-tolerant controls.",
+                "**Sample Size:** 15 patients with LTG-induced CADR (10 with maculopapular exanthema, 4 with Stevens\u2013Johnson syndrome, 1 with drug reaction with eosinophilia and systemic symptoms) and 50 LTG-tolerant controls.",
+                "**Recruitment Sites:** Faculty of Medicine, Ramathibodi Hospital, Mahidol University, Manarom Hospital, and Srinagarind Hospital in Thailand.",
+                "**Time Frame:** Patients were recruited between 2011 and 2015.",
+                "**Genotyping Method:** HLA-A and HLA-B genotyping was performed using polymerase chain reaction-sequence-specific oligonucleotides probes.",
+                "**Ethical Approval:** Approved by the Ramathibodi Hospital Ethical Review Board, with informed, written consent obtained from all participants."
             ],
             "citations": [
                 "A case\u2013control study was performed at the Laboratory for Pharmacogenomics, Somdech Phra Debaratana Medical Center (SDMC), Ramathibodi Hospital, Thailand.",
                 "Fifteen LTG-induced CADR (4 cases of SJS, 1 case of DRESS, and 10 cases of MPE) were recruited from the Faculty of Medicine, Ramathibodi Hospital, Mahidol University, Manarom Hospital, and Srinagarind Hospital between 2011 and 2015.",
-                "The study was approved by the Ramathibodi Hospital Ethical Review Board, and informed, written consent was obtained from all participants."
+                "HLA-A and HLA-B alleles were genotyped using polymerase chain reaction-sequence-specific oligonucleotides (PCR-SSOs) according to the manufacturer\u2019s protocol."
             ]
         },
         "study_results": {
             "content": [
-                "**HLA-A\u221702:07 and HLA-B\u221715:02 association with LTG-induced CADR:** Odds ratio (OR): 7.83; 95% confidence interval (CI): 1.60\u201338.25; P = 0.013 for HLA-A\u221702:07, and OR: 4.89; 95% CI: 1.28\u201318.67; P = 0.014 for HLA-B\u221715:02.",
-                "**HLA-A\u221733:03, HLA-B\u221715:02, and HLA-B\u221744:03 association with LTG-induced MPE:** OR: 8.27; 95% CI: 1.83\u201337.41; P = 0.005 for HLA-A\u221733:03, OR: 7.33; 95% CI: 1.63\u201333.02; P = 0.005 for HLA-B\u221715:02, and OR: 10.29; 95% CI: 1.45\u201372.81; P = 0.029 for HLA-B\u221744:03.",
-                "**HLA-B\u221735:08 and HLA-B\u221739:01 association with LTG-induced CADR:** OR: 70.36; 95% CI: 4.19\u20131182.21; P = 0.030 for HLA-B\u221735:08, and OR: 10.68; 95% CI: 2.20\u201351.83; P = 0.022 for HLA-B\u221739:01.",
-                "**HLA-B\u221715:02 association with LTG-induced MPE:** OR: 7.33; 95% CI: 1.63\u201333.02; P = 0.005 compared with tolerant controls, and OR: 5.44; 95% CI: 1.56\u201319.03; P = 0.003 compared with the general population.",
-                "**HLA-B\u221744:03 association with LTG-induced MPE:** OR: 10.29; 95% CI: 1.45\u201372.81; P = 0.029 compared with tolerant controls, and OR: 4.73; 95% CI: 1.20\u201318.62; P = 0.046 compared with the general population.",
-                "**HLA-A\u221702:07 association with LTG-induced CADR:** OR: 7.83; 95% CI: 1.60\u201338.25; P = 0.013 compared with tolerant controls, and OR: 3.27; 95% CI: 1.07\u20139.96; P = 0.029 compared with the general population.",
-                "**HLA-A\u221733:03 association with LTG-induced CADR:** OR: 3.16; 95% CI: 1.11\u20138.98; P = 0.023 compared with the general population."
+                "**HLA-A\u221702:07 and HLA-B\u221715:02 association with LTG-induced CADR:** The proportion of these allele carriers was significantly higher in the LTG-induced CADR group compared to tolerant controls, with OR: 7.83, 95% CI: 1.60\u201338.25, P = 0.013, and OR: 4.89, 95% CI: 1.28\u201318.67, P = 0.014, respectively.",
+                "**HLA-A\u221733:03, HLA-B\u221715:02, and HLA-B\u221744:03 association with LTG-induced MPE:** These alleles were significantly more frequent in the LTG-induced MPE group than in tolerant controls, with OR: 8.27, 95% CI: 1.83\u201337.41, P = 0.005; OR: 7.33, 95% CI: 1.63\u201333.02, P = 0.005; and OR: 10.29, 95% CI: 1.45\u201372.81, P = 0.029, respectively.",
+                "**HLA-B\u221735:08 and HLA-B\u221739:01 association with LTG-induced CADR:** These alleles showed significant associations when compared with the general population, with OR: 70.36, 95% CI: 4.19\u20131182.21, P = 0.030, and OR: 10.68, 95% CI: 2.20\u201351.83, P = 0.022, respectively.",
+                "**HLA-A\u221702:07 and HLA-A\u221733:03 association with LTG-induced CADR:** These alleles were significantly more frequent in LTG-induced CADR patients than in the general population, with OR: 3.27, 95% CI: 1.07\u20139.96, P = 0.029, and OR: 3.16, 95% CI: 1.11\u20138.98, P = 0.023, respectively.",
+                "**No significant association with LTG-induced SCAR:** There were no significant differences between HLA alleles and LTG-induced SCAR group."
             ],
             "citations": [
                 "The proportion of HLA-A\u221702:07 and HLA-B\u221715:02 allele carriers were significantly higher in the LTG-induced CADR group than in the tolerant controls [odds ratio (OR): 7.83; 95% confidence interval (CI): 1.60\u201338.25; P = 0.013, and OR: 4.89; 95% CI: 1.28\u201318.67; P = 0.014].",
                 "In addition, subjects with HLA-A\u221733:03, HLA-B\u221715:02, and HLA-B\u221744:03 were significantly higher in the LTG-induced MPE group than in the tolerant controls (OR: 8.27; 95% CI: 1.83\u201337.41; P = 0.005, OR: 7.33; 95% CI: 1.63\u201333.02; P = 0.005; and OR: 10.29; 95% CI: 1.45\u201372.81; P = 0.029).",
-                "## Table 3. List of HLA alleles that showed a significant association with LTG-induced cutaneous adverse drug reactions."
+                "In contrast to the LTG-induced MPE group, there were no significant differences between HLA alleles and LTG-induced SCAR group."
             ]
         },
         "allele_frequency": {
-            "content": "The study provides information on the frequencies of certain HLA alleles in the lamotrigine (LTG)-induced cutaneous adverse drug reactions (CADR) group, the LTG-tolerant group, and the general population. Below is a summary of the allele frequencies and their associations with LTG-induced CADR:\n\n| HLA Allele | LTG-induced CADR +/total | LTG-tolerant +/total | General population +/total |\n|------------|--------------------------|----------------------|----------------------------|\n| HLA-A\\*02:07 | 5/15 (33.3%) | 3/50 (6.0%) | 49/369 (13.3%) |\n| HLA-A\\*33:03 | 7/15 (46.7%) | 11/50 (22.0%) | 80/369 (21.7%) |\n| HLA-B\\*15:02 | 6/15 (40.0%) | 6/50 (12.0%) | 153/986 (15.5%) |\n| HLA-B\\*35:08 | 1/15 (6.7%) | 0/50 (0.0%) | 1/986 (0.1%) |\n| HLA-B\\*39:01 | 2/15 (13.3%) | 1/50 (2.0%) | 14/986 (1.4%) |\n| HLA-B\\*44:03 | 3/10 (30.0%) | 2/50 (4.0%) | 82/986 (8.3%) |\n\n### Key Findings:\n- **HLA-A\\*02:07** and **HLA-B\\*15:02** alleles were significantly more frequent in the LTG-induced CADR group compared to both the LTG-tolerant group and the general population.\n- **HLA-A\\*33:03** was significantly more frequent in the LTG-induced CADR group compared to the general population.\n- **HLA-B\\*35:08** and **HLA-B\\*39:01** were rare but showed significant associations with LTG-induced CADR when compared to the general population.\n- **HLA-B\\*44:03** showed a significant association with LTG-induced MPE compared to both control groups.\n\nThese findings suggest that certain HLA alleles are associated with an increased risk of LTG-induced CADR in the Thai population, and these alleles could potentially serve as screening markers to prevent adverse reactions before initiating LTG treatment.",
+            "content": [
+                "**HLA-A\u221702:07 frequency in LTG-induced CADR group**: 33.3%",
+                "**HLA-A\u221702:07 frequency in LTG-tolerant group**: 6.0%",
+                "**HLA-A\u221702:07 frequency in general population**: 13.3%",
+                "**HLA-A\u221733:03 frequency in LTG-induced CADR group**: 46.7%",
+                "**HLA-A\u221733:03 frequency in LTG-tolerant group**: 22.0%",
+                "**HLA-A\u221733:03 frequency in general population**: 21.7%",
+                "**HLA-B\u221715:02 frequency in LTG-induced CADR group**: 40.0%",
+                "**HLA-B\u221715:02 frequency in LTG-tolerant group**: 12.0%",
+                "**HLA-B\u221715:02 frequency in general population**: 15.5%",
+                "**HLA-B\u221735:08 frequency in LTG-induced CADR group**: 6.7%",
+                "**HLA-B\u221735:08 frequency in LTG-tolerant group**: 0.0%",
+                "**HLA-B\u221735:08 frequency in general population**: 0.1%",
+                "**HLA-B\u221739:01 frequency in LTG-induced CADR group**: 13.3%",
+                "**HLA-B\u221739:01 frequency in LTG-tolerant group**: 2.0%",
+                "**HLA-B\u221739:01 frequency in general population**: 1.4%",
+                "**HLA-B\u221744:03 frequency in LTG-induced CADR group**: 20.0%",
+                "**HLA-B\u221744:03 frequency in LTG-tolerant group**: 4.0%",
+                "**HLA-B\u221744:03 frequency in general population**: 8.3%"
+            ],
             "citations": [
-                "The proportion of HLA-A\u221702:07 and HLA-B\u221715:02 allele carriers were significantly higher in the LTG-induced CADR group than in the tolerant controls [odds ratio (OR): 7.83; 95% confidence interval (CI): 1.60\u201338.25; P = 0.013, and OR: 4.89; 95% CI: 1.28\u201318.67; P = 0.014].",
-                "In addition, subjects with HLA-A\u221733:03, HLA-B\u221715:02, and HLA-B\u221744:03 were significantly higher in the LTG-induced MPE group than in the tolerant controls (OR: 8.27; 95% CI: 1.83\u201337.41; P = 0.005, OR: 7.33; 95% CI: 1.63\u201333.02; P = 0.005; and OR: 10.29; 95% CI: 1.45\u201372.81; P = 0.029)."
+                "Compared with the *HLA-B*HLA-B allele, *HLA-A\u221702:07*HLA-A^\u2217^\u221702:07 was present in 33.3% of LTG-induced CADR patients and showed significantly higher frequencies than both the treatment control and general population groups with OR = 7.83, 95% CI = 1.60\u201338.25, *P*P-value = 0.013 and OR = 3.27, 95% CI = 1.07\u20139.96, *P*P-value = 0.029, respectively; in addition, *HLA-A\u221733:03*HLA-A^\u2217^\u221733:03 also had a significantly higher frequency than in the general population (OR = 3.16, 95% CI = 1.11\u20138.98, *P*P-value = 0.023).",
+                "The *HLA-B\u221715:02*HLA-B^\u2217^\u221715:02 allele in 40.0% of patients who developed CADR and in 12.0% of the tolerant patients."
             ]
         },
         "additional_resource_links": [
-            "The study provides the following additional resources or links related to the design and execution of the study:",
-            "- [PDF of the article](https://pmc.ncbi.nlm.nih.gov/articles/PMC5712579/pdf/fphar-08-00879.pdf)",
-            "- [Supplementary Material for the article](https://www.frontiersin.org/articles/10.3389/fphar.2017.00879/full#supplementary-material)"
+            "The study provides the following additional resources or links related to its design and execution:",
+            "- [Full Article Supplementary Material](https://www.frontiersin.org/articles/10.3389/fphar.2017.00879/full#supplementary-material)",
+            "- [PDF of the Article](https://pmc.ncbi.nlm.nih.gov/articles/PMC5712579/pdf/fphar-08-00879.pdf)"
         ]
     },
     "annotations": {
@@ -84,100 +108,124 @@
             {
                 "gene": "HLA-A",
                 "polymorphism": "HLA-A*02:07",
-                "relationship_effect": "HLA-A*02:07 is associated with increased risk of lamotrigine-induced cutaneous adverse drug reactions (CADR) in Thai patients.",
-                "p_value": "0.013",
+                "relationship_effect": "HLA-A*02:07 allele is associated with increased risk of lamotrigine-induced cutaneous adverse drug reactions (CADR) in Thai patients.",
+                "p_value": "OR: 7.83; 95% CI: 1.60\u201338.25; P = 0.013 (vs tolerant controls); OR: 3.27; 95% CI: 1.07\u20139.96; P = 0.029 (vs general population)",
                 "citations": [
-                    "The proportion of HLA-A\u221702:07 and HLA-B\u221715:02 allele carriers were significantly higher in the LTG-induced CADR group than in the tolerant controls [odds ratio (OR): 7.83; 95% confidence interval (CI): 1.60\u201338.25; P = 0.013, and OR: 4.89; 95% CI: 1.28\u201318.67; P = 0.014].",
                     "Compared with the HLA-B allele, HLA-A\u221702:07 was present in 33.3% of LTG-induced CADR patients and showed significantly higher frequencies than both the treatment control and general population groups with OR = 7.83, 95% CI = 1.60\u201338.25, P-value = 0.013 and OR = 3.27, 95% CI = 1.07\u20139.96, P-value = 0.029, respectively; in addition, HLA-A\u221733:03 also had a significantly higher frequency than in the general population (OR = 3.16, 95% CI = 1.11\u20138.98, P-value = 0.023).",
+                    "In the present study, we found the significant association between LTG-induced CADR and HLA-A\u221702:07 and HLA-B\u221715:02 when compared with both tolerant and general population controls.",
                     "## Table 3. List of HLA alleles that showed a significant association with LTG-induced cutaneous adverse drug reactions."
                 ],
                 "p_value_citations": [
-                    "The proportion of HLA-A\u221702:07 and HLA-B\u221715:02 allele carriers were significantly higher in the LTG-induced CADR group than in the tolerant controls [odds ratio (OR): 7.83; 95% confidence interval (CI): 1.60\u201338.25; P = 0.013, ...]."
+                    "Table 3. List of HLA alleles that showed a significant association with LTG-induced cutaneous adverse drug reactions."
                 ]
             },
             {
                 "gene": "HLA-B",
                 "polymorphism": "HLA-B*15:02",
-                "relationship_effect": "HLA-B*15:02 is associated with increased risk of lamotrigine-induced cutaneous adverse drug reactions (CADR) in Thai patients.",
-                "p_value": "0.014",
+                "relationship_effect": "HLA-B*15:02 allele is associated with increased risk of lamotrigine-induced cutaneous adverse drug reactions (CADR) in Thai patients.",
+                "p_value": "OR: 4.89; 95% CI: 1.28\u201318.66; P = 0.014 (vs tolerant controls); OR: 3.63; 95% CI: 1.27\u201310.34; P = 0.027 (vs general population)",
                 "citations": [
                     "The proportion of patients carrying the HLA-B\u221715:02 allele was significantly higher in LTG-induced CADR cases than in both the treatment controls and general population groups with odds ratios (OR) of 4.89, 95% CI = 1.28\u201318.66, P-value = 0.014 and OR = 3.63, 95% CI = 1.27\u201310.34, P-value = 0.027, respectively.",
-                    "In the present study, we found the significant association between LTG-induced CADR and HLA-A\u221702:07 and HLA-B\u221715:02 when compared with both tolerant and general population controls.",
-                    "We found a statistically significant association of the HLA-A\u221702:07 and HLA-B\u221715:02 alleles with LTG-induced CADR in the Thai population."
+                    "Conclusion: HLA-A\u221702:07 and HLA-B\u221715:02 were associated with LTG-induced CADR in Thai patients.",
+                    "## Table 3. List of HLA alleles that showed a significant association with LTG-induced cutaneous adverse drug reactions."
                 ],
                 "p_value_citations": [
-                    "The proportion of HLA-A\u221702:07 and HLA-B\u221715:02 allele carriers were significantly higher in the LTG-induced CADR group than in the tolerant controls [odds ratio (OR): 7.83; 95% confidence interval (CI): 1.60\u201338.25; P = 0.013, and OR: 4.89; 95% CI: 1.28\u201318.67; P = 0.014]."
+                    "Table 3. List of HLA alleles that showed a significant association with LTG-induced cutaneous adverse drug reactions."
                 ]
             },
             {
                 "gene": "HLA-A",
                 "polymorphism": "HLA-A*33:03",
-                "relationship_effect": "HLA-A*33:03 is associated with increased risk of lamotrigine-induced maculopapular exanthema (MPE) in Thai patients.",
-                "p_value": "0.005",
+                "relationship_effect": "HLA-A*33:03 allele is associated with increased risk of lamotrigine-induced cutaneous adverse drug reactions (CADR) in Thai patients (significant vs general population, trend vs tolerant controls).",
+                "p_value": "OR: 3.10; 95% CI: 0.92\u201310.46; P = 0.061 (vs tolerant controls); OR: 3.16; 95% CI: 1.11\u20138.98; P = 0.023 (vs general population)",
                 "citations": [
-                    "In subgroup analysis of LTG-induced CADR, a significant association between LTG-induced MPE and HLA-A\u221733:03 was found when compared with the tolerant controls and general population (OR = 8.27, 95% CI = 1.83\u201337.41, P-value = 0.005 and OR = 8.43, 95% CI = 2.13\u201333.34, P-value = 0.002, respectively).",
-                    "Moreover, we found a significant association of LTG-induced MPE with HLA-A\u221733:03 compared with the tolerant controls group (OR = 8.27, 95% CI = 1.83\u201337.41, P-value = 0.005) and general population group (OR = 8.43, 95% CI = 2.13\u201333.34, P-value = 0.002) as shown in Table 4.",
-                    "We demonstrated that HLA-A\u221733:03 may be a risk factors for LTG-induced MPE, which again is different from the findings of a previous study in the Han Chinese population which found that patients carrying HLA-A\u221733:03 had a lower risk for LTG-induced MPE (Li et al., 2013)."
+                    "HLA-A\u221733:03 also had a significantly higher frequency than in the general population (OR = 3.16, 95% CI = 1.11\u20138.98, *P*P-value = 0.023).",
+                    "The HLA-A\u221733:03 allele was present at a significantly higher rate in LTG-induced CADR patients than in the general population controls.",
+                    "## Table 3. List of HLA alleles that showed a significant association with LTG-induced cutaneous adverse drug reactions."
                 ],
                 "p_value_citations": [
-                    "In addition, subjects with HLA-A\u221733:03, HLA-B\u221715:02, and HLA-B\u221744:03 were significantly higher in the LTG-induced MPE group than in the tolerant controls (OR: 8.27; 95% CI: 1.83\u201337.41; P = 0.005, ...)."
-                ]
-            },
-            {
-                "gene": "HLA-B",
-                "polymorphism": "HLA-B*15:02",
-                "relationship_effect": "HLA-B*15:02 is associated with increased risk of lamotrigine-induced maculopapular exanthema (MPE) in Thai patients.",
-                "p_value": "0.005",
-                "citations": [
-                    "In subgroup analysis of LTG-induced CADR, a significant association between LTG-induced MPE and *HLA-B\u221715:02* was found when compared with the tolerant controls and general population (OR = 7.33, 95% CI = 1.63\u201333.02, *P*P-value = 0.005 and OR = 5.44, 95% CI = 1.56\u201319.03, *P*P-value = 0.003, respectively).",
-                    "The subgroup analysis revealed that the proportion of patients carrying the *HLA-B\u221715:02* allele was significantly higher in LTG-induced MPE cases than in both the tolerant control and general population groups, which is very different from previous studies in which *HLA-B\u221715:02* was not found to be associated with LTG-induced MPE ([An et al., 2010](#B2)An et al., 2010; [Shi et al., 2011](#B27)Shi et al., 2011).",
-                    "## Table 4. The associations of individual HLA alleles with LTG-induced cutaneous adverse drug reactions among the different subgroups."
-                ],
-                "p_value_citations": [
-                    "In addition, subjects with HLA-A\u221733:03, HLA-B\u221715:02, and HLA-B\u221744:03 were significantly higher in the LTG-induced MPE group than in the tolerant controls (OR: 8.27; 95% CI: 1.83\u201337.41; P = 0.005, OR: 7.33; 95% CI: 1.63\u201333.02; P = 0.005; and OR: 10.29; 95% CI: 1.45\u201372.81; P = 0.029)."
-                ]
-            },
-            {
-                "gene": "HLA-B",
-                "polymorphism": "HLA-B*44:03",
-                "relationship_effect": "HLA-B*44:03 is associated with increased risk of lamotrigine-induced maculopapular exanthema (MPE) in Thai patients.",
-                "p_value": "0.029",
-                "citations": [
-                    "In subgroup analysis of LTG-induced CADR, a significant association between LTG-induced MPE and *HLA-B\u221744:03* was found when compared with both control groups (OR = 10.29, 95% CI = 1.45\u201372.81, *P*P-value = 0.029 and OR = 4.73, 95% CI = 1.20\u201318.62, *P*P-value = 0.046, respectively), whereas *HLA-B\u221735:08* was significantly associated only with the general population (OR = 109.44, 95% CI = 6.34\u20131889.11, *P*P-value = 0.020) (**Table 4**); nevertheless, no significant associations were found in LTG-induced SCAR.",
-                    "Similarly to *HLA-B\u221735:08*, the association of LTG-induced MPE and *HLA-B\u221744:03* alleles was firstly reported in the Thai population.",
-                    "We also identified an association between HLA-A\u221733:03, HLA-B\u221715:02, and HLA-B\u221744:03 and LTG-induced MPE in this population."
-                ],
-                "p_value_citations": [
-                    "In addition, subjects with HLA-A\u221733:03, HLA-B\u221715:02, and HLA-B\u221744:03 were significantly higher in the LTG-induced MPE group than in the tolerant controls (OR: 8.27; 95% CI: 1.83\u201337.41; P = 0.005, OR: 7.33; 95% CI: 1.63\u201333.02; P = 0.005; and OR: 10.29; 95% CI: 1.45\u201372.81; P = 0.029)."
+                    "Table 3. List of HLA alleles that showed a significant association with LTG-induced cutaneous adverse drug reactions."
                 ]
             },
             {
                 "gene": "HLA-B",
                 "polymorphism": "HLA-B*35:08",
-                "relationship_effect": "HLA-B*35:08 is associated with increased risk of lamotrigine-induced cutaneous adverse drug reactions (CADR) and MPE in Thai patients compared to the general population, but this allele is very rare.",
-                "p_value": "0.030 (CADR), 0.020 (MPE)",
+                "relationship_effect": "HLA-B*35:08 allele is associated with increased risk of lamotrigine-induced cutaneous adverse drug reactions (CADR) in Thai patients (significant vs general population, not significant vs tolerant controls).",
+                "p_value": "OR: 10.45; 95% CI: 0.40\u2013270.41; P = 0.231 (vs tolerant controls); OR: 70.36; 95% CI: 4.19\u20131182.21; P = 0.030 (vs general population)",
                 "citations": [
                     "In addition, we also found a significant association between LTG-induced CADR patients and both HLA-B\u221735:08 and HLA-B\u221739:01 when compared with the general population with OR = 70.36, 95% CI = 4.19\u20131182.21, P-value = 0.030 and OR = 10.68, 95% CI = 2.20\u201351.83, P-value = 0.022, respectively.",
-                    "In subgroup analysis of LTG-induced CADR, a significant association between LTG-induced MPE and HLA-B\u221735:08 was significantly associated only with the general population (OR = 109.44, 95% CI = 6.34\u20131889.11, P-value = 0.020) (Table 4); nevertheless, no significant associations were found in LTG-induced SCAR.",
+                    "Table 3. List of HLA alleles that showed a significant association with LTG-induced cutaneous adverse drug reactions.",
                     "In this study, we report for the first time a significant association between HLA-B\u221735:08 and LTG-induced CADR or MPE, although this allele has been reported in only one case of LTG-induced MPE and once in the general population, as a result of this allele being very rare in the Thai population (less than 1%, data from [Puangpetch et al., 2015](#B24)Puangpetch et al., 2015)."
                 ],
                 "p_value_citations": [
-                    "In addition, we also found a significant association between LTG-induced CADR patients and both HLA-B\u221735:08 and HLA-B\u221739:01 when compared with the general population with OR = 70.36, 95% CI = 4.19\u20131182.21, P-value = 0.030 and OR = 10.68, 95% CI = 2.20\u201351.83, P-value = 0.022, respectively.",
-                    "...a significant association between LTG-induced MPE and HLA-B\u221735:08 was significantly associated only with the general population (OR = 109.44, 95% CI = 6.34\u20131889.11, P-value = 0.020) (Table 4); nevertheless, no significant associations were found in LTG-induced SCAR."
+                    "Table 3. List of HLA alleles that showed a significant association with LTG-induced cutaneous adverse drug reactions."
                 ]
             },
             {
                 "gene": "HLA-B",
                 "polymorphism": "HLA-B*39:01",
-                "relationship_effect": "HLA-B*39:01 is associated with increased risk of lamotrigine-induced cutaneous adverse drug reactions (CADR) in Thai patients compared to the general population, but this allele is rare.",
-                "p_value": "0.022",
+                "relationship_effect": "HLA-B*39:01 allele is associated with increased risk of lamotrigine-induced cutaneous adverse drug reactions (CADR) in Thai patients (significant vs general population, not significant vs tolerant controls).",
+                "p_value": "OR: 7.54; 95% CI: 0.63\u201389.76; P = 0.131 (vs tolerant controls); OR: 10.68; 95% CI: 2.20\u201351.83; P = 0.022 (vs general population)",
                 "citations": [
                     "In addition, we also found a significant association between LTG-induced CADR patients and both HLA-B\u221735:08 and HLA-B\u221739:01 when compared with the general population with OR = 70.36, 95% CI = 4.19\u20131182.21, P-value = 0.030 and OR = 10.68, 95% CI = 2.20\u201351.83, P-value = 0.022, respectively.",
-                    "## Table 3. List of HLA alleles that showed a significant association with LTG-induced cutaneous adverse drug reactions.",
-                    "In this study, we report for the first time a significant association between HLA-B\u221735:08 and LTG-induced CADR or MPE, although this allele has been reported in only one case of LTG-induced MPE and once in the general population, as a result of this allele being very rare in the Thai population (less than 1%, data from [Puangpetch et al., 2015](#B24)Puangpetch et al., 2015)."
+                    "HLA-B\u221739:01 | 2/15 | 1/50 | 7.54 (0.63\u201389.76) | 0.131 | 14/986 | 10.68 (2.20\u201351.83) | 0.022 |"
                 ],
                 "p_value_citations": [
-                    "In addition, we also found a significant association between LTG-induced CADR patients and both HLA-B\u221735:08 and HLA-B\u221739:01 when compared with the general population with OR = 70.36, 95% CI = 4.19\u20131182.21, P-value = 0.030 and OR = 10.68, 95% CI = 2.20\u201351.83, P-value = 0.022, respectively."
+                    "Table 3. List of HLA alleles that showed a significant association with LTG-induced cutaneous adverse drug reactions."
+                ]
+            },
+            {
+                "gene": "HLA-A",
+                "polymorphism": "HLA-A*33:03",
+                "relationship_effect": "HLA-A*33:03 allele is associated with increased risk of lamotrigine-induced maculopapular exanthema (MPE) in Thai patients.",
+                "p_value": "OR: 8.27; 95% CI: 1.83\u201337.41; P = 0.005 (vs tolerant controls); OR: 8.43; 95% CI: 2.13\u201333.34; P = 0.002 (vs general population)",
+                "citations": [
+                    "In addition, subjects with HLA-A\u221733:03, HLA-B\u221715:02, and HLA-B\u221744:03 were significantly higher in the LTG-induced MPE group than in the tolerant controls (OR: 8.27; 95% CI: 1.83\u201337.41; P = 0.005, OR: 7.33; 95% CI: 1.63\u201333.02; P = 0.005; and OR: 10.29; 95% CI: 1.45\u201372.81; P = 0.029).",
+                    "Moreover, we found a significant association of LTG-induced MPE with HLA-A\u221733:03 compared with the tolerant controls group (OR = 8.27, 95% CI = 1.83\u201337.41, P-value = 0.005) and general population group (OR = 8.43, 95% CI = 2.13\u201333.34, P-value = 0.002) as shown in Table 4."
+                ],
+                "p_value_citations": [
+                    "Table 4. The associations of individual HLA alleles with LTG-induced cutaneous adverse drug reactions among the different subgroups."
+                ]
+            },
+            {
+                "gene": "HLA-B",
+                "polymorphism": "HLA-B*15:02",
+                "relationship_effect": "HLA-B*15:02 allele is associated with increased risk of lamotrigine-induced maculopapular exanthema (MPE) in Thai patients.",
+                "p_value": "OR: 7.33; 95% CI: 1.63\u201333.02; P = 0.005 (vs tolerant controls); OR: 5.44; 95% CI: 1.56\u201319.03; P = 0.003 (vs general population)",
+                "citations": [
+                    "In subgroup analysis of LTG-induced CADR, a significant association between LTG-induced MPE and *HLA-B\u221715:02*HLA-B^\u2217^\u221715:02 was found when compared with the tolerant controls and general population (OR = 7.33, 95% CI = 1.63\u201333.02, *P*P-value = 0.005 and OR = 5.44, 95% CI = 1.56\u201319.03, *P*P-value = 0.003, respectively).",
+                    "The subgroup analysis revealed that the proportion of patients carrying the *HLA-B\u221715:02*HLA-B^\u2217^\u221715:02 allele was significantly higher in LTG-induced MPE cases than in both the tolerant control and general population groups, which is very different from previous studies in which *HLA-B\u221715:02*HLA-B^\u2217^\u221715:02 was not found to be associated with LTG-induced MPE ([An et al., 2010](#B2)An et al., 2010; [Shi et al., 2011](#B27)Shi et al., 2011)."
+                ],
+                "p_value_citations": [
+                    "Table 4. The associations of individual HLA alleles with LTG-induced cutaneous adverse drug reactions among the different subgroups."
+                ]
+            },
+            {
+                "gene": "HLA-B",
+                "polymorphism": "HLA-B*44:03",
+                "relationship_effect": "HLA-B*44:03 allele is associated with increased risk of lamotrigine-induced maculopapular exanthema (MPE) in Thai patients.",
+                "p_value": "OR: 10.29; 95% CI: 1.45\u201372.81; P = 0.029 (vs tolerant controls); OR: 4.73; 95% CI: 1.20\u201318.62; P = 0.046 (vs general population)",
+                "citations": [
+                    "In subgroup analysis of LTG-induced CADR, a significant association between LTG-induced MPE and *HLA-B\u221715:02*HLA-B^\u2217^\u221715:02 was found when compared with the tolerant controls and general population (OR = 7.33, 95% CI = 1.63\u201333.02, *P*P-value = 0.005 and OR = 5.44, 95% CI = 1.56\u201319.03, *P*P-value = 0.003, respectively). Interestingly, a significant association between LTG-induced MPE and *HLA-B\u221744:03*HLA-B^\u2217^\u221744:03 was found when compared with both control groups (OR = 10.29, 95% CI = 1.45\u201372.81, *P*P-value = 0.029 and OR = 4.73, 95% CI = 1.20\u201318.62, *P*P-value = 0.046, respectively), whereas *HLA-B\u221735:08*HLA-B^\u2217^\u221735:08 was significantly associated only with the general population (OR = 109.44, 95% CI = 6.34\u20131889.11, *P*P-value = 0.020) (**Table 4**Table [4](#T4)4); nevertheless, no significant associations were found in LTG-induced SCAR.",
+                    "Similarly to *HLA-B\u221735:08*HLA-B^\u2217^\u221735:08, the association of LTG-induced MPE and *HLA-B\u221744:03*HLA-B^\u2217^\u221744:03 alleles was firstly reported in the Thai population.",
+                    "## Table 4. The associations of individual HLA alleles with LTG-induced cutaneous adverse drug reactions among the different subgroups."
+                ],
+                "p_value_citations": [
+                    "Table 4. The associations of individual HLA alleles with LTG-induced cutaneous adverse drug reactions among the different subgroups."
+                ]
+            },
+            {
+                "gene": "HLA-B",
+                "polymorphism": "HLA-B*35:08",
+                "relationship_effect": "HLA-B*35:08 allele is associated with increased risk of lamotrigine-induced maculopapular exanthema (MPE) in Thai patients (significant vs general population, not significant vs tolerant controls).",
+                "p_value": "OR: 15.95; 95% CI: 0.60\u2013421.64; P = 0.167 (vs tolerant controls); OR: 109.44; 95% CI: 6.34\u20131889.11; P = 0.020 (vs general population)",
+                "citations": [
+                    "In subgroup analysis of LTG-induced CADR, a significant association between LTG-induced MPE and *HLA-B\u221735:08* was significantly associated only with the general population (OR = 109.44, 95% CI = 6.34\u20131889.11, *P*P-value = 0.020) (**Table 4**Table [4](#T4)4); nevertheless, no significant associations were found in LTG-induced SCAR.",
+                    "In this study, we report for the first time a significant association between *HLA-B\u221735:08* and LTG-induced CADR or MPE, although this allele has been reported in only one case of LTG-induced MPE and once in the general population, as a result of this allele being very rare in the Thai population (less than 1%, data from [Puangpetch et al., 2015](#B24)Puangpetch et al., 2015).",
+                    "## Table 4. The associations of individual HLA alleles with LTG-induced cutaneous adverse drug reactions among the different subgroups."
+                ],
+                "p_value_citations": [
+                    "Table 4. The associations of individual HLA alleles with LTG-induced cutaneous adverse drug reactions among the different subgroups."
                 ]
             }
         ]
