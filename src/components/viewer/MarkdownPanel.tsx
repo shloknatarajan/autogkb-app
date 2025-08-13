@@ -13,7 +13,7 @@ export const MarkdownPanel: React.FC<MarkdownPanelProps> = ({ markdown }) => {
     <div className="h-full border-r">
       <Card className="h-full rounded-none border-0 shadow-none">
         <CardHeader className="bg-gradient-secondary border-b">
-          <CardTitle className="text-lg">Research Paper Content</CardTitle>
+          <CardTitle className="text-lg">Paper Content</CardTitle>
         </CardHeader>
         <CardContent className="p-0 h-full">
           <ScrollArea className="h-[calc(100vh-8rem)]">
