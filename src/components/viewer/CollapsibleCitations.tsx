@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { ChevronDown, ChevronRight } from 'lucide-react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { QuoteButtons } from './QuoteButton';
 
@@ -26,9 +25,8 @@ export const CollapsibleCitations: React.FC<CollapsibleCitationsProps> = ({
     return (
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
         <CollapsibleTrigger asChild>
-          <button className="text-primary hover:text-primary/80 text-xs font-medium ml-1 inline-flex items-center gap-0.5">
+          <button className="text-primary hover:text-primary/80 text-xs font-medium ml-1">
             [{citationCount} {label}]
-            {isOpen ? <ChevronDown className="h-3 w-3" /> : <ChevronRight className="h-3 w-3" />}
           </button>
         </CollapsibleTrigger>
         <CollapsibleContent>
@@ -43,9 +41,8 @@ export const CollapsibleCitations: React.FC<CollapsibleCitationsProps> = ({
   return (
     <Collapsible open={isOpen} onOpenChange={setIsOpen}>
       <CollapsibleTrigger asChild>
-        <button className="text-primary hover:text-primary/80 text-sm font-medium inline-flex items-center gap-1">
+        <button className="text-primary hover:text-primary/80 text-sm font-medium">
           [{citationCount} {label}]
-          {isOpen ? <ChevronDown className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
         </button>
       </CollapsibleTrigger>
       <CollapsibleContent>
