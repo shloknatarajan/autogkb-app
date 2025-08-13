@@ -3,6 +3,7 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { HyperlinkedText } from '@/components/ui/hyperlinked-text';
 import { StudyParametersSection } from './StudyParametersSection';
 import { DrugAnnotationsSection } from './DrugAnnotationsSection';
 import { FunctionalAnnotationsSection } from './FunctionalAnnotationsSection';
@@ -70,6 +71,7 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
                           <tr className="bg-muted/50">
                             <th className="border border-border px-3 py-2 text-left text-sm font-medium">Gene</th>
                             <th className="border border-border px-3 py-2 text-left text-sm font-medium">Polymorphism</th>
+                            <th className="border border-border px-3 py-2 text-left text-sm font-medium">Drug</th>
                             <th className="border border-border px-3 py-2 text-left text-sm font-medium">Effect</th>
                             <th className="border border-border px-3 py-2 text-left text-sm font-medium">P-value</th>
                           </tr>
@@ -81,7 +83,10 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
                                 {relationship.gene}
                               </td>
                               <td className="border border-border px-3 py-2 text-sm">
-                                {relationship.polymorphism}
+                                <HyperlinkedText item={relationship.polymorphism} />
+                              </td>
+                              <td className="border border-border px-3 py-2 text-sm">
+                                {relationship.drug ? <HyperlinkedText item={relationship.drug} /> : 'N/A'}
                               </td>
                               <td className="border border-border px-3 py-2 text-sm">
                                 {relationship.relationship_effect}
@@ -123,15 +128,22 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
                     <div className="space-y-6">
                       {jsonData.annotations.relationships.map((relationship: any, index: number) => (
                         <div key={index} className="mb-6">
-                          <h4 className="font-medium text-base mb-3 border-b pb-1">{relationship.gene} {relationship.polymorphism}</h4>
+                          <h4 className="font-medium text-base mb-3 border-b pb-1">
+                            {relationship.gene} {relationship.polymorphism}
+                          </h4>
                           <div className="space-y-3">
                             <div className="flex flex-wrap gap-2">
                               <span className="bg-secondary/50 text-secondary-foreground px-2 py-1 rounded text-sm font-medium">
                                 {relationship.gene}
                               </span>
                               <span className="bg-secondary/50 text-secondary-foreground px-2 py-1 rounded text-sm">
-                                {relationship.polymorphism}
+                                <HyperlinkedText item={relationship.polymorphism} />
                               </span>
+                              {relationship.drug && (
+                                <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm">
+                                  <HyperlinkedText item={relationship.drug} />
+                                </span>
+                              )}
                             </div>
                             <p className="text-sm text-foreground">
                               <strong>Effect:</strong> {relationship.relationship_effect}
