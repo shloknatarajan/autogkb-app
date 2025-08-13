@@ -36,10 +36,10 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
           
           <TabsContent value="formatted" className="mt-0 flex-1 min-h-0">
             <ScrollArea className="h-[calc(100vh-8rem)]">
-              <div className="p-6 space-y-6">
+              <div className="p-6 space-y-4">
                 {/* Header with Study Parameters and Found Associations button */}
                 <div className="flex justify-between items-center mb-3">
-                  <h3 className="text-lg font-semibold text-primary">Study Parameters</h3>
+                  <h3 className="text-2xl font-semibold text-black">Study Parameters</h3>
                   {jsonData.annotations?.relationships && (
                     <button
                       onClick={() => {
@@ -66,7 +66,7 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
                 {/* Annotations */}
                 {jsonData.annotations?.relationships && (
                   <div id="found-associations-section">
-                    <h3 className="text-lg font-semibold mb-3 text-primary">Found Associations</h3>
+                    <h3 className="text-2xl font-semibold mb-2 text-black">Found Associations</h3>
                     
                     {/* Summary Table */}
                     <div className="mb-6 overflow-x-auto">
@@ -117,7 +117,7 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
                         </tbody>
                       </table>
                     </div>
-                    <div className="space-y-6">
+                    <div className="space-y-4">
                       {jsonData.annotations.relationships.map((relationship: any, index: number) => {
                         const isExpanded = expandedAssociations.has(index);
                         
@@ -136,7 +136,7 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
                             }}
                           >
                             <CollapsibleTrigger asChild>
-                              <h4 className="font-medium text-base mb-3 border-b pb-1 cursor-pointer hover:text-primary transition-colors flex items-center gap-2">
+                              <h4 className="font-medium text-base mb-2 border-b pb-1 cursor-pointer hover:text-black transition-colors flex items-center gap-2">
                                 <ChevronRight 
                                   className={`h-4 w-4 transition-transform duration-200 ${isExpanded ? 'rotate-90' : ''}`}
                                 />
@@ -144,7 +144,7 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
                               </h4>
                             </CollapsibleTrigger>
                             <CollapsibleContent>
-                              <div className="space-y-3">
+                              <div className="space-y-2">
                                 <div className="flex flex-wrap gap-2">
                                   <span className="bg-secondary/50 text-secondary-foreground px-2 py-1 rounded text-sm font-medium">
                                     {relationship.gene}
@@ -158,12 +158,12 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
                                     </span>
                                   )}
                                 </div>
-                                <p className="text-sm text-foreground">
+                                <p className="text-sm text-black">
                                   <strong>Effect:</strong> {relationship.relationship_effect}
                                 </p>
                                 {relationship.p_value && (
                                   <div>
-                                    <p className="text-sm text-foreground">
+                                    <p className="text-sm text-black">
                                       <strong>P-value:</strong> {relationship.p_value}
                                       {relationship.p_value_citations && relationship.p_value_citations.length > 0 && (
                                         <span className="ml-2">
