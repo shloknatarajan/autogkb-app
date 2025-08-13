@@ -2,6 +2,99 @@
 @tailwind components;
 @tailwind utilities;
 
+/* PP Editorial New Font Family */
+@font-face {
+  font-family: 'PP Editorial New';
+  src: url('/fonts/PPEditorialNew-Ultralight.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Editorial New';
+  src: url('/fonts/PPEditorialNew-UltralightItalic.otf') format('opentype');
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Editorial New';
+  src: url('/fonts/PPEditorialNew-Ultrabold.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Editorial New';
+  src: url('/fonts/PPEditorialNew-UltraboldItalic.otf') format('opentype');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ABC Oracle Font Family */
+@font-face {
+  font-family: 'ABC Oracle';
+  src: url('/fonts/ABC Oracle Variable/ABCOracleVariable-Trial.woff2') format('woff2'),
+       url('/fonts/ABC Oracle Variable/ABCOracleVariable-Trial.woff') format('woff'),
+       url('/fonts/ABC Oracle Variable/ABCOracleVariable-Trial.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ABC Oracle';
+  src: url('/fonts/ABC Oracle/ABCOracle-Light-Trial.woff2') format('woff2'),
+       url('/fonts/ABC Oracle/ABCOracle-Light-Trial.woff') format('woff'),
+       url('/fonts/ABC Oracle/ABCOracle-Light-Trial.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ABC Oracle';
+  src: url('/fonts/ABC Oracle/ABCOracle-Regular-Trial.woff2') format('woff2'),
+       url('/fonts/ABC Oracle/ABCOracle-Regular-Trial.woff') format('woff'),
+       url('/fonts/ABC Oracle/ABCOracle-Regular-Trial.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ABC Oracle';
+  src: url('/fonts/ABC Oracle/ABCOracle-Medium-Trial.woff2') format('woff2'),
+       url('/fonts/ABC Oracle/ABCOracle-Medium-Trial.woff') format('woff'),
+       url('/fonts/ABC Oracle/ABCOracle-Medium-Trial.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ABC Oracle';
+  src: url('/fonts/ABC Oracle/ABCOracle-Bold-Trial.woff2') format('woff2'),
+       url('/fonts/ABC Oracle/ABCOracle-Bold-Trial.woff') format('woff'),
+       url('/fonts/ABC Oracle/ABCOracle-Bold-Trial.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Cambria Font Family */
+@font-face {
+  font-family: 'Cambria';
+  src: url('/fonts/cambria.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Medical Research Tool Design System - Professional Red Theme */
 
 @layer base {

@@ -18,6 +18,12 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				'editorial': ['PP Editorial New', 'serif'],
+				'oracle': ['ABC Oracle', 'system-ui', 'sans-serif'],
+				'cambria': ['Cambria', '"Cambria Math"', 'Charter', '"Times New Roman"', 'Times', 'stixgeneral', 'serif'],
+				'libertinus': ['"Libertinus Serif"', 'serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
