@@ -38,20 +38,20 @@ export const QuoteButton: React.FC<QuoteButtonProps> = ({ quote, index, onClick 
           <span className="leading-relaxed block">
             {displayQuote}
             {!isExpanded && shouldTruncate && (
-              <button
+              <span
                 onClick={handleExpandClick}
-                className="text-primary hover:text-primary/80 ml-1 underline"
+                className="text-primary hover:text-primary/80 ml-1 underline cursor-pointer"
               >
                 ...
-              </button>
+              </span>
             )}
             {isExpanded && shouldTruncate && (
-              <button
+              <span
                 onClick={handleExpandClick}
-                className="text-primary hover:text-primary/80 ml-1 underline"
+                className="text-primary hover:text-primary/80 ml-1 underline cursor-pointer"
               >
                 {' '}Show less
-              </button>
+              </span>
             )}
           </span>
         </div>

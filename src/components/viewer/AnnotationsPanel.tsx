@@ -129,7 +129,7 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
                       {jsonData.annotations.relationships.map((relationship: any, index: number) => (
                         <div key={index} className="mb-6">
                           <h4 className="font-medium text-base mb-3 border-b pb-1">
-                            {relationship.gene} {relationship.polymorphism}
+                            {relationship.gene} {typeof relationship.polymorphism === 'string' ? relationship.polymorphism : relationship.polymorphism?.value || relationship.polymorphism}
                           </h4>
                           <div className="space-y-3">
                             <div className="flex flex-wrap gap-2">
