@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { QuoteButtons } from './QuoteButton';
+import { CollapsibleCitations } from './CollapsibleCitations';
 
 interface StudyParametersProps {
   studyParameters: any;
@@ -36,7 +37,7 @@ export const StudyParametersSection: React.FC<StudyParametersProps> = ({ studyPa
               </div>
             )}
             {studyParameters.summary.citations && (
-              <QuoteButtons quotes={studyParameters.summary.citations} onQuoteClick={onQuoteClick} />
+              <CollapsibleCitations citations={studyParameters.summary.citations} onQuoteClick={onQuoteClick} />
             )}
           </div>
         )}
@@ -61,7 +62,7 @@ export const StudyParametersSection: React.FC<StudyParametersProps> = ({ studyPa
             {studyParameters.study_type.explanation && (
               <p className="text-xs text-foreground mt-1 italic">{studyParameters.study_type.explanation}</p>
             )}
-            <QuoteButtons quotes={studyParameters.study_type.citations} onQuoteClick={onQuoteClick} />
+            <CollapsibleCitations citations={studyParameters.study_type.citations} onQuoteClick={onQuoteClick} />
           </div>
         )}
         {studyParameters.participant_info && (
@@ -82,7 +83,7 @@ export const StudyParametersSection: React.FC<StudyParametersProps> = ({ studyPa
                 <ReactMarkdown>{studyParameters.participant_info.content}</ReactMarkdown>
               </div>
             )}
-            <QuoteButtons quotes={studyParameters.participant_info.citations} onQuoteClick={onQuoteClick} />
+            <CollapsibleCitations citations={studyParameters.participant_info.citations} onQuoteClick={onQuoteClick} />
           </div>
         )}
         {studyParameters.study_design && (
@@ -103,7 +104,7 @@ export const StudyParametersSection: React.FC<StudyParametersProps> = ({ studyPa
                 <ReactMarkdown>{studyParameters.study_design.content.replace(/\*\*([^*]+):/g, "**$1**:")}</ReactMarkdown>
               </div>
             )}
-            <QuoteButtons quotes={studyParameters.study_design.citations} onQuoteClick={onQuoteClick} />
+            <CollapsibleCitations citations={studyParameters.study_design.citations} onQuoteClick={onQuoteClick} />
           </div>
         )}
         {studyParameters.study_results && (
@@ -124,7 +125,7 @@ export const StudyParametersSection: React.FC<StudyParametersProps> = ({ studyPa
                 <ReactMarkdown>{studyParameters.study_results.content}</ReactMarkdown>
               </div>
             )}
-            <QuoteButtons quotes={studyParameters.study_results.citations} onQuoteClick={onQuoteClick} />
+            <CollapsibleCitations citations={studyParameters.study_results.citations} onQuoteClick={onQuoteClick} />
           </div>
         )}
         {studyParameters.allele_frequency && (
@@ -145,7 +146,7 @@ export const StudyParametersSection: React.FC<StudyParametersProps> = ({ studyPa
                 <ReactMarkdown>{studyParameters.allele_frequency.content}</ReactMarkdown>
               </div>
             )}
-            <QuoteButtons quotes={studyParameters.allele_frequency.citations} onQuoteClick={onQuoteClick} />
+            <CollapsibleCitations citations={studyParameters.allele_frequency.citations} onQuoteClick={onQuoteClick} />
           </div>
         )}
       </div>
