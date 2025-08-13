@@ -9,6 +9,7 @@ import { DrugAnnotationsSection } from './DrugAnnotationsSection';
 import { FunctionalAnnotationsSection } from './FunctionalAnnotationsSection';
 import { PhenotypeAnnotationsSection } from './PhenotypeAnnotationsSection';
 import { QuoteButtons } from './QuoteButton';
+import { CollapsibleCitations } from './CollapsibleCitations';
 
 interface AnnotationsPanelProps {
   jsonData: any;
@@ -91,33 +92,21 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
                               <td className="border border-border px-3 py-2 text-sm">
                                 {relationship.relationship_effect}
                                 {relationship.citations && relationship.citations.length > 0 && (
-                                  <span className="ml-1">
-                                    {relationship.citations.map((citation: string, citIndex: number) => (
-                                      <button
-                                        key={citIndex}
-                                        onClick={() => onQuoteClick(citation)}
-                                        className="text-primary hover:text-primary/80 text-xs font-medium ml-0.5"
-                                      >
-                                        [{citIndex + 1}]
-                                      </button>
-                                    ))}
-                                  </span>
+                                  <CollapsibleCitations 
+                                    citations={relationship.citations} 
+                                    onQuoteClick={onQuoteClick} 
+                                    inline={true}
+                                  />
                                 )}
                               </td>
                               <td className="border border-border px-3 py-2 text-sm">
                                 {relationship.p_value || 'N/A'}
                                 {relationship.p_value_citations && relationship.p_value_citations.length > 0 && (
-                                  <span className="ml-1">
-                                    {relationship.p_value_citations.map((citation: string, citIndex: number) => (
-                                      <button
-                                        key={citIndex}
-                                        onClick={() => onQuoteClick(citation)}
-                                        className="text-primary hover:text-primary/80 text-xs font-medium ml-0.5"
-                                      >
-                                        [{citIndex + 1}]
-                                      </button>
-                                    ))}
-                                  </span>
+                                  <CollapsibleCitations 
+                                    citations={relationship.p_value_citations} 
+                                    onQuoteClick={onQuoteClick} 
+                                    inline={true}
+                                  />
                                 )}
                               </td>
                             </tr>
@@ -152,18 +141,24 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
                               <div>
                                 <p className="text-sm text-foreground">
                                   <strong>P-value:</strong> {relationship.p_value}
+                                  {relationship.p_value_citations && relationship.p_value_citations.length > 0 && (
+                                    <span className="ml-2">
+                                      <CollapsibleCitations 
+                                        citations={relationship.p_value_citations} 
+                                        onQuoteClick={onQuoteClick} 
+                                        inline={true}
+                                      />
+                                    </span>
+                                  )}
                                 </p>
-                                {relationship.p_value_citations && relationship.p_value_citations.length > 0 && (
-                                  <div className="mt-1">
-                                    <QuoteButtons quotes={relationship.p_value_citations} onQuoteClick={onQuoteClick} />
-                                  </div>
-                                )}
                               </div>
                             )}
                             {relationship.citations && relationship.citations.length > 0 && (
                               <div>
-                                <h5 className="text-sm font-bold mb-1">Citations:</h5>
-                                <QuoteButtons quotes={relationship.citations} onQuoteClick={onQuoteClick} />
+                                <CollapsibleCitations 
+                                  citations={relationship.citations} 
+                                  onQuoteClick={onQuoteClick}
+                                />
                               </div>
                             )}
                           </div>
