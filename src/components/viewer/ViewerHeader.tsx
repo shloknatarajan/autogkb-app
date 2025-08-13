@@ -25,8 +25,8 @@ export const ViewerHeader: React.FC<ViewerHeaderProps> = ({ pmcid }) => {
               Back
             </Button>
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-                <span className="text-sm font-bold text-primary-foreground">PMC</span>
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center">
+                <img src="/favicon.ico" alt="PMC Icon" className="w-8 h-8 rounded-lg" />
               </div>
               <div>
                 <h1 className="text-lg font-bold text-foreground">{pmcid}</h1>
