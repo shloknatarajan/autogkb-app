@@ -145,32 +145,32 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gradient-subtle">
-      <header className="bg-card shadow-soft border-b">
+      <header className="bg-transparent">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-3">
               <div className="w-8 h-8 rounded-lg flex items-center justify-center">
                 <img src="/favicon.ico" alt="PMC Icon" className="w-8 h-8 rounded-lg" />
               </div>
-              <h1 className="text-xl font-bold text-foreground">AutoGKB</h1>
+              <h1 className="text-xl font-bold text-foreground"></h1>
             </div>
           </div>
         </div>
       </header>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8">
-          <h2 className="text-3xl font-bold text-foreground mb-2">Available Studies</h2>
-          <p className="text-muted-foreground mb-4">
-            Click on any study to view the detailed analysis with markdown content and JSON data
+        <div className="mb-8 text-center">
+          <h2 className="text-5xl font-bold text-foreground mb-4">AutoGKB</h2>
+          <p className="text-xl text-muted-foreground mb-8">
+            Search all available studies
           </p>
-          <div className="max-w-md">
+          <div className="max-w-2xl mx-auto">
             <Input
               type="text"
               placeholder="Search by PMCID or title..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full"
+              className="w-full text-lg py-3 px-6"
             />
           </div>
         </div>
