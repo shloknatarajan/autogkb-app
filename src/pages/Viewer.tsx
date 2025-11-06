@@ -7,10 +7,9 @@ import { useQuoteHighlight } from '@/hooks/useQuoteHighlight';
 import { ViewerHeader } from '@/components/viewer/ViewerHeader';
 import { MarkdownPanel } from '@/components/viewer/MarkdownPanel';
 import { AnnotationsPanel } from '@/components/viewer/AnnotationsPanel';
-import { TableOfContents } from '@/components/viewer/TableOfContents';
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/components/ui/resizable';
 import { ImperativePanelHandle } from 'react-resizable-panels';
-import { Menu, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Menu } from 'lucide-react';
 
 const AVAILABLE_PMCS = [
   'PMC11730665', 'PMC5712579', 'PMC5728534', 'PMC5749368', 'PMC4737107'
@@ -23,17 +22,6 @@ const Viewer = () => {
   const { handleQuoteClick } = useQuoteHighlight();
   const [isRightPanelCollapsed, setIsRightPanelCollapsed] = useState(false);
   const rightPanelRef = useRef<ImperativePanelHandle>(null);
-
-  const currentIndex = AVAILABLE_PMCS.indexOf(pmcid || '');
-  const hasPrev = currentIndex > 0;
-  const hasNext = currentIndex < AVAILABLE_PMCS.length - 1;
-
-  const navigateToPaper = (direction: 'prev' | 'next') => {
-    const newIndex = direction === 'prev' ? currentIndex - 1 : currentIndex + 1;
-    if (newIndex >= 0 && newIndex < AVAILABLE_PMCS.length) {
-      navigate(`/viewer/${AVAILABLE_PMCS[newIndex]}`);
-    }
-  };
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -105,41 +93,21 @@ const Viewer = () => {
           </Button>
         )}
         <ResizablePanelGroup direction="horizontal" className="h-full">
-          <ResizablePanel defaultSize={isRightPanelCollapsed ? 75 : 50} minSize={30}>
+          <ResizablePanel defaultSize={50} minSize={30}>
             <MarkdownPanel markdown={data.markdown} isFullWidth={isRightPanelCollapsed} />
           </ResizablePanel>
           {!isRightPanelCollapsed && <ResizableHandle withHandle />}
-          {isRightPanelCollapsed ? (
-            <ResizablePanel defaultSize={25} minSize={15} maxSize={30}>
-              <div className="h-full bg-background border-l border-border flex flex-col">
-                <Button
-                  onClick={() => {
-                    rightPanelRef.current?.expand();
-                    setIsRightPanelCollapsed(false);
-                  }}
-                  className="m-4 self-end shadow-strong"
-                  size="sm"
-                  variant="default"
-                >
-                  <Menu className="h-4 w-4 mr-2" />
-                  Show Annotations
-                </Button>
-                <TableOfContents markdown={data.markdown} />
-              </div>
-            </ResizablePanel>
-          ) : (
-            <ResizablePanel 
-              ref={rightPanelRef}
-              defaultSize={50} 
-              minSize={0}
-              collapsible
-              collapsedSize={0}
-              onCollapse={() => setIsRightPanelCollapsed(true)}
-              onExpand={() => setIsRightPanelCollapsed(false)}
-            >
-              <AnnotationsPanel jsonData={data.json} onQuoteClick={handleQuoteClick} />
-            </ResizablePanel>
-          )}
+          <ResizablePanel 
+            ref={rightPanelRef}
+            defaultSize={50} 
+            minSize={0}
+            collapsible
+            collapsedSize={0}
+            onCollapse={() => setIsRightPanelCollapsed(true)}
+            onExpand={() => setIsRightPanelCollapsed(false)}
+          >
+            <AnnotationsPanel jsonData={data.json} onQuoteClick={handleQuoteClick} />
+          </ResizablePanel>
         </ResizablePanelGroup>
       </div>
     </div>
