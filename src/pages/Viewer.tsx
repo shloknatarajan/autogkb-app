@@ -92,37 +92,54 @@ const Viewer = () => {
       <ViewerHeader pmcid={pmcid || ''} />
       <div className="relative h-[calc(100vh-4rem)]">
         {isRightPanelCollapsed && (
-          <>
-            <Button
-              onClick={() => {
-                rightPanelRef.current?.expand();
-                setIsRightPanelCollapsed(false);
-              }}
-              className="fixed top-20 right-4 z-50 shadow-strong"
-              size="icon"
-              variant="default"
-            >
-              <Menu className="h-4 w-4" />
-            </Button>
-            <TableOfContents markdown={data.markdown} />
-          </>
+          <Button
+            onClick={() => {
+              rightPanelRef.current?.expand();
+              setIsRightPanelCollapsed(false);
+            }}
+            className="fixed top-20 right-4 z-50 shadow-strong"
+            size="icon"
+            variant="default"
+          >
+            <Menu className="h-4 w-4" />
+          </Button>
         )}
         <ResizablePanelGroup direction="horizontal" className="h-full">
-          <ResizablePanel defaultSize={50} minSize={30}>
+          <ResizablePanel defaultSize={isRightPanelCollapsed ? 75 : 50} minSize={30}>
             <MarkdownPanel markdown={data.markdown} isFullWidth={isRightPanelCollapsed} />
           </ResizablePanel>
           {!isRightPanelCollapsed && <ResizableHandle withHandle />}
-          <ResizablePanel 
-            ref={rightPanelRef}
-            defaultSize={50} 
-            minSize={0}
-            collapsible
-            collapsedSize={0}
-            onCollapse={() => setIsRightPanelCollapsed(true)}
-            onExpand={() => setIsRightPanelCollapsed(false)}
-          >
-            <AnnotationsPanel jsonData={data.json} onQuoteClick={handleQuoteClick} />
-          </ResizablePanel>
+          {isRightPanelCollapsed ? (
+            <ResizablePanel defaultSize={25} minSize={15} maxSize={30}>
+              <div className="h-full bg-background border-l border-border flex flex-col">
+                <Button
+                  onClick={() => {
+                    rightPanelRef.current?.expand();
+                    setIsRightPanelCollapsed(false);
+                  }}
+                  className="m-4 self-end shadow-strong"
+                  size="sm"
+                  variant="default"
+                >
+                  <Menu className="h-4 w-4 mr-2" />
+                  Show Annotations
+                </Button>
+                <TableOfContents markdown={data.markdown} />
+              </div>
+            </ResizablePanel>
+          ) : (
+            <ResizablePanel 
+              ref={rightPanelRef}
+              defaultSize={50} 
+              minSize={0}
+              collapsible
+              collapsedSize={0}
+              onCollapse={() => setIsRightPanelCollapsed(true)}
+              onExpand={() => setIsRightPanelCollapsed(false)}
+            >
+              <AnnotationsPanel jsonData={data.json} onQuoteClick={handleQuoteClick} />
+            </ResizablePanel>
+          )}
         </ResizablePanelGroup>
       </div>
     </div>

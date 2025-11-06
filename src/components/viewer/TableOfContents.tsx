@@ -71,11 +71,11 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({ markdown }) =>
   };
 
   return (
-    <div className="fixed right-0 top-32 w-56 bg-card border-l border-border shadow-soft z-40 max-h-[60vh]">
-      <div className="px-4 py-3 border-b border-border">
+    <div className="h-full flex flex-col bg-background">
+      <div className="px-4 py-3 border-b border-border bg-card">
         <h3 className="font-semibold text-xs uppercase tracking-wide text-muted-foreground">PAGE NAVIGATION</h3>
       </div>
-      <ScrollArea className="max-h-[calc(60vh-3rem)]">
+      <ScrollArea className="flex-1">
         <nav className="p-2">
           {sections.map((section, index) => (
             <button
