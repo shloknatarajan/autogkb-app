@@ -9,7 +9,11 @@ import { MarkdownPanel } from '@/components/viewer/MarkdownPanel';
 import { AnnotationsPanel } from '@/components/viewer/AnnotationsPanel';
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/components/ui/resizable';
 import { ImperativePanelHandle } from 'react-resizable-panels';
-import { Menu, X } from 'lucide-react';
+import { Menu, ChevronLeft, ChevronRight } from 'lucide-react';
+
+const AVAILABLE_PMCS = [
+  'PMC11730665', 'PMC5712579', 'PMC5728534', 'PMC5749368', 'PMC4737107'
+];
 
 const Viewer = () => {
   const { pmcid } = useParams<{ pmcid: string }>();
@@ -18,6 +22,17 @@ const Viewer = () => {
   const { handleQuoteClick } = useQuoteHighlight();
   const [isRightPanelCollapsed, setIsRightPanelCollapsed] = useState(false);
   const rightPanelRef = useRef<ImperativePanelHandle>(null);
+
+  const currentIndex = AVAILABLE_PMCS.indexOf(pmcid || '');
+  const hasPrev = currentIndex > 0;
+  const hasNext = currentIndex < AVAILABLE_PMCS.length - 1;
+
+  const navigateToPaper = (direction: 'prev' | 'next') => {
+    const newIndex = direction === 'prev' ? currentIndex - 1 : currentIndex + 1;
+    if (newIndex >= 0 && newIndex < AVAILABLE_PMCS.length) {
+      navigate(`/viewer/${AVAILABLE_PMCS[newIndex]}`);
+    }
+  };
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -76,21 +91,43 @@ const Viewer = () => {
       <ViewerHeader pmcid={pmcid || ''} />
       <div className="relative h-[calc(100vh-4rem)]">
         {isRightPanelCollapsed && (
-          <Button
-            onClick={() => {
-              rightPanelRef.current?.expand();
-              setIsRightPanelCollapsed(false);
-            }}
-            className="fixed top-20 right-4 z-50 shadow-strong"
-            size="icon"
-            variant="default"
-          >
-            <Menu className="h-4 w-4" />
-          </Button>
+          <>
+            <Button
+              onClick={() => {
+                rightPanelRef.current?.expand();
+                setIsRightPanelCollapsed(false);
+              }}
+              className="fixed top-20 right-4 z-50 shadow-strong"
+              size="icon"
+              variant="default"
+            >
+              <Menu className="h-4 w-4" />
+            </Button>
+            <div className="fixed top-1/2 left-4 -translate-y-1/2 z-50 flex flex-col gap-2">
+              <Button
+                onClick={() => navigateToPaper('prev')}
+                disabled={!hasPrev}
+                className="shadow-strong"
+                size="icon"
+                variant="default"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </Button>
+              <Button
+                onClick={() => navigateToPaper('next')}
+                disabled={!hasNext}
+                className="shadow-strong"
+                size="icon"
+                variant="default"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </Button>
+            </div>
+          </>
         )}
         <ResizablePanelGroup direction="horizontal" className="h-full">
           <ResizablePanel defaultSize={50} minSize={30}>
-            <MarkdownPanel markdown={data.markdown} />
+            <MarkdownPanel markdown={data.markdown} isFullWidth={isRightPanelCollapsed} />
           </ResizablePanel>
           {!isRightPanelCollapsed && <ResizableHandle withHandle />}
           <ResizablePanel 
