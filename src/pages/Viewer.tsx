@@ -9,6 +9,7 @@ import { MarkdownPanel } from '@/components/viewer/MarkdownPanel';
 import { AnnotationsPanel } from '@/components/viewer/AnnotationsPanel';
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/components/ui/resizable';
 import { ImperativePanelHandle } from 'react-resizable-panels';
+import { Menu, X } from 'lucide-react';
 
 const Viewer = () => {
   const { pmcid } = useParams<{ pmcid: string }>();
@@ -73,21 +74,38 @@ const Viewer = () => {
   return (
     <div className="min-h-screen bg-gradient-subtle">
       <ViewerHeader pmcid={pmcid || ''} />
-      <ResizablePanelGroup direction="horizontal" className="h-[calc(100vh-4rem)]">
-        <ResizablePanel defaultSize={50} minSize={30}>
-          <MarkdownPanel markdown={data.markdown} />
-        </ResizablePanel>
-        <ResizableHandle withHandle />
-        <ResizablePanel 
-          ref={rightPanelRef}
-          defaultSize={50} 
-          minSize={5}
-          collapsible
-          collapsedSize={5}
-        >
-          <AnnotationsPanel jsonData={data.json} onQuoteClick={handleQuoteClick} />
-        </ResizablePanel>
-      </ResizablePanelGroup>
+      <div className="relative h-[calc(100vh-4rem)]">
+        {isRightPanelCollapsed && (
+          <Button
+            onClick={() => {
+              rightPanelRef.current?.expand();
+              setIsRightPanelCollapsed(false);
+            }}
+            className="fixed top-20 right-4 z-50 shadow-strong"
+            size="icon"
+            variant="default"
+          >
+            <Menu className="h-4 w-4" />
+          </Button>
+        )}
+        <ResizablePanelGroup direction="horizontal" className="h-full">
+          <ResizablePanel defaultSize={50} minSize={30}>
+            <MarkdownPanel markdown={data.markdown} />
+          </ResizablePanel>
+          {!isRightPanelCollapsed && <ResizableHandle withHandle />}
+          <ResizablePanel 
+            ref={rightPanelRef}
+            defaultSize={50} 
+            minSize={0}
+            collapsible
+            collapsedSize={0}
+            onCollapse={() => setIsRightPanelCollapsed(true)}
+            onExpand={() => setIsRightPanelCollapsed(false)}
+          >
+            <AnnotationsPanel jsonData={data.json} onQuoteClick={handleQuoteClick} />
+          </ResizablePanel>
+        </ResizablePanelGroup>
+      </div>
     </div>
   );
 };
