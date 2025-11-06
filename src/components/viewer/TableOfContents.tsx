@@ -71,7 +71,7 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({ markdown }) =>
   };
 
   return (
-    <div className="fixed right-4 top-32 w-56 bg-card border border-border rounded-lg shadow-soft z-40 max-h-[60vh]">
+    <div className="fixed right-0 top-32 w-56 bg-card border-l border-border shadow-soft z-40 max-h-[60vh]">
       <div className="px-4 py-3 border-b border-border">
         <h3 className="font-semibold text-xs uppercase tracking-wide text-muted-foreground">PAGE NAVIGATION</h3>
       </div>
