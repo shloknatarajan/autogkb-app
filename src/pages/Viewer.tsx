@@ -104,26 +104,6 @@ const Viewer = () => {
             >
               <Menu className="h-4 w-4" />
             </Button>
-            <div className="fixed top-1/2 left-4 -translate-y-1/2 z-50 flex flex-col gap-2">
-              <Button
-                onClick={() => navigateToPaper('prev')}
-                disabled={!hasPrev}
-                className="shadow-strong"
-                size="icon"
-                variant="default"
-              >
-                <ChevronLeft className="h-4 w-4" />
-              </Button>
-              <Button
-                onClick={() => navigateToPaper('next')}
-                disabled={!hasNext}
-                className="shadow-strong"
-                size="icon"
-                variant="default"
-              >
-                <ChevronRight className="h-4 w-4" />
-              </Button>
-            </div>
             <TableOfContents markdown={data.markdown} />
           </>
         )}
