@@ -29,7 +29,7 @@ export const ViewerHeader: React.FC<ViewerHeaderProps> = ({ pmcid }) => {
                 <img src="/favicon.ico" alt="PMC Icon" className="w-8 h-8 rounded-lg" />
               </div>
               <div>
-                <h1 className="text-lg font-bold text-black dark:text-white">{pmcid}</h1>
+                <h1 className="text-lg font-bold !text-black dark:!text-white">{pmcid}</h1>
               </div>
             </div>
           </div>
