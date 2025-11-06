@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,12 +8,36 @@ import { ViewerHeader } from '@/components/viewer/ViewerHeader';
 import { MarkdownPanel } from '@/components/viewer/MarkdownPanel';
 import { AnnotationsPanel } from '@/components/viewer/AnnotationsPanel';
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/components/ui/resizable';
+import { ImperativePanelHandle } from 'react-resizable-panels';
 
 const Viewer = () => {
   const { pmcid } = useParams<{ pmcid: string }>();
   const navigate = useNavigate();
   const { data, loading, error } = useViewerData(pmcid);
   const { handleQuoteClick } = useQuoteHighlight();
+  const [isRightPanelCollapsed, setIsRightPanelCollapsed] = useState(false);
+  const rightPanelRef = useRef<ImperativePanelHandle>(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Check for Ctrl+E (Windows/Linux) or Cmd+E (Mac)
+      if ((e.ctrlKey || e.metaKey) && e.key === 'e') {
+        e.preventDefault();
+        
+        if (rightPanelRef.current) {
+          if (isRightPanelCollapsed) {
+            rightPanelRef.current.expand();
+          } else {
+            rightPanelRef.current.collapse();
+          }
+          setIsRightPanelCollapsed(!isRightPanelCollapsed);
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isRightPanelCollapsed]);
 
   if (loading) {
     return (
@@ -54,7 +78,13 @@ const Viewer = () => {
           <MarkdownPanel markdown={data.markdown} />
         </ResizablePanel>
         <ResizableHandle withHandle />
-        <ResizablePanel defaultSize={50} minSize={30}>
+        <ResizablePanel 
+          ref={rightPanelRef}
+          defaultSize={50} 
+          minSize={5}
+          collapsible
+          collapsedSize={5}
+        >
           <AnnotationsPanel jsonData={data.json} onQuoteClick={handleQuoteClick} />
         </ResizablePanel>
       </ResizablePanelGroup>
