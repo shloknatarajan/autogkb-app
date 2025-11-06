@@ -7,6 +7,7 @@ import { useQuoteHighlight } from '@/hooks/useQuoteHighlight';
 import { ViewerHeader } from '@/components/viewer/ViewerHeader';
 import { MarkdownPanel } from '@/components/viewer/MarkdownPanel';
 import { AnnotationsPanel } from '@/components/viewer/AnnotationsPanel';
+import { TableOfContents } from '@/components/viewer/TableOfContents';
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/components/ui/resizable';
 import { ImperativePanelHandle } from 'react-resizable-panels';
 import { Menu, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -123,6 +124,7 @@ const Viewer = () => {
                 <ChevronRight className="h-4 w-4" />
               </Button>
             </div>
+            <TableOfContents markdown={data.markdown} />
           </>
         )}
         <ResizablePanelGroup direction="horizontal" className="h-full">
