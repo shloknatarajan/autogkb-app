@@ -68,7 +68,9 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				'figure-bg': 'hsl(var(--figure-bg))',
+				'table-bg': 'hsl(var(--table-bg))'
 			},
 			backgroundImage: {
 				'gradient-primary': 'var(--gradient-primary)',

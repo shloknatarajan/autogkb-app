@@ -21,12 +21,13 @@ export const MarkdownPanel: React.FC<MarkdownPanelProps> = ({ markdown }) => {
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 components={{
-                  table: ({node, ...props}) => <table className="w-full border-collapse border-2 border-border shadow-soft rounded-lg overflow-hidden my-8" {...props} />,
+                  table: ({node, ...props}) => <div className="bg-table-bg p-4 rounded-lg my-8"><table className="w-full border-collapse border-2 border-border shadow-soft rounded-lg overflow-hidden bg-background" {...props} /></div>,
                   thead: ({node, ...props}) => <thead {...props} />,
                   tbody: ({node, ...props}) => <tbody {...props} />,
                   tr: ({node, ...props}) => <tr className="even:bg-muted/30" {...props} />,
                   th: ({node, ...props}) => <th className="border border-border bg-secondary px-6 py-4 text-left font-bold text-foreground" {...props} />,
                   td: ({node, ...props}) => <td className="border border-border px-6 py-3 text-sm align-top" {...props} />,
+                  img: ({node, ...props}) => <span className="block bg-figure-bg p-4 rounded-lg my-6"><img {...props} /></span>,
                   p: ({node, ...props}) => <p className="whitespace-pre-line" {...props} />
                 }}
               >

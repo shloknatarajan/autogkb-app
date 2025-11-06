@@ -141,6 +141,9 @@
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
+    --figure-bg: 45 100% 95%;
+    --table-bg: 150 40% 96%;
+
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
@@ -195,6 +198,9 @@
     --gradient-secondary: linear-gradient(135deg, hsl(0 0% 10%), hsl(0 0% 6%));
     --gradient-hero: linear-gradient(135deg, hsl(209 91% 47%), hsl(209 91% 43%));
     --gradient-subtle: linear-gradient(180deg, hsl(0 0% 4%), hsl(0 0% 6%));
+
+    --figure-bg: 45 80% 25%;
+    --table-bg: 150 30% 20%;
 
     --sidebar-background: 0 0% 6%;
     --sidebar-foreground: 0 0% 95%;
