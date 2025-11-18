@@ -1,155 +1,72 @@
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
-import { QuoteButtons } from './QuoteButton';
-import { CollapsibleCitations } from './CollapsibleCitations';
 
-interface StudyParametersProps {
-  studyParameters: any;
-  onQuoteClick: (quote: string) => void;
+interface StudyParameter {
+  "Study Parameters ID": number;
+  "Variant Annotation ID": number;
+  "Study Type": string | null;
+  "Study Cases": number | null;
+  "Study Controls": number | null;
+  "Characteristics": string;
+  "Characteristics Type": string;
+  "Frequency In Cases": number | null;
+  "Allele Of Frequency In Cases": string | null;
+  "Frequency In Controls": number | null;
+  "Allele Of Frequency In Controls": string | null;
+  "P Value": string | null;
+  "Ratio Stat Type": string | null;
+  "Ratio Stat": number | null;
+  "Confidence Interval Start": number | null;
+  "Confidence Interval Stop": number | null;
+  "Biogeographical Groups": string;
+  "Variant Annotation ID_norm": string;
 }
 
-export const StudyParametersSection: React.FC<StudyParametersProps> = ({ studyParameters, onQuoteClick }) => {
-  if (!studyParameters) return null;
+interface StudyParametersSectionProps {
+  studyParameters: StudyParameter[];
+}
+
+export const StudyParametersSection: React.FC<StudyParametersSectionProps> = ({ studyParameters }) => {
+  if (!studyParameters || studyParameters.length === 0) return null;
 
   return (
     <div>
-      <div className="space-y-4">
-        {studyParameters.summary && (
-          <div className="mb-4">
-            <h4 className="font-medium text-2xl mb-2 text-black pb-1">Summary</h4>
-            {typeof studyParameters.summary === 'string' ? (
-              <div className="text-sm text-black prose prose-sm max-w-none prose-p:text-black prose-strong:text-black">
-                <ReactMarkdown>{studyParameters.summary}</ReactMarkdown>
-              </div>
-            ) : Array.isArray(studyParameters.summary.content) ? (
-              <div className="text-sm text-black space-y-1">
-                {studyParameters.summary.content.map((item: string, index: number) => (
-                  <div key={index}>
-                    <div className="prose prose-sm max-w-none prose-p:text-black prose-strong:text-black prose-p:inline">
-                      <ReactMarkdown>{item}</ReactMarkdown>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="text-sm text-black prose prose-sm max-w-none prose-p:text-black prose-strong:text-black">
-                <ReactMarkdown>{studyParameters.summary.content}</ReactMarkdown>
-              </div>
+      {studyParameters.map((param, index) => (
+        <div key={index} className="mb-6 p-4 border border-border rounded-lg bg-muted/30">
+          <h4 className="font-medium text-base mb-3 text-primary border-b pb-1">Parameter Set {index + 1}</h4>
+          <div className="space-y-2 text-sm">
+            {param["Study Type"] && (
+              <p><span className="font-medium">Study Type:</span> {param["Study Type"]}</p>
             )}
-            {studyParameters.summary.citations && (
-              <CollapsibleCitations citations={studyParameters.summary.citations} onQuoteClick={onQuoteClick} />
+            {param["Study Cases"] !== null && (
+              <p><span className="font-medium">Study Cases:</span> {param["Study Cases"]}</p>
+            )}
+            {param["Study Controls"] !== null && (
+              <p><span className="font-medium">Study Controls:</span> {param["Study Controls"]}</p>
+            )}
+            {param.Characteristics && (
+              <p><span className="font-medium">Characteristics:</span> {param.Characteristics}</p>
+            )}
+            {param["Characteristics Type"] && (
+              <p><span className="font-medium">Characteristics Type:</span> {param["Characteristics Type"]}</p>
+            )}
+            {param["Frequency In Cases"] !== null && (
+              <p><span className="font-medium">Frequency In Cases:</span> {param["Frequency In Cases"]} {param["Allele Of Frequency In Cases"] && `(${param["Allele Of Frequency In Cases"]})`}</p>
+            )}
+            {param["Frequency In Controls"] !== null && (
+              <p><span className="font-medium">Frequency In Controls:</span> {param["Frequency In Controls"]} {param["Allele Of Frequency In Controls"] && `(${param["Allele Of Frequency In Controls"]})`}</p>
+            )}
+            {param["P Value"] && (
+              <p><span className="font-medium">P Value:</span> {param["P Value"]}</p>
+            )}
+            {param["Ratio Stat Type"] && param["Ratio Stat"] !== null && (
+              <p><span className="font-medium">{param["Ratio Stat Type"]}:</span> {param["Ratio Stat"]} {param["Confidence Interval Start"] !== null && param["Confidence Interval Stop"] !== null && `(95% CI: ${param["Confidence Interval Start"]}-${param["Confidence Interval Stop"]})`}</p>
+            )}
+            {param["Biogeographical Groups"] && (
+              <p><span className="font-medium">Biogeographical Groups:</span> {param["Biogeographical Groups"]}</p>
             )}
           </div>
-        )}
-        {studyParameters.study_type && (
-          <div className="mb-4">
-            <h4 className="font-medium text-2xl mb-2 text-black pb-1">Study Type</h4>
-            {Array.isArray(studyParameters.study_type.content) ? (
-              <div className="text-sm text-black">
-                {studyParameters.study_type.content.map((item: string, index: number) => (
-                  <div key={index}>
-                    <div className="prose prose-sm max-w-none prose-p:text-black prose-strong:text-black prose-p:inline">
-                      <ReactMarkdown>{item}</ReactMarkdown>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="text-sm text-black prose prose-sm max-w-none prose-p:text-black prose-strong:text-black">
-                <ReactMarkdown>{studyParameters.study_type.content}</ReactMarkdown>
-              </div>
-            )}
-            {studyParameters.study_type.explanation && (
-              <p className="text-xs text-black mt-1 italic">{studyParameters.study_type.explanation}</p>
-            )}
-            <CollapsibleCitations citations={studyParameters.study_type.citations} onQuoteClick={onQuoteClick} />
-          </div>
-        )}
-        {studyParameters.participant_info && (
-          <div className="mb-4">
-            <h4 className="font-medium text-2xl mb-2 text-black pb-1">Participant Information</h4>
-            {Array.isArray(studyParameters.participant_info.content) ? (
-              <div className="text-sm text-black">
-                {studyParameters.participant_info.content.map((item: string, index: number) => (
-                  <div key={index}>
-                    <div className="prose prose-sm max-w-none prose-p:text-black prose-strong:text-black prose-p:inline">
-                      <ReactMarkdown>{item}</ReactMarkdown>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="text-sm text-black prose prose-sm max-w-none prose-p:text-black prose-strong:text-black">
-                <ReactMarkdown>{studyParameters.participant_info.content}</ReactMarkdown>
-              </div>
-            )}
-            <CollapsibleCitations citations={studyParameters.participant_info.citations} onQuoteClick={onQuoteClick} />
-          </div>
-        )}
-        {studyParameters.study_design && (
-          <div className="mb-4">
-            <h4 className="font-medium font-oracle text-2xl mb-1 text-black pb-1">Study Design</h4>
-            {Array.isArray(studyParameters.study_design.content) ? (
-              <div className="text-sm text-black">
-                {studyParameters.study_design.content.map((item: string, index: number) => (
-                  <div key={index}>
-                    <div className="prose prose-sm max-w-none prose-p:text-foreground prose-strong:text-foreground prose-p:inline">
-                      <ReactMarkdown>{item.replace(/\*\*([^*]+):/g, "**$1**:")}</ReactMarkdown>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="text-sm text-black prose prose-sm max-w-none prose-p:text-black prose-strong:text-black">
-                <ReactMarkdown>{studyParameters.study_design.content.replace(/\*\*([^*]+):/g, "**$1**:")}</ReactMarkdown>
-              </div>
-            )}
-            <CollapsibleCitations citations={studyParameters.study_design.citations} onQuoteClick={onQuoteClick} />
-          </div>
-        )}
-        {studyParameters.study_results && (
-          <div className="mb-4">
-            <h4 className="font-medium text-2xl mb-2 text-black pb-1">Study Results</h4>
-            {Array.isArray(studyParameters.study_results.content) ? (
-              <div className="text-sm text-black space-y-1">
-                {studyParameters.study_results.content.map((item: string, index: number) => (
-                  <div key={index}>
-                    <div className="prose prose-sm max-w-none prose-p:text-black prose-strong:text-black prose-p:inline">
-                      <ReactMarkdown>{item}</ReactMarkdown>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="text-sm text-black prose prose-sm max-w-none prose-p:text-black prose-strong:text-black">
-                <ReactMarkdown>{studyParameters.study_results.content}</ReactMarkdown>
-              </div>
-            )}
-            <CollapsibleCitations citations={studyParameters.study_results.citations} onQuoteClick={onQuoteClick} />
-          </div>
-        )}
-        {studyParameters.allele_frequency && (
-          <div className="mb-4">
-            <h4 className="font-medium text-2xl mb-2 text-black pb-1">Allele Frequency</h4>
-            {Array.isArray(studyParameters.allele_frequency.content) ? (
-              <div className="text-sm text-black space-y-1">
-                {studyParameters.allele_frequency.content.map((item: string, index: number) => (
-                  <div key={index}>
-                    <div className="prose prose-sm max-w-none prose-p:text-black prose-strong:text-black prose-p:inline">
-                      <ReactMarkdown>{item}</ReactMarkdown>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="text-sm text-black prose prose-sm max-w-none prose-p:text-black prose-strong:text-black">
-                <ReactMarkdown>{studyParameters.allele_frequency.content}</ReactMarkdown>
-              </div>
-            )}
-            <CollapsibleCitations citations={studyParameters.allele_frequency.citations} onQuoteClick={onQuoteClick} />
-          </div>
-        )}
-      </div>
+        </div>
+      ))}
     </div>
   );
 };

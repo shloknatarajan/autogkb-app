@@ -1,62 +1,95 @@
 import React from 'react';
-import { QuoteButton } from './QuoteButton';
 
-interface PhenotypeAnnotationsSectionProps {
-  phenotypeAnnotations: any[];
-  onQuoteClick: (quote: string) => void;
+interface PhenotypeAnnotation {
+  "Variant Annotation ID": number;
+  "Variant/Haplotypes": string;
+  "Gene": string;
+  "Drug(s)": string;
+  "PMID": number;
+  "Phenotype Category": string;
+  "Significance": string;
+  "Notes": string;
+  "Sentence": string;
+  "Alleles": string;
+  "Specialty Population": string | null;
+  "Metabolizer types": string | null;
+  "isPlural": string;
+  "Is/Is Not associated": string;
+  "Direction of effect": string | null;
+  "Side effect/efficacy/other": string;
+  "Phenotype": string;
+  "Multiple phenotypes And/or": string | null;
+  "When treated with/exposed to/when assayed with": string | null;
+  "Multiple drugs And/or": string | null;
+  "Population types": string | null;
+  "Population Phenotypes or diseases": string | null;
+  "Multiple phenotypes or diseases And/or": string | null;
+  "Comparison Allele(s) or Genotype(s)": string | null;
+  "Comparison Metabolizer types": string | null;
+  "PMID_norm": string;
+  "Variant Annotation ID_norm": string;
 }
 
-export const PhenotypeAnnotationsSection: React.FC<PhenotypeAnnotationsSectionProps> = ({ phenotypeAnnotations, onQuoteClick }) => {
+interface PhenotypeAnnotationsSectionProps {
+  phenotypeAnnotations: PhenotypeAnnotation[];
+}
+
+export const PhenotypeAnnotationsSection: React.FC<PhenotypeAnnotationsSectionProps> = ({ phenotypeAnnotations }) => {
   if (!phenotypeAnnotations || phenotypeAnnotations.length === 0) return null;
 
   return (
     <div>
       <h3 className="text-lg font-semibold mb-3 text-primary">Phenotype Annotations</h3>
-      {phenotypeAnnotations.map((annotation: any, index: number) => (
-        <div key={index} className="mb-6">
+      {phenotypeAnnotations.map((annotation, index) => (
+        <div key={index} className="mb-6 p-4 border border-border rounded-lg bg-muted/30">
           <h4 className="font-medium text-base mb-3 text-primary border-b pb-1">Annotation {index + 1}</h4>
           <div className="space-y-2 text-sm">
-            {annotation.sentence_summary && (
-              <p><span className="font-medium">Summary:</span> {annotation.sentence_summary}</p>
+            {annotation.Sentence && (
+              <p className="mb-2 italic text-foreground/90">{annotation.Sentence}</p>
             )}
-            {annotation.associated_drugs?.contents && (
-              <p><span className="font-medium">Associated Drugs:</span> {annotation.associated_drugs.contents.join(', ')}</p>
+            {annotation["Variant/Haplotypes"] && (
+              <p><span className="font-medium">Variant/Haplotypes:</span> {annotation["Variant/Haplotypes"]}</p>
             )}
-            {annotation.association_significance?.content && (
-              <p><span className="font-medium">Significance:</span> {annotation.association_significance.content}</p>
+            {annotation.Gene && (
+              <p><span className="font-medium">Gene:</span> {annotation.Gene}</p>
             )}
-            {annotation.specialty_populations?.content && annotation.specialty_populations.content !== "Unknown" && (
-              <p><span className="font-medium">Specialty Populations:</span> {annotation.specialty_populations.content}</p>
+            {annotation["Drug(s)"] && (
+              <p><span className="font-medium">Drug(s):</span> {annotation["Drug(s)"]}</p>
             )}
-            {annotation.notes && (
-              <p><span className="font-medium">Notes:</span> {annotation.notes}</p>
+            {annotation.Alleles && (
+              <p><span className="font-medium">Alleles:</span> {annotation.Alleles}</p>
+            )}
+            {annotation.Phenotype && (
+              <p><span className="font-medium">Phenotype:</span> {annotation.Phenotype}</p>
+            )}
+            {annotation["Phenotype Category"] && (
+              <p><span className="font-medium">Phenotype Category:</span> {annotation["Phenotype Category"]}</p>
+            )}
+            {annotation.Significance && (
+              <p><span className="font-medium">Significance:</span> {annotation.Significance}</p>
+            )}
+            {annotation["Direction of effect"] && (
+              <p><span className="font-medium">Direction of Effect:</span> {annotation["Direction of effect"]}</p>
+            )}
+            {annotation["Side effect/efficacy/other"] && (
+              <p><span className="font-medium">Effect Type:</span> {annotation["Side effect/efficacy/other"]}</p>
+            )}
+            {annotation["Metabolizer types"] && (
+              <p><span className="font-medium">Metabolizer Types:</span> {annotation["Metabolizer types"]}</p>
+            )}
+            {annotation["Specialty Population"] && (
+              <p><span className="font-medium">Specialty Population:</span> {annotation["Specialty Population"]}</p>
+            )}
+            {annotation["Population types"] && annotation["Population Phenotypes or diseases"] && (
+              <p><span className="font-medium">Population:</span> {annotation["Population types"]} {annotation["Population Phenotypes or diseases"]}</p>
+            )}
+            {annotation["Comparison Allele(s) or Genotype(s)"] && (
+              <p><span className="font-medium">Comparison:</span> {annotation["Comparison Allele(s) or Genotype(s)"]} {annotation["Comparison Metabolizer types"] && `(${annotation["Comparison Metabolizer types"]})`}</p>
+            )}
+            {annotation.Notes && (
+              <p className="mt-2 pt-2 border-t border-border"><span className="font-medium">Notes:</span> {annotation.Notes}</p>
             )}
           </div>
-          {/* Quote buttons with proper sequential numbering */}
-          {(annotation.associated_drugs?.quotes || annotation.association_significance?.quotes) && (
-            <div className="mt-2">
-              <div className="flex flex-wrap gap-1">
-                {/* First show associated_drugs quotes */}
-                {annotation.associated_drugs?.quotes?.map((quote: string, quoteIndex: number) => (
-                  <QuoteButton
-                    key={`drugs-${quoteIndex}`}
-                    quote={quote}
-                    index={quoteIndex}
-                    onClick={onQuoteClick}
-                  />
-                ))}
-                {/* Then show association_significance quotes with continued numbering */}
-                {annotation.association_significance?.quotes?.map((quote: string, quoteIndex: number) => (
-                  <QuoteButton
-                    key={`significance-${quoteIndex}`}
-                    quote={quote}
-                    index={(annotation.associated_drugs?.quotes?.length || 0) + quoteIndex}
-                    onClick={onQuoteClick}
-                  />
-                ))}
-              </div>
-            </div>
-          )}
         </div>
       ))}
     </div>
