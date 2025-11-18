@@ -43,7 +43,9 @@ export const FunctionalAnnotationsSection: React.FC<FunctionalAnnotationsSection
       <h3 className="text-2xl font-semibold mb-3 text-black">Functional Annotations</h3>
       {functionalAnnotations.map((annotation, index) => (
         <div key={index} className="mb-6 p-4 border border-border rounded-lg bg-muted/30">
-          <h4 className="font-medium text-base mb-3 text-primary border-b pb-1">Annotation {index + 1}</h4>
+          <h4 className="font-medium text-base mb-3 text-primary border-b pb-1">
+            {annotation.Gene} {annotation["Variant/Haplotypes"]}
+          </h4>
           <div className="space-y-2 text-sm">
             {annotation.Sentence && (
               <p className="mb-2 italic text-foreground/90">{annotation.Sentence}</p>
