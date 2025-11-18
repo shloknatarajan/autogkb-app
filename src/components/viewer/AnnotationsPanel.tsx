@@ -205,6 +205,7 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
                 {jsonData.var_drug_ann && (
                   <DrugAnnotationsSection 
                     drugAnnotations={jsonData.var_drug_ann} 
+                    onQuoteClick={onQuoteClick}
                   />
                 )}
 
@@ -212,6 +213,7 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
                 {jsonData.var_pheno_ann && (
                   <PhenotypeAnnotationsSection 
                     phenotypeAnnotations={jsonData.var_pheno_ann} 
+                    onQuoteClick={onQuoteClick}
                   />
                 )}
 
@@ -219,6 +221,7 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
                 {jsonData.var_fa_ann && (
                   <FunctionalAnnotationsSection 
                     functionalAnnotations={jsonData.var_fa_ann} 
+                    onQuoteClick={onQuoteClick}
                   />
                 )}
               </div>
