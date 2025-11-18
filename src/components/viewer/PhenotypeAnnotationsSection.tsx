@@ -1,4 +1,5 @@
 import React from 'react';
+import { CollapsibleCitations } from './CollapsibleCitations';
 
 interface PhenotypeAnnotation {
   "Variant Annotation ID": number;
@@ -28,13 +29,15 @@ interface PhenotypeAnnotation {
   "Comparison Metabolizer types": string | null;
   "PMID_norm": string;
   "Variant Annotation ID_norm": string;
+  "Citations"?: string[];
 }
 
 interface PhenotypeAnnotationsSectionProps {
   phenotypeAnnotations: PhenotypeAnnotation[];
+  onQuoteClick: (quote: string) => void;
 }
 
-export const PhenotypeAnnotationsSection: React.FC<PhenotypeAnnotationsSectionProps> = ({ phenotypeAnnotations }) => {
+export const PhenotypeAnnotationsSection: React.FC<PhenotypeAnnotationsSectionProps> = ({ phenotypeAnnotations, onQuoteClick }) => {
   if (!phenotypeAnnotations || phenotypeAnnotations.length === 0) return null;
 
   return (
@@ -88,6 +91,16 @@ export const PhenotypeAnnotationsSection: React.FC<PhenotypeAnnotationsSectionPr
             )}
             {annotation.Notes && (
               <p className="mt-2 pt-2 border-t border-border"><span className="font-medium">Notes:</span> {annotation.Notes}</p>
+            )}
+            {annotation.Citations && annotation.Citations.length > 0 && (
+              <div className="mt-3 pt-2 border-t border-border">
+                <span className="font-medium">Citations: </span>
+                <CollapsibleCitations 
+                  citations={annotation.Citations} 
+                  onQuoteClick={onQuoteClick}
+                  inline={true}
+                />
+              </div>
             )}
           </div>
         </div>
