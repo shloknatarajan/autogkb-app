@@ -15,10 +15,11 @@ import { CollapsibleCitations } from './CollapsibleCitations';
 
 interface AnnotationsPanelProps {
   jsonData: any;
+  benchmarkJsonData: any | null;
   onQuoteClick: (quote: string) => void;
 }
 
-export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, onQuoteClick }) => {
+export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, benchmarkJsonData, onQuoteClick }) => {
   const [expandedAssociations, setExpandedAssociations] = useState<Set<number>>(new Set());
   return (
     <Card className="h-full rounded-none border-0 shadow-none flex flex-col">
@@ -30,7 +31,9 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
           <div className="border-b px-6 pt-4 flex-shrink-0 bg-background">
             <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="formatted">Formatted View</TabsTrigger>
-              <TabsTrigger value="raw">Raw JSON</TabsTrigger>
+              <TabsTrigger value="curator" disabled={!benchmarkJsonData}>
+                Curator Annotation {!benchmarkJsonData && '(N/A)'}
+              </TabsTrigger>
             </TabsList>
           </div>
           
@@ -228,12 +231,59 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
             </ScrollArea>
           </TabsContent>
           
-          <TabsContent value="raw" className="mt-0 flex-1 min-h-0">
+          <TabsContent value="curator" className="mt-0 flex-1 min-h-0">
             <ScrollArea className="h-[calc(100vh-12rem)]">
-              <div className="p-6">
-                <pre className="text-xs bg-muted p-4 rounded-lg overflow-auto">
-                  {JSON.stringify(jsonData, null, 2)}
-                </pre>
+              <div className="p-6 space-y-4">
+                {benchmarkJsonData ? (
+                  <>
+                    {/* Summary Section */}
+                    {benchmarkJsonData.summary && (
+                      <div className="mb-6">
+                        <h3 className="text-2xl font-semibold text-black mb-3">Summary</h3>
+                        <p className="text-sm text-foreground">{benchmarkJsonData.summary}</p>
+                      </div>
+                    )}
+                    
+                    {/* Study Parameters */}
+                    <div className="flex justify-between items-center mb-3">
+                      <h3 className="text-2xl font-semibold text-black">Study Parameters</h3>
+                    </div>
+                    
+                    <div>
+                      <StudyParametersSection 
+                        studyParameters={benchmarkJsonData.study_parameters} 
+                      />
+                    </div>
+
+                    {/* Drug Annotations */}
+                    {benchmarkJsonData.var_drug_ann && benchmarkJsonData.var_drug_ann.length > 0 && (
+                      <DrugAnnotationsSection 
+                        drugAnnotations={benchmarkJsonData.var_drug_ann} 
+                        onQuoteClick={onQuoteClick}
+                      />
+                    )}
+
+                    {/* Phenotype Annotations */}
+                    {benchmarkJsonData.var_pheno_ann && benchmarkJsonData.var_pheno_ann.length > 0 && (
+                      <PhenotypeAnnotationsSection 
+                        phenotypeAnnotations={benchmarkJsonData.var_pheno_ann} 
+                        onQuoteClick={onQuoteClick}
+                      />
+                    )}
+
+                    {/* Functional Annotations */}
+                    {benchmarkJsonData.var_fa_ann && benchmarkJsonData.var_fa_ann.length > 0 && (
+                      <FunctionalAnnotationsSection 
+                        functionalAnnotations={benchmarkJsonData.var_fa_ann} 
+                        onQuoteClick={onQuoteClick}
+                      />
+                    )}
+                  </>
+                ) : (
+                  <div className="text-center text-muted-foreground py-12">
+                    <p>No curator annotations available for this study.</p>
+                  </div>
+                )}
               </div>
             </ScrollArea>
           </TabsContent>

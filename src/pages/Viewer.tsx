@@ -112,7 +112,11 @@ const Viewer = () => {
             onCollapse={() => setIsRightPanelCollapsed(true)}
             onExpand={() => setIsRightPanelCollapsed(false)}
           >
-            <AnnotationsPanel jsonData={data.json} onQuoteClick={handleQuoteClick} />
+            <AnnotationsPanel 
+              jsonData={data.json} 
+              benchmarkJsonData={data.benchmarkJson}
+              onQuoteClick={handleQuoteClick} 
+            />
           </ResizablePanel>
         </ResizablePanelGroup>
       </div>
