@@ -55,7 +55,7 @@ const Dashboard = () => {
               try {
                 const [markdownResponse, jsonResponse] = await Promise.allSettled([
                   fetch(`/data/markdown/${pmcid}.md`),
-                  fetch(`/data/benchmark_annotations/${pmcid}.json`)
+                  fetch(`/data/annotations/${pmcid}.json`)
                 ]);
                 
                 const markdownOk = markdownResponse.status === 'fulfilled' && markdownResponse.value.ok;
@@ -76,7 +76,7 @@ const Dashboard = () => {
         // Load data for discovered PMC IDs (suppress individual errors)
         for (const pmcid of pmcIds) {
           try {
-            const jsonResponse = await fetch(`/data/benchmark_annotations/${pmcid}.json`).catch(() => null);
+            const jsonResponse = await fetch(`/data/annotations/${pmcid}.json`).catch(() => null);
 
             if (jsonResponse?.ok) {
               const jsonData = await jsonResponse.json().catch(() => null);
