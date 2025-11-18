@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 interface ViewerData {
   markdown: string;
   json: any;
+  benchmarkJson: any | null;
 }
 
 export const useViewerData = (pmcid: string | undefined) => {
@@ -22,7 +23,7 @@ export const useViewerData = (pmcid: string | undefined) => {
         setLoading(true);
         setError(null);
 
-        // Load both markdown and JSON files from the correct paths
+        // Load markdown, annotations, and benchmark annotations
         const [markdownResponse, jsonResponse] = await Promise.all([
           fetch(`/data/markdown/${pmcid}.md`),
           fetch(`/data/annotations/${pmcid}.json`)
@@ -37,9 +38,22 @@ export const useViewerData = (pmcid: string | undefined) => {
           jsonResponse.json()
         ]);
 
+        // Try to load benchmark annotations, but don't fail if they don't exist
+        let benchmarkData = null;
+        try {
+          const benchmarkResponse = await fetch(`/data/benchmark_annotations/${pmcid}.json`);
+          if (benchmarkResponse.ok) {
+            benchmarkData = await benchmarkResponse.json();
+          }
+        } catch (e) {
+          // Benchmark annotations are optional
+          console.log('No benchmark annotations available for', pmcid);
+        }
+
         setData({
           markdown: markdownText,
-          json: jsonData
+          json: jsonData,
+          benchmarkJson: benchmarkData
         });
       } catch (error) {
         console.error('Error loading data:', error);
