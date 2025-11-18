@@ -41,7 +41,19 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
                 {jsonData.summary && (
                   <div className="mb-6">
                     <h3 className="text-2xl font-semibold text-black mb-3">Summary</h3>
-                    <p className="text-sm text-foreground">{jsonData.summary}</p>
+                    {typeof jsonData.summary === 'string' ? (
+                      <p className="text-sm text-foreground">{jsonData.summary}</p>
+                    ) : (
+                      <>
+                        <p className="text-sm text-foreground">{jsonData.summary.content}</p>
+                        {jsonData.summary.citations && (
+                          <CollapsibleCitations 
+                            citations={jsonData.summary.citations} 
+                            onQuoteClick={onQuoteClick} 
+                          />
+                        )}
+                      </>
+                    )}
                   </div>
                 )}
                 
