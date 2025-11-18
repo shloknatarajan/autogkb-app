@@ -40,8 +40,13 @@ const Dashboard = () => {
         // If no manifest or manifest failed, try common PMC patterns
         if (pmcIds.length === 0) {
           const commonPMCs = [
-            'PMC11730665', 'PMC5712579', 'PMC5728534', 'PMC5749368', 'PMC4737107',
-            'PMC6289290', 'PMC10000000', 'PMC9000000', 'PMC8000000', 'PMC7000000'
+            'PMC12035587', 'PMC11430164', 'PMC11971672', 'PMC10275785', 'PMC12038368', 
+            'PMC2859392', 'PMC11603346', 'PMC12036300', 'PMC10399933', 'PMC10786722',
+            'PMC10880264', 'PMC10946077', 'PMC10993165', 'PMC11062152', 'PMC12260932',
+            'PMC12319246', 'PMC12331468', 'PMC3113609', 'PMC3387531', 'PMC3548984',
+            'PMC3584248', 'PMC3839910', 'PMC384715', 'PMC4706412', 'PMC4916189',
+            'PMC5508045', 'PMC554812', 'PMC5561238', 'PMC6435416', 'PMC6465603',
+            'PMC6714829', 'PMC8790808', 'PMC8973308'
           ];
           
           // Test which PMCs actually exist (suppress individual errors)
@@ -50,7 +55,7 @@ const Dashboard = () => {
               try {
                 const [markdownResponse, jsonResponse] = await Promise.allSettled([
                   fetch(`/data/markdown/${pmcid}.md`),
-                  fetch(`/data/annotations/${pmcid}.json`)
+                  fetch(`/data/benchmark_annotations/${pmcid}.json`)
                 ]);
                 
                 const markdownOk = markdownResponse.status === 'fulfilled' && markdownResponse.value.ok;
@@ -71,40 +76,24 @@ const Dashboard = () => {
         // Load data for discovered PMC IDs (suppress individual errors)
         for (const pmcid of pmcIds) {
           try {
-            const jsonResponse = await fetch(`/data/annotations/${pmcid}.json`).catch(() => null);
+            const jsonResponse = await fetch(`/data/benchmark_annotations/${pmcid}.json`).catch(() => null);
 
             if (jsonResponse?.ok) {
               const jsonData = await jsonResponse.json().catch(() => null);
               
               if (jsonData) {
-                const summaryContent = jsonData.study_parameters?.summary?.content || 
-                                     jsonData.study_parameters?.summary || 
-                                     jsonData.description;
-                const summary = Array.isArray(summaryContent) 
-                              ? summaryContent.join(' ') 
-                              : summaryContent || 'No description available';
-                
-                const studyTypeContent = jsonData.study_parameters?.study_type?.content || 
-                                        jsonData.study_parameters?.study_type || 
-                                        jsonData.studyType;
-                const studyType = Array.isArray(studyTypeContent) 
-                                ? studyTypeContent.join(', ') 
-                                : studyTypeContent || 'Unknown';
-                
-                const participantContent = jsonData.study_parameters?.participant_info?.content;
-                const participantText = Array.isArray(participantContent) 
-                                       ? participantContent.join(' ') 
-                                       : participantContent;
-                const participants = participantText ? 
-                                   extractParticipantNumber(participantText) :
-                                   jsonData.participants || null;
+                // Extract study characteristics from study_parameters array
+                const studyParams = jsonData.study_parameters || [];
+                const characteristics = studyParams.map((p: any) => p.Characteristics).filter(Boolean).join('; ');
+                const studyTypes = [...new Set(studyParams.map((p: any) => p["Study Type"]).filter(Boolean))].join(', ');
+                const totalCases = studyParams.reduce((sum: number, p: any) => sum + (p["Study Cases"] || 0), 0);
 
                 studies.push({
                   id: pmcid,
                   title: jsonData.title || `Study ${pmcid}`,
-                  description: summary,
-                  studyType: studyType,
-                  participants: participants
+                  description: characteristics || 'No description available',
+                  studyType: studyTypes || 'Unknown',
+                  participants: totalCases || null
                 });
               }
             }
@@ -122,12 +111,6 @@ const Dashboard = () => {
 
     discoverAvailableStudies();
   }, []);
-
-  const extractParticipantNumber = (participantInfo: string): number | null => {
-    // Try to extract number from participant info text
-    const match = participantInfo.match(/(\d+)\s+(?:treatment-naive\s+)?patients?/i);
-    return match ? parseInt(match[1]) : null;
-  };
 
   const filteredStudies = useMemo(() => {
     if (!searchTerm.trim()) return availableStudies;

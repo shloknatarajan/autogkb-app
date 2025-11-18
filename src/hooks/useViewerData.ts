@@ -25,7 +25,7 @@ export const useViewerData = (pmcid: string | undefined) => {
         // Load both markdown and JSON files from the correct paths
         const [markdownResponse, jsonResponse] = await Promise.all([
           fetch(`/data/markdown/${pmcid}.md`),
-          fetch(`/data/annotations/${pmcid}.json`)
+          fetch(`/data/benchmark_annotations/${pmcid}.json`)
         ]);
 
         if (!markdownResponse.ok || !jsonResponse.ok) {
