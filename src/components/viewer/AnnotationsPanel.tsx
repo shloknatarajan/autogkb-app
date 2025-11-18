@@ -37,6 +37,16 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, on
           <TabsContent value="formatted" className="mt-0 flex-1 min-h-0">
             <ScrollArea className="h-[calc(100vh-8rem)]">
               <div className="p-6 space-y-4">
+                {/* Title/Summary Section */}
+                {jsonData.title && (
+                  <div className="mb-6">
+                    <h2 className="text-2xl font-bold text-black mb-4">{jsonData.title}</h2>
+                    {jsonData.pmcid && (
+                      <p className="text-sm text-muted-foreground">PMCID: {jsonData.pmcid} {jsonData.pmid && `| PMID: ${jsonData.pmid}`}</p>
+                    )}
+                  </div>
+                )}
+                
                 {/* Header with Study Parameters and Found Associations button */}
                 <div className="flex justify-between items-center mb-3">
                   <h3 className="text-2xl font-semibold text-black">Study Parameters</h3>
