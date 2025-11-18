@@ -39,7 +39,7 @@ export const DrugAnnotationsSection: React.FC<DrugAnnotationsSectionProps> = ({ 
 
   return (
     <div>
-      <h3 className="text-lg font-semibold mb-3 text-primary">Drug Annotations</h3>
+      <h3 className="text-2xl font-semibold mb-3 text-black">Drug Annotations</h3>
       {drugAnnotations.map((annotation, index) => (
         <div key={index} className="mb-6 p-4 border border-border rounded-lg bg-muted/30">
           <h4 className="font-medium text-base mb-3 text-primary border-b pb-1">Annotation {index + 1}</h4>
