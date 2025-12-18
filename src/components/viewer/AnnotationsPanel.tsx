@@ -12,14 +12,16 @@ import { FunctionalAnnotationsSection } from './FunctionalAnnotationsSection';
 import { PhenotypeAnnotationsSection } from './PhenotypeAnnotationsSection';
 import { QuoteButtons } from './QuoteButton';
 import { CollapsibleCitations } from './CollapsibleCitations';
+import { AnalysisSection } from './AnalysisSection';
 
 interface AnnotationsPanelProps {
   jsonData: any;
   benchmarkJsonData: any | null;
+  analysisJsonData: any | null;
   onQuoteClick: (quote: string) => void;
 }
 
-export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, benchmarkJsonData, onQuoteClick }) => {
+export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, benchmarkJsonData, analysisJsonData, onQuoteClick }) => {
   const [expandedAssociations, setExpandedAssociations] = useState<Set<number>>(new Set());
   return (
     <Card className="h-full rounded-none border-0 shadow-none flex flex-col">
@@ -29,10 +31,13 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, be
       <CardContent className="p-0 flex-1 flex flex-col min-h-0">
         <Tabs defaultValue="formatted" className="w-full flex flex-col h-full">
           <div className="border-b px-6 pt-4 flex-shrink-0 bg-background">
-            <TabsList className="grid w-full grid-cols-2">
+            <TabsList className="grid w-full grid-cols-3">
               <TabsTrigger value="formatted">Formatted View</TabsTrigger>
               <TabsTrigger value="curator" disabled={!benchmarkJsonData}>
-                Curator Annotation {!benchmarkJsonData && '(N/A)'}
+                Curator {!benchmarkJsonData && '(N/A)'}
+              </TabsTrigger>
+              <TabsTrigger value="analysis" disabled={!analysisJsonData}>
+                Analysis {!analysisJsonData && '(N/A)'}
               </TabsTrigger>
             </TabsList>
           </div>
@@ -284,6 +289,14 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, be
                     <p>No curator annotations available for this study.</p>
                   </div>
                 )}
+              </div>
+            </ScrollArea>
+          </TabsContent>
+          
+          <TabsContent value="analysis" className="mt-0 flex-1 min-h-0">
+            <ScrollArea className="h-[calc(100vh-12rem)]">
+              <div className="p-6">
+                <AnalysisSection analysisData={analysisJsonData} />
               </div>
             </ScrollArea>
           </TabsContent>
