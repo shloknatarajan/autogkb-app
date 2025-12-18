@@ -137,8 +137,8 @@ def normalize_annotation(input_annotation: Path, output_annotation: Path):
     # Save the normalized annotations to a file
     try:
         os.makedirs(output_annotation.parent, exist_ok=True)
-        with open(output_annotation, "w") as f:
-            json.dump(annotations, f, indent=4)
+        with open(output_annotation, "w", encoding="utf-8") as f:
+            json.dump(annotations, f, indent=4, ensure_ascii=False)
     except Exception as e:
         logger.error(f"Failed to save annotations file: {e}")
         return

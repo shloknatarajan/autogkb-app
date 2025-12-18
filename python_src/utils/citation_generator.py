@@ -6,7 +6,46 @@ that support extracted annotations by finding relevant quotes in the source text
 """
 
 import json
+import re
 from typing import Dict, List, Tuple, Union
+
+
+def clean_citation(citation: str) -> str:
+    """
+    Clean up a citation string by removing unwanted formatting.
+    
+    Args:
+        citation: Raw citation string from LLM
+        
+    Returns:
+        Cleaned citation string
+    """
+    if not citation:
+        return citation
+    
+    # Strip whitespace
+    cleaned = citation.strip()
+    
+    # Remove surrounding quotes if present
+    if (cleaned.startswith('"') and cleaned.endswith('"')) or \
+       (cleaned.startswith("'") and cleaned.endswith("'")):
+        cleaned = cleaned[1:-1]
+    
+    # Remove list markers (1., 2., -, *, etc.)
+    cleaned = re.sub(r"^[\d\-\*•]+[\.)\s]*", "", cleaned).strip()
+    
+    # Clean up escaped quotes
+    cleaned = cleaned.replace('\\"', '"')
+    cleaned = cleaned.replace("\\'", "'")
+    
+    # Clean up any remaining backslash escapes
+    cleaned = cleaned.replace('\\n', ' ')
+    cleaned = cleaned.replace('\\t', ' ')
+    
+    # Normalize whitespace
+    cleaned = re.sub(r'\s+', ' ', cleaned).strip()
+    
+    return cleaned
 
 
 # Single source of truth for citation prompt template
@@ -114,7 +153,12 @@ async def generate_citations(
 
         # Parse and return citations
         citations_data = json.loads(response_text)
-        citations = citations_data.get("citations", [])
+        raw_citations = citations_data.get("citations", [])
+        
+        # Clean up each citation
+        citations = [clean_citation(c) for c in raw_citations if c]
+        # Filter out empty citations after cleaning
+        citations = [c for c in citations if c]
 
         if return_usage:
             return citations, usage_info

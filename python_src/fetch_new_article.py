@@ -187,8 +187,8 @@ async def get_annotation_from_markdown(
         final_file = output_dir / f"{pmcid}.json"
 
         try:
-            with open(temp_file, "w") as f:
-                json.dump(annotation_results, f, indent=2)
+            with open(temp_file, "w", encoding="utf-8") as f:
+                json.dump(annotation_results, f, indent=2, ensure_ascii=False)
 
             # Normalize terms
             logger.info("Normalizing terms in annotation...")
