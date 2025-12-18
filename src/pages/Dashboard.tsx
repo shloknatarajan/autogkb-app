@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import AddArticleDialog from '@/components/AddArticleDialog';
+import { toast } from 'sonner';
 
 interface Study {
   id: string;
@@ -17,6 +19,7 @@ const Dashboard = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [availableStudies, setAvailableStudies] = useState<Study[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
 
   useEffect(() => {
     const discoverAvailableStudies = async () => {
@@ -126,6 +129,16 @@ const Dashboard = () => {
     navigate(`/viewer/${pmcid}`);
   };
 
+  const handleArticleAdded = (pmcid: string) => {
+    toast.success(`Article ${pmcid} added successfully!`, {
+      description: 'The page will reload to show the new article.',
+    });
+    // Reload the page after a short delay to fetch the new article
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-subtle">
       <header className="bg-transparent">
@@ -147,7 +160,7 @@ const Dashboard = () => {
           <p className="text-xl text-muted-foreground mb-8">
             Search all available studies
           </p>
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-2xl mx-auto space-y-4">
             <Input
               type="text"
               placeholder="Search by PMCID or title..."
@@ -155,6 +168,13 @@ const Dashboard = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full text-lg py-3 px-6"
             />
+            <Button
+              onClick={() => setIsAddDialogOpen(true)}
+              size="lg"
+              className="w-full sm:w-auto"
+            >
+              Add New Article
+            </Button>
           </div>
         </div>
 
@@ -229,6 +249,12 @@ const Dashboard = () => {
           </div>
         )}
       </main>
+
+      <AddArticleDialog
+        open={isAddDialogOpen}
+        onOpenChange={setIsAddDialogOpen}
+        onSuccess={handleArticleAdded}
+      />
     </div>
   );
 };
