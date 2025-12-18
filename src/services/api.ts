@@ -2,7 +2,8 @@
  * API service for communicating with the article processor.
  */
 
-import { supabase } from '@/integrations/supabase/client';
+// Lazy load supabase to avoid initialization errors when env vars aren't ready
+const getSupabase = () => import('@/integrations/supabase/client').then(m => m.supabase);
 
 export enum JobStatus {
   PENDING = 'pending',
@@ -57,6 +58,7 @@ export async function submitArticle(
   request: SubmitArticleRequest
 ): Promise<SubmitArticleResponse> {
   try {
+    const supabase = await getSupabase();
     const { data, error } = await supabase.functions.invoke('process-article', {
       body: { pmid: request.pmid }
     });
@@ -89,6 +91,7 @@ export async function submitArticle(
  */
 export async function getJobStatus(jobId: string): Promise<Job> {
   try {
+    const supabase = await getSupabase();
     const { data, error } = await supabase
       .from('article_jobs')
       .select('*')
@@ -156,6 +159,7 @@ export async function pollJobUntilComplete(
  */
 export async function listJobs(limit: number = 50): Promise<Job[]> {
   try {
+    const supabase = await getSupabase();
     const { data, error } = await supabase
       .from('article_jobs')
       .select('*')
@@ -197,6 +201,7 @@ export async function listJobs(limit: number = 50): Promise<Job[]> {
  */
 export async function checkHealth(): Promise<boolean> {
   try {
+    const supabase = await getSupabase();
     const { error } = await supabase.from('article_jobs').select('id').limit(1);
     return !error;
   } catch {
