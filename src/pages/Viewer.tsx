@@ -115,6 +115,7 @@ const Viewer = () => {
             <AnnotationsPanel 
               jsonData={data.json} 
               benchmarkJsonData={data.benchmarkJson}
+              analysisJsonData={data.analysisJson}
               onQuoteClick={handleQuoteClick} 
             />
           </ResizablePanel>

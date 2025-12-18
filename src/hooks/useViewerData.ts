@@ -4,6 +4,7 @@ interface ViewerData {
   markdown: string;
   json: any;
   benchmarkJson: any | null;
+  analysisJson: any | null;
 }
 
 export const useViewerData = (pmcid: string | undefined) => {
@@ -38,22 +39,33 @@ export const useViewerData = (pmcid: string | undefined) => {
           jsonResponse.json()
         ]);
 
-        // Try to load benchmark annotations, but don't fail if they don't exist
+        // Try to load benchmark annotations and analysis, but don't fail if they don't exist
         let benchmarkData = null;
+        let analysisData = null;
+        
         try {
           const benchmarkResponse = await fetch(`/data/benchmark_annotations/${pmcid}.json`);
           if (benchmarkResponse.ok) {
             benchmarkData = await benchmarkResponse.json();
           }
         } catch (e) {
-          // Benchmark annotations are optional
           console.log('No benchmark annotations available for', pmcid);
+        }
+
+        try {
+          const analysisResponse = await fetch(`/data/analysis/${pmcid}.json`);
+          if (analysisResponse.ok) {
+            analysisData = await analysisResponse.json();
+          }
+        } catch (e) {
+          console.log('No analysis available for', pmcid);
         }
 
         setData({
           markdown: markdownText,
           json: jsonData,
-          benchmarkJson: benchmarkData
+          benchmarkJson: benchmarkData,
+          analysisJson: analysisData
         });
       } catch (error) {
         console.error('Error loading data:', error);
