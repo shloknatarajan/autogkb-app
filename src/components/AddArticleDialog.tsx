@@ -114,7 +114,7 @@ const AddArticleDialog: React.FC<AddArticleDialogProps> = ({
           <DialogTitle>Add New Article</DialogTitle>
           <DialogDescription>
             Enter a PubMed ID (PMID) to fetch and annotate a new article.
-            This process typically takes 5-10 minutes.
+            This process typically takes 1-2 minutes.
           </DialogDescription>
         </DialogHeader>
 
@@ -157,9 +157,9 @@ const AddArticleDialog: React.FC<AddArticleDialogProps> = ({
             {!isProcessing && !error && (
               <Alert>
                 <AlertDescription>
-                  <strong>Note:</strong> The annotation process uses AI models
-                  and may incur costs. Processing time varies but typically
-                  takes 5-10 minutes per article.
+                  <strong>Note:</strong> The annotation process uses AI and
+                  typically takes 1-2 minutes per article. The article must have
+                  a full-text version available in PubMed Central (PMC).
                 </AlertDescription>
               </Alert>
             )}

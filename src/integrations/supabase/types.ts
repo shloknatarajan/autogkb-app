@@ -14,7 +14,48 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      article_jobs: {
+        Row: {
+          annotation_data: Json | null
+          created_at: string
+          error: string | null
+          id: string
+          markdown_content: string | null
+          pmcid: string | null
+          pmid: string
+          progress: string | null
+          status: Database["public"]["Enums"]["article_job_status"]
+          title: string | null
+          updated_at: string
+        }
+        Insert: {
+          annotation_data?: Json | null
+          created_at?: string
+          error?: string | null
+          id?: string
+          markdown_content?: string | null
+          pmcid?: string | null
+          pmid: string
+          progress?: string | null
+          status?: Database["public"]["Enums"]["article_job_status"]
+          title?: string | null
+          updated_at?: string
+        }
+        Update: {
+          annotation_data?: Json | null
+          created_at?: string
+          error?: string | null
+          id?: string
+          markdown_content?: string | null
+          pmcid?: string | null
+          pmid?: string
+          progress?: string | null
+          status?: Database["public"]["Enums"]["article_job_status"]
+          title?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +64,12 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      article_job_status:
+        | "pending"
+        | "fetching"
+        | "annotating"
+        | "completed"
+        | "failed"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +196,14 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      article_job_status: [
+        "pending",
+        "fetching",
+        "annotating",
+        "completed",
+        "failed",
+      ],
+    },
   },
 } as const

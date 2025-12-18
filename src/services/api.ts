@@ -1,10 +1,8 @@
 /**
- * API service for communicating with the backend article processor.
- *
- * This service handles requests to fetch and annotate new articles.
+ * API service for communicating with the article processor.
  */
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+import { supabase } from '@/integrations/supabase/client';
 
 export enum JobStatus {
   PENDING = 'pending',
@@ -22,23 +20,22 @@ export interface Job {
   created_at: string;
   updated_at: string;
   pmcid?: string;
+  title?: string;
   error?: string;
   result?: {
     pmcid: string;
-    annotation_file: string;
-    markdown_file: string;
-    cost_usd: number;
+    annotation_data: any;
+    markdown_content: string;
   };
 }
 
 export interface SubmitArticleRequest {
   pmid: string;
-  model?: string;
 }
 
 export interface SubmitArticleResponse {
   job_id: string;
-  status: JobStatus;
+  success: boolean;
   message: string;
 }
 
@@ -60,24 +57,23 @@ export async function submitArticle(
   request: SubmitArticleRequest
 ): Promise<SubmitArticleResponse> {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/articles`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(request),
+    const { data, error } = await supabase.functions.invoke('process-article', {
+      body: { pmid: request.pmid }
     });
 
-    if (!response.ok) {
-      const error = await response.json().catch(() => ({}));
-      throw new APIError(
-        error.detail || 'Failed to submit article',
-        response.status,
-        error
-      );
+    if (error) {
+      throw new APIError(error.message || 'Failed to submit article');
     }
 
-    return await response.json();
+    if (!data.success) {
+      throw new APIError(data.error || 'Failed to submit article');
+    }
+
+    return {
+      job_id: data.job_id,
+      success: true,
+      message: data.message
+    };
   } catch (error) {
     if (error instanceof APIError) throw error;
     throw new APIError(
@@ -93,21 +89,35 @@ export async function submitArticle(
  */
 export async function getJobStatus(jobId: string): Promise<Job> {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/articles/${jobId}`);
+    const { data, error } = await supabase
+      .from('article_jobs')
+      .select('*')
+      .eq('id', jobId)
+      .single();
 
-    if (!response.ok) {
-      if (response.status === 404) {
+    if (error) {
+      if (error.code === 'PGRST116') {
         throw new APIError('Job not found', 404);
       }
-      const error = await response.json().catch(() => ({}));
-      throw new APIError(
-        error.detail || 'Failed to get job status',
-        response.status,
-        error
-      );
+      throw new APIError(error.message || 'Failed to get job status');
     }
 
-    return await response.json();
+    return {
+      job_id: data.id,
+      pmid: data.pmid,
+      status: data.status as JobStatus,
+      progress: data.progress || '',
+      created_at: data.created_at,
+      updated_at: data.updated_at,
+      pmcid: data.pmcid,
+      title: data.title,
+      error: data.error,
+      result: data.status === 'completed' ? {
+        pmcid: data.pmcid,
+        annotation_data: data.annotation_data,
+        markdown_content: data.markdown_content
+      } : undefined
+    };
   } catch (error) {
     if (error instanceof APIError) throw error;
     throw new APIError(
@@ -120,11 +130,6 @@ export async function getJobStatus(jobId: string): Promise<Job> {
 
 /**
  * Poll a job until it completes or fails.
- *
- * @param jobId - The job ID to poll
- * @param onProgress - Callback for progress updates
- * @param pollInterval - Interval between polls in milliseconds (default: 2000)
- * @returns The completed job
  */
 export async function pollJobUntilComplete(
   jobId: string,
@@ -142,7 +147,6 @@ export async function pollJobUntilComplete(
       return job;
     }
 
-    // Wait before next poll
     await new Promise(resolve => setTimeout(resolve, pollInterval));
   }
 }
@@ -152,15 +156,32 @@ export async function pollJobUntilComplete(
  */
 export async function listJobs(limit: number = 50): Promise<Job[]> {
   try {
-    const response = await fetch(
-      `${API_BASE_URL}/api/articles?limit=${limit}`
-    );
+    const { data, error } = await supabase
+      .from('article_jobs')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(limit);
 
-    if (!response.ok) {
-      throw new APIError('Failed to list jobs', response.status);
+    if (error) {
+      throw new APIError('Failed to list jobs');
     }
 
-    return await response.json();
+    return data.map(job => ({
+      job_id: job.id,
+      pmid: job.pmid,
+      status: job.status as JobStatus,
+      progress: job.progress || '',
+      created_at: job.created_at,
+      updated_at: job.updated_at,
+      pmcid: job.pmcid,
+      title: job.title,
+      error: job.error,
+      result: job.status === 'completed' ? {
+        pmcid: job.pmcid,
+        annotation_data: job.annotation_data,
+        markdown_content: job.markdown_content
+      } : undefined
+    }));
   } catch (error) {
     if (error instanceof APIError) throw error;
     throw new APIError(
@@ -176,8 +197,8 @@ export async function listJobs(limit: number = 50): Promise<Job[]> {
  */
 export async function checkHealth(): Promise<boolean> {
   try {
-    const response = await fetch(`${API_BASE_URL}/`);
-    return response.ok;
+    const { error } = await supabase.from('article_jobs').select('id').limit(1);
+    return !error;
   } catch {
     return false;
   }
