@@ -107,8 +107,13 @@ const BenchmarkSection: React.FC<{ title: string; data: any }> = ({ title, data 
   if (!data) return null;
   
   const groundTruth = data.ground_truth_annotations;
-  const extraPredictions = data.extra_predictions || [];
-  const missingAnnotations = data.missing_annotations || [];
+  const extraPredictions = data.extra_predictions;
+  const missingAnnotations = data.missing_annotations;
+  
+  const extraCount = extraPredictions?.count ?? extraPredictions?.length ?? 0;
+  const extraItems = extraPredictions?.items ?? (Array.isArray(extraPredictions) ? extraPredictions : []);
+  const missingCount = missingAnnotations?.count ?? missingAnnotations?.length ?? 0;
+  const missingItems = missingAnnotations?.items ?? (Array.isArray(missingAnnotations) ? missingAnnotations : []);
   
   return (
     <Collapsible open={isOpen} onOpenChange={setIsOpen}>
@@ -128,11 +133,11 @@ const BenchmarkSection: React.FC<{ title: string; data: any }> = ({ title, data 
               <div className="text-xs text-muted-foreground">Matched</div>
             </div>
             <div className="p-2 bg-red-50 rounded">
-              <div className="text-lg font-bold text-red-600">{extraPredictions.length}</div>
+              <div className="text-lg font-bold text-red-600">{extraCount}</div>
               <div className="text-xs text-muted-foreground">Extra Predictions</div>
             </div>
             <div className="p-2 bg-yellow-50 rounded">
-              <div className="text-lg font-bold text-yellow-600">{missingAnnotations.length}</div>
+              <div className="text-lg font-bold text-yellow-600">{missingCount}</div>
               <div className="text-xs text-muted-foreground">Missing</div>
             </div>
           </div>
@@ -153,30 +158,30 @@ const BenchmarkSection: React.FC<{ title: string; data: any }> = ({ title, data 
           )}
 
           {/* Extra Predictions */}
-          {extraPredictions.length > 0 && (
+          {extraItems.length > 0 && (
             <div>
               <h5 className="text-sm font-medium mb-2 flex items-center gap-2">
                 <AlertCircle className="h-4 w-4 text-orange-600" />
                 Extra Predictions (False Positives)
               </h5>
               <div className="space-y-2">
-                {extraPredictions.map((item: any, idx: number) => (
-                  <AnnotationItem key={idx} item={{ annotation: item, matched: false }} index={idx} />
+                {extraItems.map((item: any, idx: number) => (
+                  <AnnotationItem key={idx} item={{ annotation: item.annotation || item, matched: false }} index={idx} />
                 ))}
               </div>
             </div>
           )}
 
           {/* Missing Annotations */}
-          {missingAnnotations.length > 0 && (
+          {missingItems.length > 0 && (
             <div>
               <h5 className="text-sm font-medium mb-2 flex items-center gap-2">
                 <XCircle className="h-4 w-4 text-red-600" />
                 Missing Annotations (False Negatives)
               </h5>
               <div className="space-y-2">
-                {missingAnnotations.map((item: any, idx: number) => (
-                  <AnnotationItem key={idx} item={{ annotation: item, matched: false }} index={idx} />
+                {missingItems.map((item: any, idx: number) => (
+                  <AnnotationItem key={idx} item={{ annotation: item.annotation || item, matched: false }} index={idx} />
                 ))}
               </div>
             </div>
