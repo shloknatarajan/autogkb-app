@@ -12,31 +12,86 @@ const normalizeText = (text: string): string => {
     .trim();
 };
 
+// Helper function to find longest common subsequence of words
+const longestCommonWordSequence = (words1: string[], words2: string[]): number => {
+  const m = words1.length;
+  const n = words2.length;
+  if (m === 0 || n === 0) return 0;
+
+  // DP table for longest common subsequence
+  const dp: number[][] = Array(m + 1).fill(null).map(() => Array(n + 1).fill(0));
+
+  for (let i = 1; i <= m; i++) {
+    for (let j = 1; j <= n; j++) {
+      if (words1[i - 1] === words2[j - 1]) {
+        dp[i][j] = dp[i - 1][j - 1] + 1;
+      } else {
+        dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+      }
+    }
+  }
+
+  return dp[m][n];
+};
+
+// Helper function to find consecutive matching words (phrase matching)
+const longestConsecutiveMatch = (words1: string[], words2: string[]): number => {
+  if (words1.length === 0 || words2.length === 0) return 0;
+
+  let maxConsecutive = 0;
+
+  for (let i = 0; i < words1.length; i++) {
+    for (let j = 0; j < words2.length; j++) {
+      let consecutive = 0;
+      let a = i, b = j;
+      while (a < words1.length && b < words2.length && words1[a] === words2[b]) {
+        consecutive++;
+        a++;
+        b++;
+      }
+      maxConsecutive = Math.max(maxConsecutive, consecutive);
+    }
+  }
+
+  return maxConsecutive;
+};
+
 // Helper function to calculate similarity between two strings
 const calculateSimilarity = (str1: string, str2: string): number => {
   const norm1 = normalizeText(str1);
   const norm2 = normalizeText(str2);
-  
+
   // Exact match gets highest score
   if (norm1 === norm2) return 1.0;
-  
+
   // Substring match gets high score
   if (norm1.includes(norm2) || norm2.includes(norm1)) {
     const longer = Math.max(norm1.length, norm2.length);
     const shorter = Math.min(norm1.length, norm2.length);
-    return shorter / longer * 0.9;
+    return shorter / longer * 0.95;
   }
-  
-  // Word overlap similarity
+
   const words1 = norm1.split(/\s+/).filter(w => w.length > 2);
   const words2 = norm2.split(/\s+/).filter(w => w.length > 2);
-  
+
   if (words1.length === 0 || words2.length === 0) return 0;
-  
-  const commonWords = words1.filter(w => words2.includes(w));
-  const totalWords = Math.max(words1.length, words2.length);
-  
-  return commonWords.length / totalWords;
+
+  // Prioritize consecutive word matches (phrase matching)
+  const consecutiveMatch = longestConsecutiveMatch(words1, words2);
+  const consecutiveScore = consecutiveMatch / Math.min(words1.length, words2.length);
+
+  // Also consider longest common subsequence for overall structure
+  const lcsLength = longestCommonWordSequence(words1, words2);
+  const lcsScore = lcsLength / Math.max(words1.length, words2.length);
+
+  // Combine scores - weight consecutive matches more heavily as they indicate specific phrases
+  // Consecutive matches of 5+ words are very strong indicators
+  if (consecutiveMatch >= 5) {
+    return 0.5 + consecutiveScore * 0.5;
+  }
+
+  // Blend consecutive and LCS scores
+  return consecutiveScore * 0.6 + lcsScore * 0.4;
 };
 
 // Helper function to extract sentences from HTML elements
@@ -201,17 +256,32 @@ export const useQuoteHighlight = () => {
         // Extract all sentences from the document
         const sentences = extractSentences(markdownContainer);
         console.log(`Found ${sentences.length} sentences to compare`);
-        
+
+        // First, try to find a sentence that contains the first distinctive phrase of the quote
+        // This helps distinguish similar citations that start differently
+        const normalizedQuote = normalizeText(quote);
+        const quoteWords = normalizedQuote.split(/\s+/).filter(w => w.length > 2);
+        const firstPhraseLength = Math.min(6, quoteWords.length);
+        const firstPhrase = quoteWords.slice(0, firstPhraseLength).join(' ');
+
         // Find the best matching sentence
         let bestMatch: { similarity: number; sentence: {text: string, element: Element, textNode: Text | null, startOffset: number, endOffset: number} | null } = { similarity: 0, sentence: null };
-        
+
         sentences.forEach(sentenceObj => {
-          const similarity = calculateSimilarity(quote, sentenceObj.text);
+          const normalizedSentence = normalizeText(sentenceObj.text);
+          let similarity = calculateSimilarity(quote, sentenceObj.text);
+
+          // Bonus if the sentence contains the distinctive first phrase of the quote
+          if (firstPhrase.length > 10 && normalizedSentence.includes(firstPhrase)) {
+            similarity = Math.min(1.0, similarity + 0.3);
+            console.log('Found first phrase match:', firstPhrase, 'in sentence starting with:', sentenceObj.text.substring(0, 50));
+          }
+
           if (similarity > bestMatch.similarity) {
             bestMatch = { similarity, sentence: sentenceObj };
           }
         });
-        
+
         console.log('Best match similarity:', bestMatch.similarity);
         
         if (bestMatch.similarity > 0.2 && bestMatch.sentence) { // Minimum threshold

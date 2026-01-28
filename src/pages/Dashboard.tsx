@@ -53,18 +53,25 @@ const Dashboard = () => {
           ];
           
           // Test which PMCs actually exist (suppress individual errors)
+          // Check for markdown AND either annotation_sentences (preferred) or annotations
           const existingPMCs = await Promise.allSettled(
             commonPMCs.map(async (pmcid) => {
               try {
-                const [markdownResponse, jsonResponse] = await Promise.allSettled([
-                  fetch(`/data/markdown/${pmcid}.md`),
-                  fetch(`/data/annotations/${pmcid}.json`)
-                ]);
-                
-                const markdownOk = markdownResponse.status === 'fulfilled' && markdownResponse.value.ok;
-                const jsonOk = jsonResponse.status === 'fulfilled' && jsonResponse.value.ok;
-                
-                return markdownOk && jsonOk ? pmcid : null;
+                // Check markdown first
+                const markdownResponse = await fetch(`/data/markdown/${pmcid}.md`).catch(() => null);
+                const markdownOk = markdownResponse?.ok;
+
+                if (!markdownOk) return null;
+
+                // Check annotation_sentences first (preferred)
+                const sentencesResponse = await fetch(`/data/annotation_sentences/${pmcid}.json`).catch(() => null);
+                if (sentencesResponse?.ok) return pmcid;
+
+                // Fallback to annotations
+                const annotationsResponse = await fetch(`/data/annotations/${pmcid}.json`).catch(() => null);
+                if (annotationsResponse?.ok) return pmcid;
+
+                return null;
               } catch {
                 return null;
               }
@@ -77,28 +84,65 @@ const Dashboard = () => {
         }
         
         // Load data for discovered PMC IDs (suppress individual errors)
+        // Try annotation_sentences first (preferred), then fallback to annotations
         for (const pmcid of pmcIds) {
           try {
-            const jsonResponse = await fetch(`/data/annotations/${pmcid}.json`).catch(() => null);
+            let jsonData: any = null;
+            let source: 'annotation_sentences' | 'annotations' = 'annotations';
 
-            if (jsonResponse?.ok) {
-              const jsonData = await jsonResponse.json().catch(() => null);
-              
-              if (jsonData) {
-                // Extract study characteristics from study_parameters array
+            // Try annotation_sentences first
+            const sentencesResponse = await fetch(`/data/annotation_sentences/${pmcid}.json`).catch(() => null);
+            if (sentencesResponse?.ok) {
+              jsonData = await sentencesResponse.json().catch(() => null);
+              source = 'annotation_sentences';
+            }
+
+            // Fallback to annotations
+            if (!jsonData) {
+              const annotationsResponse = await fetch(`/data/annotations/${pmcid}.json`).catch(() => null);
+              if (annotationsResponse?.ok) {
+                jsonData = await annotationsResponse.json().catch(() => null);
+                source = 'annotations';
+              }
+            }
+
+            if (jsonData) {
+              let title = '';
+              let description = '';
+              let studyTypes = 'Unknown';
+              let totalCases: number | null = null;
+
+              if (source === 'annotation_sentences') {
+                // New schema: annotation_sentences format
+                const result = jsonData.result || {};
+                title = result.pmcid ? `Study ${result.pmcid}` : `Study ${pmcid}`;
+                // Use variants as a description hint or first association sentence
+                const associations = result.associations || [];
+                if (associations.length > 0) {
+                  description = associations[0].sentence || 'No description available';
+                } else {
+                  description = `Variants: ${(result.variants || []).join(', ') || 'None identified'}`;
+                }
+                // Extract variants count as a proxy for study scope
+                const variantCount = (result.variants || []).length;
+                studyTypes = jsonData.metadata?.pipeline_config?.variant_extraction?.method || 'Automated';
+              } else {
+                // Old schema: annotations format
+                title = jsonData.title || `Study ${pmcid}`;
                 const studyParams = jsonData.study_parameters || [];
                 const characteristics = studyParams.map((p: any) => p.Characteristics).filter(Boolean).join('; ');
-                const studyTypes = [...new Set(studyParams.map((p: any) => p["Study Type"]).filter(Boolean))].join(', ');
-                const totalCases = studyParams.reduce((sum: number, p: any) => sum + (p["Study Cases"] || 0), 0);
-
-                studies.push({
-                  id: pmcid,
-                  title: jsonData.title || `Study ${pmcid}`,
-                  description: characteristics || 'No description available',
-                  studyType: studyTypes || 'Unknown',
-                  participants: totalCases || null
-                });
+                description = characteristics || 'No description available';
+                studyTypes = [...new Set(studyParams.map((p: any) => p["Study Type"]).filter(Boolean))].join(', ') || 'Unknown';
+                totalCases = studyParams.reduce((sum: number, p: any) => sum + (p["Study Cases"] || 0), 0) || null;
               }
+
+              studies.push({
+                id: pmcid,
+                title,
+                description,
+                studyType: studyTypes,
+                participants: totalCases
+              });
             }
           } catch {
             // Silently skip studies that fail to load

@@ -1,6 +1,8 @@
 
 import React, { useState } from 'react';
 import { ChevronRight } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
@@ -21,8 +23,43 @@ interface AnnotationsPanelProps {
   onQuoteClick: (quote: string) => void;
 }
 
+// Helper to detect if data is in the new annotation_sentences format
+const isAnnotationSentencesFormat = (data: any): boolean => {
+  return data?.result?.associations !== undefined || data?.metadata?.pipeline_config !== undefined;
+};
+
+// Helper to get summary from either format
+const getSummary = (data: any): string | null => {
+  if (isAnnotationSentencesFormat(data)) {
+    return data?.result?.summary || null;
+  }
+  return data?.summary || null;
+};
+
+// Helper to get associations from either format
+const getAssociations = (data: any): any[] => {
+  if (isAnnotationSentencesFormat(data)) {
+    return data?.result?.associations || [];
+  }
+  return [];
+};
+
+// Helper to get variants from the new format
+const getVariants = (data: any): string[] => {
+  if (isAnnotationSentencesFormat(data)) {
+    return data?.result?.variants || [];
+  }
+  return [];
+};
+
 export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, benchmarkJsonData, analysisJsonData, onQuoteClick }) => {
   const [expandedAssociations, setExpandedAssociations] = useState<Set<number>>(new Set());
+
+  const isNewFormat = isAnnotationSentencesFormat(jsonData);
+  const summary = getSummary(jsonData);
+  const associations = getAssociations(jsonData);
+  const variants = getVariants(jsonData);
+
   return (
     <Card className="h-full rounded-none border-0 shadow-none flex flex-col">
       <CardHeader className="bg-gradient-secondary border-b flex-shrink-0">
@@ -46,40 +83,145 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, be
             <ScrollArea className="h-[calc(100vh-12rem)]">
               <div className="p-6 space-y-4">
                 {/* Summary Section */}
-                {jsonData.summary && (
+                {summary && (
                   <div className="mb-6">
                     <h3 className="text-2xl font-semibold text-black mb-3">Summary</h3>
-                    <p className="text-sm text-foreground">{jsonData.summary}</p>
+                    <div className="text-sm text-foreground prose prose-sm max-w-none prose-headings:text-lg prose-headings:font-semibold prose-headings:mt-4 prose-headings:mb-2 prose-p:my-2 prose-ul:my-2 prose-li:my-0">
+                      <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                        {summary}
+                      </ReactMarkdown>
+                    </div>
                   </div>
                 )}
-                
-                {/* Header with Study Parameters and Found Associations button */}
-                <div className="flex justify-between items-center mb-3">
-                  <h3 className="text-2xl font-semibold text-black">Study Parameters</h3>
-                  {jsonData.annotations?.relationships && (
-                    <button
-                      onClick={() => {
-                        const foundAssociationsElement = document.getElementById('found-associations-section');
-                        if (foundAssociationsElement) {
-                          foundAssociationsElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }
-                      }}
-                      className="px-3 py-1 text-sm bg-primary text-primary-foreground rounded hover:bg-primary/90 transition-colors"
-                    >
-                      Found Associations
-                    </button>
-                  )}
-                </div>
-                
-                {/* Study Parameters Content */}
-                <div>
-                  <StudyParametersSection 
-                    studyParameters={jsonData.study_parameters} 
-                  />
-                </div>
 
-                {/* Annotations */}
-                {jsonData.annotations?.relationships && (
+                {/* New Format: Variant Associations */}
+                {isNewFormat && associations.length > 0 && (
+                  <div id="found-associations-section">
+                    <div className="flex justify-between items-center mb-3">
+                      <h3 className="text-2xl font-semibold text-black">Variant Associations</h3>
+                      {variants.length > 0 && (
+                        <span className="text-sm text-muted-foreground">
+                          {variants.length} variant{variants.length !== 1 ? 's' : ''} identified
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Summary Table for new format */}
+                    <div className="mb-6 overflow-x-auto">
+                      <table className="w-full border-collapse border border-border rounded-lg">
+                        <thead>
+                          <tr className="bg-muted/50">
+                            <th className="border border-border px-3 py-2 text-left text-sm font-medium">Variant</th>
+                            <th className="border border-border px-3 py-2 text-left text-sm font-medium">Association</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {associations.map((assoc: any, index: number) => (
+                            <tr key={index} className="hover:bg-muted/25">
+                              <td className="border border-border px-3 py-2 text-sm font-medium">
+                                {assoc.variant_id}
+                              </td>
+                              <td className="border border-border px-3 py-2 text-sm">
+                                {assoc.sentence}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+
+                    {/* Detailed associations for new format */}
+                    <div className="space-y-4">
+                      {associations.map((assoc: any, index: number) => {
+                        const isExpanded = expandedAssociations.has(index);
+
+                        return (
+                          <Collapsible
+                            key={index}
+                            open={isExpanded}
+                            onOpenChange={(open) => {
+                              const newExpanded = new Set(expandedAssociations);
+                              if (open) {
+                                newExpanded.add(index);
+                              } else {
+                                newExpanded.delete(index);
+                              }
+                              setExpandedAssociations(newExpanded);
+                            }}
+                          >
+                            <CollapsibleTrigger asChild>
+                              <h4 className="font-medium text-base mb-2 border-b pb-1 cursor-pointer hover:text-black transition-colors flex items-center gap-2">
+                                <ChevronRight
+                                  className={`h-4 w-4 transition-transform duration-200 ${isExpanded ? 'rotate-90' : ''}`}
+                                />
+                                {assoc.variant_id}
+                              </h4>
+                            </CollapsibleTrigger>
+                            <CollapsibleContent>
+                              <div className="space-y-3 pl-6">
+                                <div>
+                                  <span className="bg-secondary/50 text-secondary-foreground px-2 py-1 rounded text-sm font-medium">
+                                    {assoc.variant_id}
+                                  </span>
+                                </div>
+                                <div>
+                                  <p className="text-sm text-black">
+                                    <strong>Association:</strong> {assoc.sentence}
+                                  </p>
+                                </div>
+                                {assoc.explanation && (
+                                  <div>
+                                    <p className="text-sm text-black">
+                                      <strong>Explanation:</strong> {assoc.explanation}
+                                    </p>
+                                  </div>
+                                )}
+                                {assoc.citations && assoc.citations.length > 0 && (
+                                  <CollapsibleCitations
+                                    citations={assoc.citations}
+                                    onQuoteClick={onQuoteClick}
+                                  />
+                                )}
+                              </div>
+                            </CollapsibleContent>
+                          </Collapsible>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {/* Old Format: Header with Study Parameters and Found Associations button */}
+                {!isNewFormat && (
+                  <>
+                    <div className="flex justify-between items-center mb-3">
+                      <h3 className="text-2xl font-semibold text-black">Study Parameters</h3>
+                      {jsonData.annotations?.relationships && (
+                        <button
+                          onClick={() => {
+                            const foundAssociationsElement = document.getElementById('found-associations-section');
+                            if (foundAssociationsElement) {
+                              foundAssociationsElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }
+                          }}
+                          className="px-3 py-1 text-sm bg-primary text-primary-foreground rounded hover:bg-primary/90 transition-colors"
+                        >
+                          Found Associations
+                        </button>
+                      )}
+                    </div>
+
+                    {/* Study Parameters Content */}
+                    <div>
+                      <StudyParametersSection
+                        studyParameters={jsonData.study_parameters}
+                      />
+                    </div>
+                  </>
+                )}
+
+                {/* Old Format: Annotations */}
+                {!isNewFormat && jsonData.annotations?.relationships && (
                   <div id="found-associations-section">
                     <h3 className="text-2xl font-semibold mb-2 text-black">Found Associations</h3>
                     
@@ -209,26 +351,26 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, be
                   </div>
                 )}
 
-                {/* Drug Annotations */}
-                {jsonData.var_drug_ann && (
-                  <DrugAnnotationsSection 
-                    drugAnnotations={jsonData.var_drug_ann} 
+                {/* Old Format: Drug Annotations */}
+                {!isNewFormat && jsonData.var_drug_ann && (
+                  <DrugAnnotationsSection
+                    drugAnnotations={jsonData.var_drug_ann}
                     onQuoteClick={onQuoteClick}
                   />
                 )}
 
-                {/* Phenotype Annotations */}
-                {jsonData.var_pheno_ann && (
-                  <PhenotypeAnnotationsSection 
-                    phenotypeAnnotations={jsonData.var_pheno_ann} 
+                {/* Old Format: Phenotype Annotations */}
+                {!isNewFormat && jsonData.var_pheno_ann && (
+                  <PhenotypeAnnotationsSection
+                    phenotypeAnnotations={jsonData.var_pheno_ann}
                     onQuoteClick={onQuoteClick}
                   />
                 )}
 
-                {/* Functional Annotations */}
-                {jsonData.var_fa_ann && (
-                  <FunctionalAnnotationsSection 
-                    functionalAnnotations={jsonData.var_fa_ann} 
+                {/* Old Format: Functional Annotations */}
+                {!isNewFormat && jsonData.var_fa_ann && (
+                  <FunctionalAnnotationsSection
+                    functionalAnnotations={jsonData.var_fa_ann}
                     onQuoteClick={onQuoteClick}
                   />
                 )}
