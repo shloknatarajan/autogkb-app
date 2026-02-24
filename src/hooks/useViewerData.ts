@@ -43,7 +43,12 @@ export const useViewerData = (pmcid: string | undefined) => {
         }
 
         // Priority 2: API fallback (previously analyzed article)
-        const jobData = await getJobByPmcid(pmcid);
+        let jobData = null;
+        try {
+          jobData = await getJobByPmcid(pmcid);
+        } catch {
+          // API unavailable — fall through to static files
+        }
         if (jobData?.annotation_data != null && jobData?.markdown_content != null) {
           setData({
             markdown: jobData.markdown_content ?? '',

@@ -150,7 +150,7 @@ const AddArticleDialog: React.FC<AddArticleDialogProps> = ({
           <DialogTitle>Add New Article</DialogTitle>
           <DialogDescription>
             Enter a PubMed Central ID (PMCID) to fetch and annotate a new article.
-            This process typically takes 5-10 minutes.
+            This process typically takes 10-30 seconds.
           </DialogDescription>
         </DialogHeader>
 
