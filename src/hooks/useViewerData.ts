@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { type JobResponse, getJobByPmcid } from '@/lib/api';
 
 interface ViewerData {
   markdown: string;
@@ -12,6 +14,7 @@ export const useViewerData = (pmcid: string | undefined) => {
   const [data, setData] = useState<ViewerData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const location = useLocation();
 
   useEffect(() => {
     const loadData = async () => {
@@ -25,6 +28,40 @@ export const useViewerData = (pmcid: string | undefined) => {
         setLoading(true);
         setError(null);
 
+        // Priority 1: Router state (just-analyzed article)
+        const dynamicData = location.state?.dynamicData as JobResponse | undefined;
+        if (dynamicData?.annotation_data != null && dynamicData?.markdown_content != null) {
+          setData({
+            markdown: dynamicData.markdown_content ?? '',
+            json: dynamicData.annotation_data,
+            benchmarkJson: null,
+            analysisJson: null,
+            annotationSource: 'annotation_sentences',
+          });
+          setLoading(false);
+          return;
+        }
+
+        // Priority 2: API fallback (previously analyzed article)
+        let jobData = null;
+        try {
+          jobData = await getJobByPmcid(pmcid);
+        } catch {
+          // API unavailable — fall through to static files
+        }
+        if (jobData?.annotation_data != null && jobData?.markdown_content != null) {
+          setData({
+            markdown: jobData.markdown_content ?? '',
+            json: jobData.annotation_data,
+            benchmarkJson: null,
+            analysisJson: null,
+            annotationSource: 'annotation_sentences',
+          });
+          setLoading(false);
+          return;
+        }
+
+        // Priority 3: Static files (existing behavior)
         // Load markdown first
         const markdownResponse = await fetch(`/data/markdown/${pmcid}.md`);
         if (!markdownResponse.ok) {
@@ -95,7 +132,7 @@ export const useViewerData = (pmcid: string | undefined) => {
     };
 
     loadData();
-  }, [pmcid]);
+  }, [pmcid, location.state]);
 
   return { data, loading, error };
 };

@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input';
 import AddArticleDialog from '@/components/AddArticleDialog';
 import { toast } from 'sonner';
+import type { JobResponse } from '@/lib/api';
 
 interface Study {
   id: string;
@@ -173,14 +174,9 @@ const Dashboard = () => {
     navigate(`/viewer/${pmcid}`);
   };
 
-  const handleArticleAdded = (pmcid: string) => {
-    toast.success(`Article ${pmcid} added successfully!`, {
-      description: 'The page will reload to show the new article.',
-    });
-    // Reload the page after a short delay to fetch the new article
-    setTimeout(() => {
-      window.location.reload();
-    }, 2000);
+  const handleArticleAdded = (pmcid: string, jobData: JobResponse) => {
+    toast.success(`Analysis complete for ${pmcid}!`);
+    navigate(`/viewer/${pmcid}`, { state: { dynamicData: jobData } });
   };
 
   return (
