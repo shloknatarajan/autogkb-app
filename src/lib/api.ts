@@ -1,4 +1,4 @@
-const API_URL = (import.meta.env.VITE_API_URL as string | undefined) ?? 'http://localhost:8001';
+const API_URL = (import.meta.env.VITE_API_URL as string | undefined) ?? 'https://autogkb-api.up.railway.app';
 
 export interface JobResponse {
   job_id: string;
