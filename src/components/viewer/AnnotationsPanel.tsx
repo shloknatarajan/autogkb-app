@@ -68,14 +68,12 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, be
       <CardContent className="p-0 flex-1 flex flex-col min-h-0">
         <Tabs defaultValue="formatted" className="w-full flex flex-col h-full">
           <div className="border-b px-6 pt-4 flex-shrink-0 bg-background">
-            <TabsList className="grid w-full grid-cols-3">
+            <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="formatted">Formatted View</TabsTrigger>
               <TabsTrigger value="curator" disabled={!benchmarkJsonData}>
                 Curator {!benchmarkJsonData && '(N/A)'}
               </TabsTrigger>
-              <TabsTrigger value="analysis" disabled={!analysisJsonData}>
-                Analysis {!analysisJsonData && '(N/A)'}
-              </TabsTrigger>
+              {/* Analysis tab hidden but code preserved below */}
             </TabsList>
           </div>
           
@@ -435,6 +433,7 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, be
             </ScrollArea>
           </TabsContent>
           
+          {/* Analysis tab content hidden but preserved for future use
           <TabsContent value="analysis" className="mt-0 flex-1 min-h-0">
             <ScrollArea className="h-[calc(100vh-12rem)]">
               <div className="p-6">
@@ -442,6 +441,7 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, be
               </div>
             </ScrollArea>
           </TabsContent>
+          */}
         </Tabs>
       </CardContent>
     </Card>
