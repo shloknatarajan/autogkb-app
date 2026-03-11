@@ -28,37 +28,44 @@ const isAnnotationSentencesFormat = (data: any): boolean => {
   return data?.result?.associations !== undefined || data?.metadata?.pipeline_config !== undefined;
 };
 
-// Helper to get summary from either format
-const getSummary = (data: any): string | null => {
+// Newer API responses nest the result as {pmcid, summary, variants, num_variants, associations}
+// inside data.result.summary (i.e. data.result.summary is the whole result object).
+// Older ones have data.result.summary as a plain string.
+const unwrapResult = (data: any): { summary: string | null; associations: any[]; variants: string[] } => {
   if (isAnnotationSentencesFormat(data)) {
-    return data?.result?.summary || null;
-  }
-  return data?.summary || null;
-};
+    const result = data?.result;
+    const rawSummary = result?.summary;
 
-// Helper to get associations from either format
-const getAssociations = (data: any): any[] => {
-  if (isAnnotationSentencesFormat(data)) {
-    return data?.result?.associations || [];
-  }
-  return [];
-};
+    // Newer shape: result.summary is an object containing the real fields
+    if (rawSummary && typeof rawSummary === 'object' && 'summary' in rawSummary) {
+      return {
+        summary: rawSummary.summary ?? null,
+        associations: rawSummary.associations ?? result?.associations ?? [],
+        variants: rawSummary.variants ?? result?.variants ?? [],
+      };
+    }
 
-// Helper to get variants from the new format
-const getVariants = (data: any): string[] => {
-  if (isAnnotationSentencesFormat(data)) {
-    return data?.result?.variants || [];
+    // Older shape: result.summary is already a string
+    return {
+      summary: typeof rawSummary === 'string' ? rawSummary : null,
+      associations: result?.associations ?? [],
+      variants: result?.variants ?? [],
+    };
   }
-  return [];
+
+  // Legacy format
+  return {
+    summary: typeof data?.summary === 'string' ? data.summary : null,
+    associations: [],
+    variants: [],
+  };
 };
 
 export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, benchmarkJsonData, analysisJsonData, onQuoteClick }) => {
   const [expandedAssociations, setExpandedAssociations] = useState<Set<number>>(new Set());
 
   const isNewFormat = isAnnotationSentencesFormat(jsonData);
-  const summary = getSummary(jsonData);
-  const associations = getAssociations(jsonData);
-  const variants = getVariants(jsonData);
+  const { summary, associations, variants } = unwrapResult(jsonData);
 
   return (
     <Card className="h-full rounded-none border-0 shadow-none flex flex-col">
