@@ -12,7 +12,7 @@ interface Study {
   id: string;
   title: string;
   description: string;
-  studyType: string;
+  numVariants: number | null;
   participants: number | null;
 }
 
@@ -32,11 +32,23 @@ const Dashboard = () => {
         // Primary: load completed PMCIDs from the API
         const entries = await listPmcids();
         for (const entry of entries) {
+          let summary = entry.summary || '';
+          let numVariants: number | null = null;
+
+          // Some entries store summary as a JSON string with num_variants
+          if (summary.startsWith('{')) {
+            try {
+              const parsed = JSON.parse(summary);
+              summary = parsed.summary || '';
+              numVariants = parsed.num_variants ?? null;
+            } catch { /* use raw summary */ }
+          }
+
           studies.push({
             id: entry.pmcid,
             title: entry.title || entry.pmcid,
-            description: entry.summary || '',
-            studyType: 'Automated',
+            description: summary,
+            numVariants,
             participants: null,
           });
         }
@@ -63,11 +75,12 @@ const Dashboard = () => {
                   : null;
 
               if (jsonData) {
+                const variants = jsonData.result?.variants;
                 studies.push({
                   id: pmcid,
                   title: jsonData.title || jsonData.result?.pmcid || pmcid,
                   description: jsonData.result?.associations?.[0]?.sentence || '',
-                  studyType: 'Static',
+                  numVariants: Array.isArray(variants) ? variants.length : null,
                   participants: null,
                 });
               }
@@ -153,9 +166,11 @@ const Dashboard = () => {
                   <div className="px-3 py-1.5 bg-primary/10 text-primary text-xs font-medium rounded-full">
                     {study.id}
                   </div>
-                  <div className="px-3 py-1.5 bg-accent text-accent-foreground text-xs font-medium rounded-full truncate">
-                    {study.studyType}
-                  </div>
+                  {study.numVariants != null && (
+                    <div className="px-3 py-1.5 bg-accent text-accent-foreground text-xs font-medium rounded-full truncate">
+                      {study.numVariants} Variant{study.numVariants !== 1 ? 's' : ''}
+                    </div>
+                  )}
                 </div>
                 <CardTitle className="text-lg leading-tight line-clamp-2">
                   {study.title}

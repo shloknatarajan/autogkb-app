@@ -75,12 +75,9 @@ export const AnnotationsPanel: React.FC<AnnotationsPanelProps> = ({ jsonData, be
       <CardContent className="p-0 flex-1 flex flex-col min-h-0">
         <Tabs defaultValue="formatted" className="w-full flex flex-col h-full">
           <div className="border-b px-6 pt-4 flex-shrink-0 bg-background">
-            <TabsList className="grid w-full grid-cols-2">
+            <TabsList className="grid w-full grid-cols-1">
               <TabsTrigger value="formatted">Formatted View</TabsTrigger>
-              <TabsTrigger value="curator" disabled={!benchmarkJsonData}>
-                Curator {!benchmarkJsonData && '(N/A)'}
-              </TabsTrigger>
-              {/* Analysis tab hidden but code preserved below */}
+              {/* Curator and Analysis tabs hidden but code preserved below */}
             </TabsList>
           </div>
           
