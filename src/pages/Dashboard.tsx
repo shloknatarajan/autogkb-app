@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import AddArticleDialog from '@/components/AddArticleDialog';
 import { toast } from 'sonner';
 import type { JobResponse } from '@/lib/api';
+import { listJobs } from '@/lib/api';
 
 interface Study {
   id: string;
@@ -28,129 +29,51 @@ const Dashboard = () => {
       const studies: Study[] = [];
 
       try {
-        // Try to fetch a manifest file first (suppress errors)
-        let pmcIds: string[] = [];
-        
+        // Primary: load completed jobs from the API
+        const jobs = await listJobs('completed');
+        for (const job of jobs) {
+          studies.push({
+            id: job.pmcid,
+            title: job.title || job.pmcid,
+            description: '',
+            studyType: 'Automated',
+            participants: null,
+          });
+        }
+      } catch {
+        // API unavailable — fall back to static file discovery
         try {
           const manifestResponse = await fetch('/data/manifest.json').catch(() => null);
+          let pmcIds: string[] = [];
           if (manifestResponse?.ok) {
             const manifest = await manifestResponse.json().catch(() => null);
             pmcIds = manifest?.studies || [];
           }
-        } catch {
-          // Silently continue to fallback approach
-        }
-        
-        // If no manifest or manifest failed, try common PMC patterns
-        if (pmcIds.length === 0) {
-          const commonPMCs = [
-            'PMC12035587', 'PMC11430164', 'PMC11971672', 'PMC10275785', 'PMC12038368', 
-            'PMC2859392', 'PMC11603346', 'PMC12036300', 'PMC10399933', 'PMC10786722',
-            'PMC10880264', 'PMC10946077', 'PMC10993165', 'PMC11062152', 'PMC12260932',
-            'PMC12319246', 'PMC12331468', 'PMC3113609', 'PMC3387531', 'PMC3548984',
-            'PMC3584248', 'PMC3839910', 'PMC384715', 'PMC4706412', 'PMC4916189',
-            'PMC5508045', 'PMC554812', 'PMC5561238', 'PMC6435416', 'PMC6465603',
-            'PMC6714829', 'PMC8790808', 'PMC8973308'
-          ];
-          
-          // Test which PMCs actually exist (suppress individual errors)
-          // Check for markdown AND either annotation_sentences (preferred) or annotations
-          const existingPMCs = await Promise.allSettled(
-            commonPMCs.map(async (pmcid) => {
-              try {
-                // Check markdown first
-                const markdownResponse = await fetch(`/data/markdown/${pmcid}.md`).catch(() => null);
-                const markdownOk = markdownResponse?.ok;
 
-                if (!markdownOk) return null;
+          for (const pmcid of pmcIds) {
+            try {
+              const sentencesResponse = await fetch(`/data/annotation_sentences/${pmcid}.json`).catch(() => null);
+              const annotationsResponse = sentencesResponse?.ok
+                ? null
+                : await fetch(`/data/annotations/${pmcid}.json`).catch(() => null);
+              const jsonData = sentencesResponse?.ok
+                ? await sentencesResponse.json().catch(() => null)
+                : annotationsResponse?.ok
+                  ? await annotationsResponse.json().catch(() => null)
+                  : null;
 
-                // Check annotation_sentences first (preferred)
-                const sentencesResponse = await fetch(`/data/annotation_sentences/${pmcid}.json`).catch(() => null);
-                if (sentencesResponse?.ok) return pmcid;
-
-                // Fallback to annotations
-                const annotationsResponse = await fetch(`/data/annotations/${pmcid}.json`).catch(() => null);
-                if (annotationsResponse?.ok) return pmcid;
-
-                return null;
-              } catch {
-                return null;
+              if (jsonData) {
+                studies.push({
+                  id: pmcid,
+                  title: jsonData.title || jsonData.result?.pmcid || pmcid,
+                  description: jsonData.result?.associations?.[0]?.sentence || '',
+                  studyType: 'Static',
+                  participants: null,
+                });
               }
-            })
-          );
-          
-          pmcIds = existingPMCs
-            .filter(result => result.status === 'fulfilled' && result.value !== null)
-            .map(result => (result as PromiseFulfilledResult<string>).value);
-        }
-        
-        // Load data for discovered PMC IDs (suppress individual errors)
-        // Try annotation_sentences first (preferred), then fallback to annotations
-        for (const pmcid of pmcIds) {
-          try {
-            let jsonData: any = null;
-            let source: 'annotation_sentences' | 'annotations' = 'annotations';
-
-            // Try annotation_sentences first
-            const sentencesResponse = await fetch(`/data/annotation_sentences/${pmcid}.json`).catch(() => null);
-            if (sentencesResponse?.ok) {
-              jsonData = await sentencesResponse.json().catch(() => null);
-              source = 'annotation_sentences';
-            }
-
-            // Fallback to annotations
-            if (!jsonData) {
-              const annotationsResponse = await fetch(`/data/annotations/${pmcid}.json`).catch(() => null);
-              if (annotationsResponse?.ok) {
-                jsonData = await annotationsResponse.json().catch(() => null);
-                source = 'annotations';
-              }
-            }
-
-            if (jsonData) {
-              let title = '';
-              let description = '';
-              let studyTypes = 'Unknown';
-              let totalCases: number | null = null;
-
-              if (source === 'annotation_sentences') {
-                // New schema: annotation_sentences format
-                const result = jsonData.result || {};
-                title = result.pmcid ? `Study ${result.pmcid}` : `Study ${pmcid}`;
-                // Use variants as a description hint or first association sentence
-                const associations = result.associations || [];
-                if (associations.length > 0) {
-                  description = associations[0].sentence || 'No description available';
-                } else {
-                  description = `Variants: ${(result.variants || []).join(', ') || 'None identified'}`;
-                }
-                // Extract variants count as a proxy for study scope
-                const variantCount = (result.variants || []).length;
-                studyTypes = jsonData.metadata?.pipeline_config?.variant_extraction?.method || 'Automated';
-              } else {
-                // Old schema: annotations format
-                title = jsonData.title || `Study ${pmcid}`;
-                const studyParams = jsonData.study_parameters || [];
-                const characteristics = studyParams.map((p: any) => p.Characteristics).filter(Boolean).join('; ');
-                description = characteristics || 'No description available';
-                studyTypes = [...new Set(studyParams.map((p: any) => p["Study Type"]).filter(Boolean))].join(', ') || 'Unknown';
-                totalCases = studyParams.reduce((sum: number, p: any) => sum + (p["Study Cases"] || 0), 0) || null;
-              }
-
-              studies.push({
-                id: pmcid,
-                title,
-                description,
-                studyType: studyTypes,
-                participants: totalCases
-              });
-            }
-          } catch {
-            // Silently skip studies that fail to load
+            } catch { /* skip */ }
           }
-        }
-      } catch {
-        // Silently handle any discovery errors
+        } catch { /* nothing */ }
       }
 
       setAvailableStudies(studies);
