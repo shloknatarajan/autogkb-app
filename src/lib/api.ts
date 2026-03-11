@@ -34,11 +34,11 @@ export async function listPmcids(): Promise<PmcidEntry[]> {
   return res.json();
 }
 
-export async function analyzeArticle(pmcid: string): Promise<JobResponse> {
+export async function analyzeArticle(pmcid: string, force = false): Promise<JobResponse> {
   const res = await fetch(`${API_URL}/analyze`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ pmcid }),
+    body: JSON.stringify({ pmcid, force }),
   });
   if (!res.ok) {
     const err = await res.json().catch(() => ({ detail: res.statusText }));
