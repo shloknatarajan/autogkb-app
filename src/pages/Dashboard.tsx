@@ -35,7 +35,7 @@ const Dashboard = () => {
           studies.push({
             id: entry.pmcid,
             title: entry.title || entry.pmcid,
-            description: '',
+            description: entry.summary || '',
             studyType: 'Automated',
             participants: null,
           });

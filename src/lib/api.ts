@@ -25,6 +25,7 @@ export const STATUS_LABELS: Record<string, string> = {
 export interface PmcidEntry {
   pmcid: string;
   title: string | null;
+  summary: string | null;
 }
 
 export async function listPmcids(): Promise<PmcidEntry[]> {
