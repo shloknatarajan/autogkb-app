@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import AddArticleDialog from '@/components/AddArticleDialog';
 import { toast } from 'sonner';
 import type { JobResponse } from '@/lib/api';
-import { listJobs } from '@/lib/api';
+import { listPmcids } from '@/lib/api';
 
 interface Study {
   id: string;
@@ -29,12 +29,12 @@ const Dashboard = () => {
       const studies: Study[] = [];
 
       try {
-        // Primary: load completed jobs from the API
-        const jobs = await listJobs('completed');
-        for (const job of jobs) {
+        // Primary: load completed PMCIDs from the API
+        const entries = await listPmcids();
+        for (const entry of entries) {
           studies.push({
-            id: job.pmcid,
-            title: job.title || job.pmcid,
+            id: entry.pmcid,
+            title: entry.title || entry.pmcid,
             description: '',
             studyType: 'Automated',
             participants: null,

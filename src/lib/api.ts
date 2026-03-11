@@ -22,17 +22,13 @@ export const STATUS_LABELS: Record<string, string> = {
   failed: 'Analysis failed',
 };
 
-export interface JobSummary {
-  job_id: string;
+export interface PmcidEntry {
   pmcid: string;
-  pmid: string | null;
   title: string | null;
-  status: string;
-  created_at: string | null;
 }
 
-export async function listJobs(status = 'completed'): Promise<JobSummary[]> {
-  const res = await fetch(`${API_URL}/jobs?status=${status}`);
+export async function listPmcids(): Promise<PmcidEntry[]> {
+  const res = await fetch(`${API_URL}/pmcids`);
   if (!res.ok) return [];
   return res.json();
 }
